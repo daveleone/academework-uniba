@@ -39,7 +39,7 @@ This command will create the necessary tables and schema for the application to 
 Once all dependencies are installed and the database is set up:
 
 ```bash
-php artisan server
+php artisan serve
 ```
 
 This command will start the server locally, allowing you to access and interact with the application via your web browser at `localhost:8000`.
