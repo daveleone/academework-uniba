@@ -28,4 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/teacher-dashboard', function () {
+    return view('dashboard-teacher');
+})->middleware('auth', 'role:teacher');
+
+
 require __DIR__.'/auth.php';
