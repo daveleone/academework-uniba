@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
+            $table->unsignedBigInteger('teacherId');
+            $table->foreign('teacherId')->references('id')->on('users'); // cambiare in teachers (non implementato in questa branch)
+            $table->timestamps();
         });
     }
 

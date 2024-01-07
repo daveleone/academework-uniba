@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SubjectsController;
 
 /*
@@ -32,9 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/subjects', [SubjectsController::class, 'show']);
-Route::get('/subjects/make', [SubjectsController::class, 'make']);
-
-Route::get('/quiz', [QuizController::class, 'show']);
+Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
 
 
 require __DIR__.'/auth.php';
