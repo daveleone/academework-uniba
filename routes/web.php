@@ -36,6 +36,7 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     })->name('td');
     Route::get('/subjects', [SubjectsController::class, 'show']);
     Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
+    Route::get('/subject/{id}', [SubjectsController::class, 'topics'])->name('subject.topics');
 });
 
 

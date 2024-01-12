@@ -10,10 +10,15 @@
         </div>
 
         @foreach ($subjects as $subject)
-            <div>
-                <p><b>Title:</b> {{ $subject->name }}</p>
-                <p><b>Description:</b>  {{ $subject->description }}</p>
+        <div style="display:flex; flex-direction: row;">
+            <div style="margin: 2rem; align: left;">
+                <p><b>Title: </b>{{ $subject->name }}</p>
+                <p><b>Description: </b>{{ $subject->description }}</p>
             </div>
+            <button>
+                <a href="{{ route('subject.topics', ['id' => $subject->id]) }}"> Edit </a>
+            </button>
+        </div>
         @endforeach
 
     </div>

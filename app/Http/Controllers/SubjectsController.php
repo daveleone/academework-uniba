@@ -25,4 +25,9 @@ class SubjectsController extends Controller
         ]);
         return $this->show();
     }
+
+    public function topics($id): View{
+        $subject = Subject::find($id);
+        return view('topics', ['subject' => $subject]);
+    }
 }
