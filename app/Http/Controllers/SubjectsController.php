@@ -13,7 +13,8 @@ class SubjectsController extends Controller
 {
     public function show(): View
     {
-        return view('subject');
+        $subjects = Subject::all();
+        return view('subject', ['subjects' => $subjects]);
     }
 
     public function create(): View{
@@ -22,6 +23,6 @@ class SubjectsController extends Controller
             'description' => Request()->get('SubDescription'),
             'teacherId' => Auth::user()->id
         ]);
-        return view('subject');
+        return $this->show();
     }
 }

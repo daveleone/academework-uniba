@@ -4,9 +4,17 @@
             {{ __('Subject') }}
         </h2>
     </x-slot>
-    <div style="display: flex; align-items:center; justify-content:center;">
+    <div style="display: flex; align-items:center; justify-content:center; flex-direction: column;">
         <div style="background-color: white">
            @include('forms.create-subject')
         </div>
+
+        @foreach ($subjects as $subject)
+            <div>
+                <p><b>Title:</b> {{ $subject->name }}</p>
+                <p><b>Description:</b>  {{ $subject->description }}</p>
+            </div>
+        @endforeach
+
     </div>
 </x-app-layout>
