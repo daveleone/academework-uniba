@@ -28,9 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/teacher-dashboard', function () {
-    return view('dashboard-teacher');
-})->middleware('auth', 'role:teacher');
+Route::middleware('auth', 'role:teacher')->group(function(){
+    Route::get('/teacher-dashboard', function () {
+        return view('dashboard-teacher');
+    })->name('td');
+});
 
 
 require __DIR__.'/auth.php';
