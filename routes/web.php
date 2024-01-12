@@ -30,8 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/subjects', [SubjectsController::class, 'show']);
-Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
+Route::middleware('auth', 'role:teacher')->group(function(){
+    Route::get('/teacher-dashboard', function () {
+        return view('dashboard-teacher');
+    })->name('td');
+    Route::get('/subjects', [SubjectsController::class, 'show']);
+    Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
+});
+
+
 
 
 require __DIR__.'/auth.php';
