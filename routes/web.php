@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth', 'role:teacher')->group(function(){
-    // Routes accessibles only for teachers
+    // Here routes accessibles only for teachers
 });
 
 
