@@ -7,8 +7,20 @@
         </x-slot>
         <div style="display: flex; align-items:center; justify-content:center; flex-direction: column;">
             <div style="background-color: white">
-                <h2>{{$subject->name}}</h2>
+                @include('forms.create-topic')
             </div>
+
+            @foreach ($topics as $topic)
+            <div style="display:flex; flex-direction: row;">
+                <div style="margin: 2rem; align: left;">
+                    <a href="">
+                        <p><b>Title: </b>{{ $topic->name }}</p>
+                        <p><b>Description: </b>{{ $topic->description }}</p>
+                    </a>
+                </div>
+                <button>Edit</button>
+            </div>
+            @endforeach
 
         </div>
     </x-app-layout>

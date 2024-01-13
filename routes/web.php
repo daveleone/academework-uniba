@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\TopicsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,9 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     })->name('td');
     Route::get('/subjects', [SubjectsController::class, 'show']);
     Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
-    Route::get('/subject/{id}', [SubjectsController::class, 'topics'])->name('subject.topics');
+
+    Route::get('/subject/{id}', [TopicsController::class, 'show'])->name('subject.topics');
+    Route::post('/subject/{id}', [TopicsController::class, 'create'])->name('topic.create');
 });
 
 

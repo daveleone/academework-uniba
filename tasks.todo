@@ -1,10 +1,10 @@
 % Gestione esercizi
     - Gestione Subject
-        ? creazione
+        x creazione
         - modifica
         - cancellazione
     - Gestione topics
-        ? creazione model
+        x creazione
         - modifica
         - cancellazione
     - Creazione esercizi
