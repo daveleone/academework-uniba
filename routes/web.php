@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\ExercisesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,8 @@ Route::middleware('auth', 'role:teacher')->group(function(){
 
     Route::get('/subject/{id}', [TopicsController::class, 'show'])->name('subject.topics');
     Route::post('/subject/{id}', [TopicsController::class, 'create'])->name('topic.create');
+
+    Route::get('/exercises/{id}', [ExercisesController::class, 'show'])->name('topic.exercises');
 });
-
-
-
 
 require __DIR__.'/auth.php';

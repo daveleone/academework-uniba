@@ -12,7 +12,7 @@ class SubjectsController extends Controller
 {
     public function show(): View
     {
-        $subjects = Subject::all();
+        $subjects = Subject::all(); // modificare per ogni teacher
         return view('subject', ['subjects' => $subjects]);
     }
 

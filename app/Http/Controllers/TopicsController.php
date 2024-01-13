@@ -25,6 +25,13 @@ class TopicsController extends Controller
                 'subjectId' => $subject->id
             ]);
         }
+
         return $this->show($id);
+    }
+
+    public function showExercises($id): View{
+        $subject = Subject::find($id);
+        $topics = Topic::where('subjectId', $subject->id)->get();
+        return view('topics', ['subject' => $subject, 'topics' => $topics]);
     }
 }

@@ -1,17 +1,24 @@
 % Gestione esercizi
     - Gestione Subject
+        ! gestione errori
         x creazione
         - modifica
         - cancellazione
+        ? gestione diversi teachers
     - Gestione topics
+        ! gestione errori
         x creazione
         - modifica
         - cancellazione
     - Creazione esercizi
+        ! gestione errori
         - creazione models
+        -    Esercizio
+        -    Elemento Esercizio
+            ? elemento unico o differenziati
         - creazione views
+        Teacher => Subject -> Topic -> Exercises
 
     - factories e seeders per testing
 
-Teacher => Subject -> Topic -> Quiz -> Exercises
 
