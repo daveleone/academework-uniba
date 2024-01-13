@@ -1,0 +1,17 @@
+% Gestione esercizi
+    - Gestione Subject
+        ? creazione
+        - modifica
+        - cancellazione
+    - Gestione topics
+        ? creazione model
+        - modifica
+        - cancellazione
+    - Creazione esercizi
+        - creazione models
+        - creazione views
+
+    - factories e seeders per testing
+
+Teacher => Subject -> Topic -> Quiz -> Exercises
+

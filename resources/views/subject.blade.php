@@ -12,12 +12,12 @@
         @foreach ($subjects as $subject)
         <div style="display:flex; flex-direction: row;">
             <div style="margin: 2rem; align: left;">
-                <p><b>Title: </b>{{ $subject->name }}</p>
-                <p><b>Description: </b>{{ $subject->description }}</p>
+                <a href="{{ route('subject.topics', ['id' => $subject->id]) }}">
+                    <p><b>Title: </b>{{ $subject->name }}</p>
+                    <p><b>Description: </b>{{ $subject->description }}</p>
+                </a>
             </div>
-            <button>
-                <a href="{{ route('subject.topics', ['id' => $subject->id]) }}"> Edit </a>
-            </button>
+            <button>Edit</button>
         </div>
         @endforeach
 
