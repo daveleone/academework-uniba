@@ -28,38 +28,7 @@
     Scrivi Tipo
     invia request [nome, desc, tipo, punti]
     - Form per tipo
-        - true/false
+        x true/false
         - open
         - close
         - fill-in
-
-    % true/false
-        Scrivi affermazione
-        Specifica se vera o falsa (check box?)
-        Pulsante per aggiungere affermazioni
-        Pulsante per inviare request [['statement', bool], ..]
-
-        ElementoVoF{
-            id
-            idElemSucc
-            risposta
-            tipo // vera o falsa
-        }
-
-    % close
-        scrivi domanda
-        inserisci risposta
-        pulsante per aggiungere risposte
-        seleziona risposta corretta
-        invia request ['risposta corretta', 'risposta sbagliata', ..]
-
-    % open
-        scrivi risposta corretta per autovalutazione
-        invia request ['risposta corretta']
-
-
-    % fill-in
-        pulsanti per aggiungere testo o testo da inserire
-        inserire testo/testo da inserire
-        invia request ['testo/daInserire', ..]
-
