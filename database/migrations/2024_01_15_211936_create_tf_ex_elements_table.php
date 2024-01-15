@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exercises', function (Blueprint $table) {
+        Schema::create('tf_ex_elements', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->string('type');
-            $table->integer('points');
-            $table->unsignedBigInteger('topicId');
-            $table->foreign('topicId')->references('id')->on('topics');
+            $table->unsignedInteger('position');
+            $table->longText('content');
+            $table->boolean('truth');
+            $table->unsignedBigInteger('exerciseId');
+            $table->foreign('exerciseId')->references('id')->on('exercises');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exercises');
+        Schema::dropIfExists('tf_ex_elements');
     }
 };

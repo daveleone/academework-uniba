@@ -43,6 +43,8 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     Route::post('/subject/{id}', [TopicsController::class, 'create'])->name('topic.create');
 
     Route::get('/exercises/{id}', [ExercisesController::class, 'show'])->name('topic.exercises');
+    Route::post('/exercise-creator/{id}', [ExercisesController::class, 'create'])->name('exercise.createInit');
+    Route::post('/exercises/{id}', [ExercisesController::class, 'createTf'])->name('exercise.createTf');
 });
 
 require __DIR__.'/auth.php';

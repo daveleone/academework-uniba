@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise extends Model
+class tfExElement extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'type',
-        'points',
-        'topicId'
+        'exerciseId',
+        'position',
+        'content',
+        'truth'
     ];
 }
