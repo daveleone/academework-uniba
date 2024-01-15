@@ -15,5 +15,10 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->using(CourseStudent::class);
+    }
+
     use HasFactory;
 }
