@@ -22,6 +22,6 @@ class CheckRole
             return $next($request);
         }
 
-        return redirect()->route('dashboard')->with('error', 'Unauthorized');
+        return redirect()->route('/')->with('error', 'Unauthorized');
     }
 }
