@@ -28,6 +28,6 @@
     invia request [nome, desc, tipo, punti]
     - Form per tipo
         x true/false
-        - open
+        x open
         x close
         - fill-in

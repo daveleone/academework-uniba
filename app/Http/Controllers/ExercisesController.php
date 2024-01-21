@@ -10,6 +10,7 @@ use App\Models\Topic;
 use App\Models\Exercise;
 use App\Models\tfExElement;
 use App\Models\closedExElement;
+use App\Models\openExElement;
 
 
 class ExercisesController extends Controller
@@ -17,7 +18,7 @@ class ExercisesController extends Controller
     public function show($id): View{
         $topic = Topic::find($id);
         $exercises = Exercise::where('topicId', $topic->id)->get();
-        return view('exercises', ['topic' => $topic, 'exercises' => $exercises]);
+        return view('exercises.exercises', ['topic' => $topic, 'exercises' => $exercises]);
     }
 
     public function create($id) : View{
@@ -35,20 +36,21 @@ class ExercisesController extends Controller
 
         //Sostituire con switch
         if($exType == 'true/false'){
-            return view('createTfEx', ['topic' => $topic, 'exercises' => $exercises]);
+            return view('exercises.createTfEx', ['topic' => $topic, 'exercises' => $exercises]);
         } elseif ($exType == 'open'){
-            return view('createOpenEx', ['topic' => $topic, 'exercises' => $exercises]);
+            return view('exercises.createOpenEx', ['topic' => $topic, 'exercises' => $exercises]);
         }elseif ($exType == 'close'){
-            return view('createClosedEx', ['topic' => $topic, 'exercises' => $exercises]);
+            return view('exercises.createClosedEx', ['topic' => $topic, 'exercises' => $exercises]);
         }elseif ($exType == 'fill-in'){
-            return view('createFillEx', ['topic' => $topic, 'exercises' => $exercises]);
+            return view('exercises.createFillEx', ['topic' => $topic, 'exercises' => $exercises]);
         }
-        return view('exercises', ['topic' => $topic, 'exercises' => $exercises]);
+        return view('exercises.exercises', ['topic' => $topic, 'exercises' => $exercises]);
     }
 
     public function createTf($id) : View {
         $topic = Topic::find($id);    //ottimizzare?
 
+        //chiudere in una funzione?
         $exercise = json_decode(Session::get('exerciseInit'));
         Session::forget('exerciseInit');
 
@@ -74,6 +76,7 @@ class ExercisesController extends Controller
     public function createClosed($id) : View {
         $topic = Topic::find($id);    //ottimizzare?
 
+        //chiudere in una funzione?
         $exercise = json_decode(Session::get('exerciseInit'));
         Session::forget('exerciseInit');
 
@@ -93,6 +96,28 @@ class ExercisesController extends Controller
                 'truth' => Request()->get('isTrue'.$i, false) == "1" ? true : false
             ]);
         }
+        return $this->show($id);
+    }
+
+    public function createOpen($id) : View {
+        $topic = Topic::find($id);    //ottimizzare?
+
+        //chiudere in una funzione?
+        $exercise = json_decode(Session::get('exerciseInit'));
+        Session::forget('exerciseInit');
+
+        $exercise = Exercise::create([
+            'name' => $exercise->name,
+            'description' => $exercise->description,
+            'type' => $exercise->type,
+            'points' => $exercise->points,
+            'topicId' => $topic->id
+        ]);
+
+        openExElement::create([
+            'exerciseId' => $exercise->id,
+            'answer' => Request()->get('exAnswer'),
+        ]);
         return $this->show($id);
     }
 }
