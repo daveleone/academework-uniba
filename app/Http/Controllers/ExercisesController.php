@@ -11,6 +11,7 @@ use App\Models\Exercise;
 use App\Models\tfExElement;
 use App\Models\closedExElement;
 use App\Models\openExElement;
+use App\Models\fillExElement;
 
 
 class ExercisesController extends Controller
@@ -118,6 +119,33 @@ class ExercisesController extends Controller
             'exerciseId' => $exercise->id,
             'answer' => Request()->get('exAnswer'),
         ]);
+        return $this->show($id);
+    }
+
+    public function createFill($id) : View {
+        $topic = Topic::find($id);    //ottimizzare?
+
+        //chiudere in una funzione?
+        $exercise = json_decode(Session::get('exerciseInit'));
+        Session::forget('exerciseInit');
+
+        $exercise = Exercise::create([
+            'name' => $exercise->name,
+            'description' => $exercise->description,
+            'type' => $exercise->type,
+            'points' => $exercise->points,
+            'topicId' => $topic->id
+        ]);
+
+        $nElements = intval(Request()->get('elemNum'));
+        for($i = 0; $i < $nElements; $i++){
+            fillExElement::create([
+                'position' => $i,
+                'exerciseId' => $exercise->id,
+                'content' => Request()->get('element'.$i),
+                'type' => Request()->get('elemType'.$i)
+            ]);
+        }
         return $this->show($id);
     }
 }

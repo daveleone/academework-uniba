@@ -8,11 +8,10 @@
         <div style="background-color: white">
             <form action="{{ route('exercise.createOpen', ['id' => $topic->id]) }}" method="post" id="open-Form">
                 @csrf
-                <input type="hidden" id="questionNum" name="questionNum" value="1">
                 <div>
                     <div>
                         <label for="exAnswer">Answer: </label>
-                        <textarea name="exAnswer" id="exAnswer"></textarea>
+                        <textarea name="exAnswer" id="exAnswer" required></textarea>
                     </div>
                 </div>
             </form>

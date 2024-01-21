@@ -10,13 +10,12 @@
         x creazione
         - modifica
         - cancellazione
-    - Creazione esercizi
+    - Gestione esercizi
         ! gestione errori
-        - creazione models
-        x    Esercizio
-        -    Elemento Esercizio
-            ? elemento unico o differenziati
-        - creazione views
+        - Creazione esercizi
+            - eliminare elementi durante creazione
+        - modifica
+        - cancellazione
 
 % Altro
     - factories e seeders per testing
@@ -26,8 +25,3 @@
     Scrivi Descrizione
     Scrivi Tipo
     invia request [nome, desc, tipo, punti]
-    - Form per tipo
-        x true/false
-        x open
-        x close
-        - fill-in
