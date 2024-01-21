@@ -9,6 +9,8 @@ use App\Models\Subject;
 use App\Models\Topic;
 use App\Models\Exercise;
 use App\Models\tfExElement;
+use App\Models\closedExElement;
+
 
 class ExercisesController extends Controller
 {
@@ -28,25 +30,27 @@ class ExercisesController extends Controller
             'points' => Request()->get('ExPoints'),
             'topicId' => $topic->id
         ];
-        Session::put('tfExerciseInit', json_encode($exercise));
+        Session::put('exerciseInit', json_encode($exercise));
         $exType = Request()->get('ExType');
+
+        //Sostituire con switch
         if($exType == 'true/false'){
             return view('createTfEx', ['topic' => $topic, 'exercises' => $exercises]);
         } elseif ($exType == 'open'){
-            return view('createOpenEx');
+            return view('createOpenEx', ['topic' => $topic, 'exercises' => $exercises]);
         }elseif ($exType == 'close'){
-            return view('createCloseEx');
+            return view('createClosedEx', ['topic' => $topic, 'exercises' => $exercises]);
         }elseif ($exType == 'fill-in'){
-            return view('createFillEx');
+            return view('createFillEx', ['topic' => $topic, 'exercises' => $exercises]);
         }
         return view('exercises', ['topic' => $topic, 'exercises' => $exercises]);
     }
 
     public function createTf($id) : View {
-        $topic = Topic::find($id);                                    //ottimizzare?
+        $topic = Topic::find($id);    //ottimizzare?
 
-        $exercise = json_decode(Session::get('tfExerciseInit'));
-        Session::forget('tfExerciseInit');
+        $exercise = json_decode(Session::get('exerciseInit'));
+        Session::forget('exerciseInit');
 
         $exercise = Exercise::create([
             'name' => $exercise->name,
@@ -61,6 +65,31 @@ class ExercisesController extends Controller
                 'position' => $i,
                 'exerciseId' => $exercise->id,
                 'content' => Request()->get('question'.$i),
+                'truth' => Request()->get('isTrue'.$i, false) == "1" ? true : false
+            ]);
+        }
+        return $this->show($id);
+    }
+
+    public function createClosed($id) : View {
+        $topic = Topic::find($id);    //ottimizzare?
+
+        $exercise = json_decode(Session::get('exerciseInit'));
+        Session::forget('exerciseInit');
+
+        $exercise = Exercise::create([
+            'name' => $exercise->name,
+            'description' => $exercise->description,
+            'type' => $exercise->type,
+            'points' => $exercise->points,
+            'topicId' => $topic->id
+        ]);
+        $nAnswers = intval(Request()->get('answerNum'));
+        for($i = 0; $i < $nAnswers; $i++){
+            closedExElement::create([
+                'position' => $i,
+                'exerciseId' => $exercise->id,
+                'content' => Request()->get('answer'.$i),
                 'truth' => Request()->get('isTrue'.$i, false) == "1" ? true : false
             ]);
         }

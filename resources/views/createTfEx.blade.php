@@ -11,7 +11,7 @@
                 <input type="hidden" id="questionNum" name="questionNum" value="1">
                 <div id="tf-FormDiv">
                     <div>
-                        <label for="question">Question 1: </label>
+                        <label for="question0">Question 1: </label>
                         <input type="text" id="question0" name="question0" required>
                         <input type="checkbox" id="isTrue0" name="isTrue0" value="1">
                         <label for="isTrue"> True?</label>

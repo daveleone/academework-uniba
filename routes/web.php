@@ -44,7 +44,8 @@ Route::middleware('auth', 'role:teacher')->group(function(){
 
     Route::get('/exercises/{id}', [ExercisesController::class, 'show'])->name('topic.exercises');
     Route::post('/exercise-creator/{id}', [ExercisesController::class, 'create'])->name('exercise.createInit');
-    Route::post('/exercises/{id}', [ExercisesController::class, 'createTf'])->name('exercise.createTf');
+    Route::post('/true-false-creator/{id}', [ExercisesController::class, 'createTf'])->name('exercise.createTf');
+    Route::post('/closed-creator/{id}', [ExercisesController::class, 'createClosed'])->name('exercise.createClosed');
 });
 
 require __DIR__.'/auth.php';

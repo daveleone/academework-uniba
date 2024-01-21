@@ -24,11 +24,10 @@
     x form iniziale
     Scrivi Nome
     Scrivi Descrizione
-    Scrivi Punti (o alla fine?)
     Scrivi Tipo
     invia request [nome, desc, tipo, punti]
     - Form per tipo
         x true/false
         - open
-        - close
+        x close
         - fill-in
