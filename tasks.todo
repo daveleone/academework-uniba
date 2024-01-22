@@ -12,16 +12,14 @@
         - cancellazione
     - Gestione esercizi
         ! gestione errori
-        - Creazione esercizi
+        x Creazione esercizi
             - eliminare elementi durante creazione
+                x tf
+                - close
+                - fill
         - modifica
         - cancellazione
+        - visualizzazione
 
 % Altro
     - factories e seeders per testing
-
-    x form iniziale
-    Scrivi Nome
-    Scrivi Descrizione
-    Scrivi Tipo
-    invia request [nome, desc, tipo, punti]
