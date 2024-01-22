@@ -33,7 +33,7 @@
             const questionInput =     document.createElement("input");
             const questionCheckbox =  document.createElement("input");
             const checkboxLabel =     document.createElement("label");
-            const deleteButtn =       document.createElement("button")
+            const deleteButtn =       document.createElement("button");
             let n = parseInt(questionNum.value);
 
             questionDiv.id = "questDiv" + n;
