@@ -13,10 +13,7 @@
     - Gestione esercizi
         ! gestione errori
         x Creazione esercizi
-            - eliminare elementi durante creazione
-                x tf
-                x close
-                - fill
+            - prevenire form vuoto fill-in
         - modifica
         - cancellazione
         - visualizzazione
