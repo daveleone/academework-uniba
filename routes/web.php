@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:teacher'])->group(function () {
     // Here route accessible only to teachers
+    Route::get('/create-course', [CourseController::class, 'index'])->name('courses.index');
+    Route::post('/create-course', [CourseController::class, 'store'])->name('courses.store');
+    Route::get('/my-courses', [CourseController::class, 'show'])->name('courses.show');
+    Route::get('/my-courses/{course}', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::put('/my-courses/{course}', [CourseController::class, 'update'])->name('courses.update');
 });
 
 require __DIR__.'/auth.php';
