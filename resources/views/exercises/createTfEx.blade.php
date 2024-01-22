@@ -28,12 +28,12 @@
         const form = document.getElementById("tf-FormDiv");
 
         function addQuestion(){
-            const questionDiv = document.createElement("div");
-            const questionLabel = document.createElement("label");
-            const questionInput = document.createElement("input");
-            const questionCheckbox = document.createElement("input");
-            const checkboxLabel = document.createElement("label");
-            const deleteButtn = document.createElement("button")
+            const questionDiv =       document.createElement("div");
+            const questionLabel =     document.createElement("label");
+            const questionInput =     document.createElement("input");
+            const questionCheckbox =  document.createElement("input");
+            const checkboxLabel =     document.createElement("label");
+            const deleteButtn =       document.createElement("button")
             let n = parseInt(questionNum.value);
 
             questionDiv.id = "questDiv" + n;
@@ -75,12 +75,12 @@
             divToDelete.remove();
             if(p != n-1){
                 for(let i = p+1; i < n; i++){
-                    let questionDiv       = document.getElementById("questDiv" + i);
-                    let questionLabel     = document.getElementById("questLab" + i);
-                    let questionInput     = document.getElementById("question" + i);
-                    let questionCheckbox  = document.getElementById("isTrue" + i);
+                    let questionDiv       = document.getElementById("questDiv"  + i);
+                    let questionLabel     = document.getElementById("questLab"  + i);
+                    let questionInput     = document.getElementById("question"  + i);
+                    let questionCheckbox  = document.getElementById("isTrue"    + i);
                     let checkboxLabel     = document.getElementById("isTrueLab" + i);
-                    let deleteButtn       = document.getElementById("delButt" + i);
+                    let deleteButtn       = document.getElementById("delButt"   + i);
 
                     questionDiv.id = "questDiv" + (i - 1);
 
@@ -102,7 +102,6 @@
                 }
             }
             questionNum.value--;
-            console.log(questionNum.value);
         }
     </script>
 </x-app-layout>
