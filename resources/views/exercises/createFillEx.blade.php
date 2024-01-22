@@ -15,13 +15,14 @@
             </form>
             <button onclick="addTextElem()">Add text</button>
             <button onclick="addInputElem()">Add input</button>
-            <button type="submit" form="fill-Form">Submit</button>
+            <button id="submitButtn" type="submit" form="fill-Form" disabled>Submit</button>
         </div>
     </div>
 
     <script>
         const elemNum = document.getElementById("elemNum");
         const form = document.getElementById("fill-FormDiv");
+        const submitButtn = document.getElementById("submitButtn");
 
         function addTextElem(){
             const elemDiv     = document.createElement("div");
@@ -50,6 +51,8 @@
 
             form.appendChild(elemDiv);
             elemNum.value++;
+
+            submitButtn.disabled = elemNum.value == 0 ? true : false;
         }
 
         function addInputElem(){
@@ -80,6 +83,8 @@
 
             form.appendChild(elemDiv);
             elemNum.value++;
+
+            submitButtn.disabled = elemNum.value == 0 ? true : false;
         }
 
         function deleteElement(divId, p){ // p := posizione elemento
@@ -107,6 +112,8 @@
                 }
             }
             elemNum.value--;
+
+            submitButtn.disabled = elemNum.value == 0 ? true : false;
         }
 
     </script>

@@ -13,7 +13,6 @@
     - Gestione esercizi
         ! gestione errori
         x Creazione esercizi
-            - prevenire form vuoto fill-in
         - modifica
         - cancellazione
         - visualizzazione
