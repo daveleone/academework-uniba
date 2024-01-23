@@ -2,9 +2,9 @@
     - Gestione Subject
         ! gestione errori
         x creazione
-        - modifica
-        - cancellazione
-        ? gestione diversi teachers
+        x modifica
+        x cancellazione
+        - gestione diversi teachers
     - Gestione topics
         ! gestione errori
         x creazione

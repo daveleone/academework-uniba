@@ -18,10 +18,31 @@ class SubjectsController extends Controller
 
     public function create(): View{
         Subject::create([
-            'name' => Request()->get('SubName'),
-            'description' => Request()->get('SubDescription'),
+            'name' => Request()->input('SubName'),
+            'description' => Request()->input('SubDescription'),
             'teacherId' => Auth::user()->id
         ]);
+        return $this->show();
+    }
+
+    public function delete(): View{
+        Subject::destroy(Request()->input('subId'));
+        return $this->show();
+    }
+
+    public function edit(): View{
+        $subject = Subject::find(Request()->input('subId'));
+        $newName = Request()->input('subName'.$subject->id);
+        $newDesc = Request()->input('subDesc'.$subject->id);
+
+        if ($newName and $newName != ''){
+            $subject->update(['name' => $newName]);
+        }
+
+        if ($newDesc and $newDesc != ''){
+            $subject->update(['description' => $newDesc]);
+        }
+
         return $this->show();
     }
 }

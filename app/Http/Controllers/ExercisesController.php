@@ -26,14 +26,14 @@ class ExercisesController extends Controller
         $topic = Topic::find($id);
         $exercises = Exercise::where('topicId', $topic->id)->get();
         $exercise = [
-            'name' => Request()->get('ExName'),
-            'description' => Request()->get('ExDescription'),
-            'type' => Request()->get('ExType'),
-            'points' => Request()->get('ExPoints'),
+            'name' => Request()->input('ExName'),
+            'description' => Request()->input('ExDescription'),
+            'type' => Request()->input('ExType'),
+            'points' => Request()->input('ExPoints'),
             'topicId' => $topic->id
         ];
         Session::put('exerciseInit', json_encode($exercise));
-        $exType = Request()->get('ExType');
+        $exType = Request()->input('ExType');
 
         //Sostituire con switch
         if($exType == 'true/false'){
@@ -62,13 +62,13 @@ class ExercisesController extends Controller
             'points' => $exercise->points,
             'topicId' => $topic->id
         ]);
-        $nQuestions = intval(Request()->get('questionNum'));
+        $nQuestions = intval(Request()->input('questionNum'));
         for($i = 0; $i < $nQuestions; $i++){
             tfExElement::create([
                 'position' => $i,
                 'exerciseId' => $exercise->id,
-                'content' => Request()->get('question'.$i),
-                'truth' => Request()->get('isTrue'.$i, false) == "1" ? true : false
+                'content' => Request()->input('question'.$i),
+                'truth' => Request()->input('isTrue'.$i, false) == "1" ? true : false
             ]);
         }
         return $this->show($id);
@@ -88,13 +88,13 @@ class ExercisesController extends Controller
             'points' => $exercise->points,
             'topicId' => $topic->id
         ]);
-        $nAnswers = intval(Request()->get('answerNum'));
+        $nAnswers = intval(Request()->input('answerNum'));
         for($i = 0; $i < $nAnswers; $i++){
             closedExElement::create([
                 'position' => $i,
                 'exerciseId' => $exercise->id,
-                'content' => Request()->get('answer'.$i),
-                'truth' => Request()->get('isTrue'.$i, false) == "1" ? true : false
+                'content' => Request()->input('answer'.$i),
+                'truth' => Request()->input('isTrue'.$i, false) == "1" ? true : false
             ]);
         }
         return $this->show($id);
@@ -117,7 +117,7 @@ class ExercisesController extends Controller
 
         openExElement::create([
             'exerciseId' => $exercise->id,
-            'answer' => Request()->get('exAnswer'),
+            'answer' => Request()->input('exAnswer'),
         ]);
         return $this->show($id);
     }
@@ -137,13 +137,13 @@ class ExercisesController extends Controller
             'topicId' => $topic->id
         ]);
 
-        $nElements = intval(Request()->get('elemNum'));
+        $nElements = intval(Request()->input('elemNum'));
         for($i = 0; $i < $nElements; $i++){
             fillExElement::create([
                 'position' => $i,
                 'exerciseId' => $exercise->id,
-                'content' => Request()->get('element'.$i),
-                'type' => Request()->get('elemType'.$i)
+                'content' => Request()->input('element'.$i),
+                'type' => Request()->input('elemType'.$i)
             ]);
         }
         return $this->show($id);

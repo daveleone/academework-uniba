@@ -20,8 +20,8 @@ class TopicsController extends Controller
         $subject = Subject::find($id);
         if($subject){
             Topic::create([
-                'name' => Request()->get('TopicName'),
-                'description' => Request()->get('TopicDescription'),
+                'name' => Request()->input('TopicName'),
+                'description' => Request()->input('TopicDescription'),
                 'subjectId' => $subject->id
             ]);
         }

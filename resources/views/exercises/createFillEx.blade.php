@@ -35,11 +35,11 @@
 
             elemType.type = "hidden";
             elemType.value = "text";
-            elemType.id = "elemType" + n;      //
-            elemType.name = "elemType" + n;    //
+            elemType.id = "elemType" + n;
+            elemType.name = "elemType" + n;
 
-            elem.id = "element" + n;           // x
-            elem.name = "element" + n;         // x
+            elem.id = "element" + n;
+            elem.name = "element" + n;
             elem.required = true;
             elemDiv.appendChild(elem);
             elemDiv.appendChild(elemType);
@@ -66,12 +66,12 @@
 
             elemType.type = "hidden";
             elemType.value = "input";
-            elemType.id = "elemType" + n;        //
-            elemType.name = "elemType" + n;      //
+            elemType.id = "elemType" + n;
+            elemType.name = "elemType" + n;
 
             elem.type = "text";
-            elem.id = "element" + n;             // x
-            elem.name = "element" + n;           // x
+            elem.id = "element" + n;
+            elem.name = "element" + n;
             elem.required = true;
             elemDiv.appendChild(elem);
             elemDiv.appendChild(elemType);
