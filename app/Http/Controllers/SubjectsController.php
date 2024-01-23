@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectsController extends Controller
 {
-    public function show(): View
-    {
+    public function show(): View{
         $subjects = Subject::all(); // modificare per ogni teacher
         return view('subject', ['subjects' => $subjects]);
     }

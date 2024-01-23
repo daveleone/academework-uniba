@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('content');
             $table->boolean('truth');
             $table->unsignedBigInteger('exerciseId');
-            $table->foreign('exerciseId')->references('id')->on('exercises');
+            $table->foreign('exerciseId')->references('id')->on('exercises')->onDelete('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

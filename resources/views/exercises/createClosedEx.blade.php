@@ -47,6 +47,7 @@
             answerInput.type = "text";
             answerInput.id = "answer" + n;
             answerInput.name = "answer" + n;
+            answerInput.required = true;
             answerDiv.appendChild(answerInput);
 
             answerRadio.type = "radio";

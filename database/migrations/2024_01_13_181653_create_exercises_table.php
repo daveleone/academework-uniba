@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('type');
             $table->integer('points');
             $table->unsignedBigInteger('topicId');
-            $table->foreign('topicId')->references('id')->on('topics')->onDelete('cascade');;
+            $table->foreign('topicId')->references('id')->on('topics')->onDelete('cascade');
             $table->timestamps();
         });
     }

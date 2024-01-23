@@ -25,13 +25,26 @@ class TopicsController extends Controller
                 'subjectId' => $subject->id
             ]);
         }
-
         return $this->show($id);
     }
 
-    public function showExercises($id): View{
-        $subject = Subject::find($id);
-        $topics = Topic::where('subjectId', $subject->id)->get();
-        return view('topics', ['subject' => $subject, 'topics' => $topics]);
+    public function delete($id): View{
+        Topic::destroy(Request()->input('topId'));
+        return $this->show($id);
+    }
+
+    public function edit($id): View{
+        $topic = Topic::find(Request()->input('topId'));
+        $newName = Request()->input('topName'.$topic->id);
+        $newDesc = Request()->input('topDesc'.$topic->id);
+
+        if ($newName and $newName != ''){
+            $topic->update(['name' => $newName]);
+        }
+
+        if ($newDesc and $newDesc != ''){
+            $topic->update(['description' => $newDesc]);
+        }
+        return $this->show($id);
     }
 }

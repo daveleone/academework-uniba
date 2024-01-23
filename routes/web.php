@@ -36,21 +36,31 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     Route::get('/teacher-dashboard', function () {
         return view('dashboard-teacher');
     })->name('td');
-    Route::get('/subjects', [SubjectsController::class, 'show']);
-    Route::post('/subjects', [SubjectsController::class, 'create'])->name('subject.create');
-    Route::put('/subjects', [SubjectsController::class, 'edit'])->name('subject.edit');
-    Route::delete('/subjects', [SubjectsController::class, 'delete'])->name('subject.delete');
 
-    Route::get('/subject/{id}', [TopicsController::class, 'show'])->name('subject.topics');
-    Route::post('/subject/{id}', [TopicsController::class, 'create'])->name('topic.create');
-    Route::delete('/subject/{id}', [TopicsController::class, 'delete'])->name('topic.delete');
+    Route::controller(SubjectsController::class)->group(function () {
+        Route::get('/subjects', 'show');
+        Route::post('/subjects', 'create')->name('subject.create');
+        Route::put('/subjects', 'edit')->name('subject.edit');
+        Route::delete('/subjects', 'delete')->name('subject.delete');
+    });
 
-    Route::get('/exercises/{id}', [ExercisesController::class, 'show'])->name('topic.exercises');
-    Route::post('/exercise-creator/{id}', [ExercisesController::class, 'create'])->name('exercise.createInit');
-    Route::post('/true-false-creator/{id}', [ExercisesController::class, 'createTf'])->name('exercise.createTf');
-    Route::post('/closed-creator/{id}', [ExercisesController::class, 'createClosed'])->name('exercise.createClosed');
-    Route::post('/open-creator/{id}', [ExercisesController::class, 'createOpen'])->name('exercise.createOpen');
-    Route::post('/fill-creator/{id}', [ExercisesController::class, 'createFill'])->name('exercise.createFill');
+    Route::controller(TopicsController::class)->group(function () {
+        Route::get('/subject/{id}', 'show')->name('subject.topics');
+        Route::post('/subject/{id}', 'create')->name('topic.create');
+        Route::put('/subject/{id}', 'edit')->name('topic.edit');
+        Route::delete('/subject/{id}', 'delete')->name('topic.delete');
+    });
+
+    Route::controller(ExercisesController::class)->group(function () {
+        Route::get('/exercises/{id}', 'show')->name('topic.exercises');
+        Route::post('/exercise-creator/{id}', 'create')->name('exercise.createInit');
+        Route::post('/true-false-creator/{id}', 'createTf')->name('exercise.createTf');
+        Route::post('/closed-creator/{id}', 'createClosed')->name('exercise.createClosed');
+        Route::post('/open-creator/{id}', 'createOpen')->name('exercise.createOpen');
+        Route::post('/fill-creator/{id}', 'createFill')->name('exercise.createFill');
+    });
+
+
 });
 
 require __DIR__.'/auth.php';

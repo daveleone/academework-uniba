@@ -46,6 +46,7 @@
             questionInput.type = "text";
             questionInput.id = "question" + n;
             questionInput.name = "question" + n;
+            questionInput.required = true;
             questionDiv.appendChild(questionInput);
 
             questionCheckbox.type = "checkbox";
