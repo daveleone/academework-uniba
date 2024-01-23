@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Student;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
@@ -11,7 +12,8 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index(): View{
+    public function index(): View
+    {
         return view('courses');
     }
 
@@ -40,11 +42,13 @@ class CourseController extends Controller
         return view('my-courses', compact('courses'));
     }
 
-    public function edit(Course $course){
+    public function edit(Course $course)
+    {
         return view('edit', compact('course'));
     }
 
-    public function update(Course $course, Request $request){
+    public function update(Course $course, Request $request)
+    {
         $request->validate([
             'course_name' => 'min:2|max:5',
             'course_description' => 'max:255',

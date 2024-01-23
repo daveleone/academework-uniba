@@ -17,13 +17,10 @@
     </div>
 
     <script>
-        // Add a click event listener to the clickable divs
         document.querySelectorAll('.clickable-course').forEach(function(div) {
             div.addEventListener('click', function() {
-                // Get the data-href attribute value
                 var href = this.getAttribute('data-href');
 
-                // Redirect to the specified route
                 window.location.href = href;
             });
         });
