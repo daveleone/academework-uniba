@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('open_ex_elements', function (Blueprint $table) {
             $table->id();
             $table->longText('answer');
-            $table->unsignedBigInteger('exerciseId');
-            $table->foreign('exerciseId')->references('id')->on('exercises')->onDelete('cascade');
+            $table->unsignedBigInteger('exercise_id');
+            $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
             $table->timestamps();
         });
     }

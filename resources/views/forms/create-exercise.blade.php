@@ -10,7 +10,7 @@
             <textarea id="ExDescription" name="ExDescription" required></textarea>
         </div>
         <div>
-            <label for="ExDescription"> Points: </label>
+            <label for="ExPoints"> Points: </label>
             <input type="number" id="ExPoints" name="ExPoints" min="1" required>
         </div>
         <div>

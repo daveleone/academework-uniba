@@ -92,25 +92,25 @@
             let n = parseInt(elemNum.value);
 
             divToDelete.remove();
-            if(p != n-1){
-                for(let i = p+1; i < n; i++){
-                    let elementDiv    = document.getElementById("elemDiv"  + i);
-                    let elemType      = document.getElementById("elemType" + i);
-                    let elementInput  = document.getElementById("element"  + i);
-                    let deleteButtn   = document.getElementById("delButt"  + i);
 
-                    elementDiv.id = "elemDiv" + (i - 1);
+            for(let i = p+1; i < n; i++){
+                let elementDiv    = document.getElementById("elemDiv"  + i);
+                let elementType      = document.getElementById("elemType" + i);
+                let elementInput  = document.getElementById("element"  + i);
+                let deleteButtn   = document.getElementById("delButt"  + i);
 
-                    elementType.id = "elemType" + (i - 1);
-                    elementType.name = "elemType" + (i - 1);
+                elementDiv.id = "elemDiv" + (i - 1);
 
-                    elementInput.id = "element" + (i - 1);
-                    elementInput.name = "element" + (i - 1);
+                elementType.id = "elemType" + (i - 1);
+                elementType.name = "elemType" + (i - 1);
 
-                    deleteButtn.id = "delButt" + (i - 1);
-                    deleteButtn.onclick = () => { deleteElement(elementDiv.id, i-1); };
-                }
+                elementInput.id = "element" + (i - 1);
+                elementInput.name = "element" + (i - 1);
+
+                deleteButtn.id = "delButt" + (i - 1);
+                deleteButtn.onclick = () => { deleteElement(elementDiv.id, i-1); };
             }
+
             elemNum.value--;
 
             submitButtn.disabled = elemNum.value == 0 ? true : false;

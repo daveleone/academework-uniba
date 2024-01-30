@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Auth;
 class SubjectsController extends Controller
 {
     public function show(): View{
-        $subjects = Subject::all(); // modificare per ogni teacher
-        return view('subject', ['subjects' => $subjects]);
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get(); // modificare
+        return view('subjects', ['subjects' => $subjects]);
     }
 
     public function create(): View{
         Subject::create([
             'name' => Request()->input('SubName'),
             'description' => Request()->input('SubDescription'),
-            'teacherId' => Auth::user()->id
+            'teacher_id' => Auth::user()->id
         ]);
         return $this->show();
     }
@@ -41,7 +41,6 @@ class SubjectsController extends Controller
         if ($newDesc and $newDesc != ''){
             $subject->update(['description' => $newDesc]);
         }
-
         return $this->show();
     }
 }

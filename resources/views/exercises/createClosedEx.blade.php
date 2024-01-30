@@ -14,7 +14,7 @@
                         <p>Select the correct answer</p>
                         <label for="answer0" id = "ansLab0">Answer 1: </label>
                         <input type="text" id="answer0" name="answer0" required>
-                        <input type="radio" id="isTrue0" name="isTrue0" value="0">
+                        <input type="radio" id="isTrue0" name="isTrue" value="0">
                         <label for="isTrue0" id="isTrueLab0"> True?</label>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
 
             answerRadio.type = "radio";
             answerRadio.id = "isTrue" + n;
-            answerRadio.name = "isTrue" + n;
-            answerRadio.value = "1";
+            answerRadio.name = "isTrue";
+            answerRadio.value = n;
             answerDiv.appendChild(answerRadio);
 
             radioLabel.id = "isTrueLab" + n;
@@ -75,34 +75,33 @@
             let n = parseInt(answerNum.value);
 
             divToDelete.remove();
-            if(p != n-1){
-                for(let i = p+1; i < n; i++){
-                    let answerDiv       = document.getElementById("ansDiv"  + i);
-                    let answerLabel     = document.getElementById("ansLab"  + i);
-                    let answerInput     = document.getElementById("answer"  + i);
-                    let answerRadio  = document.getElementById("isTrue"    + i);
-                    let radioLabel     = document.getElementById("isTrueLab" + i);
-                    let deleteButtn       = document.getElementById("delButt"   + i);
+            for(let i = p+1; i < n; i++){
+                let answerDiv       = document.getElementById("ansDiv"  + i);
+                let answerLabel     = document.getElementById("ansLab"  + i);
+                let answerInput     = document.getElementById("answer"  + i);
+                let answerRadio  = document.getElementById("isTrue"    + i);
+                let radioLabel     = document.getElementById("isTrueLab" + i);
+                let deleteButtn       = document.getElementById("delButt"   + i);
 
-                    answerDiv.id = "ansDiv" + (i - 1);
+                answerDiv.id = "ansDiv" + (i - 1);
 
-                    answerLabel.id = "ansLab" + (i - 1);
-                    answerLabel.for = "answer" + (i - 1);
-                    answerLabel.innerText = "Answer "+ (i) + ": ";
+                answerLabel.id = "ansLab" + (i - 1);
+                answerLabel.for = "answer" + (i - 1);
+                answerLabel.innerText = "Answer "+ (i) + ": ";
 
-                    answerInput.id = "answer" + (i - 1);
-                    answerInput.name = "answer" + (i - 1);
+                answerInput.id = "answer" + (i - 1);
+                answerInput.name = "answer" + (i - 1);
 
-                    answerRadio.id = "isTrue" + (i - 1);
-                    answerRadio.name = "isTrue" + (i - 1);
+                answerRadio.id = "isTrue" + (i - 1);
+                answerRadio.name = "isTrue" + (i - 1);
 
-                    radioLabel.id = "isTrueLab" + (i - 1);
-                    radioLabel.for = "isTrue" + (i - 1);
+                radioLabel.id = "isTrueLab" + (i - 1);
+                radioLabel.for = "isTrue" + (i - 1);
 
-                    deleteButtn.id = "delButt" + (i - 1);
-                    deleteButtn.onclick = () => { deleteAnswer(answerDiv.id, i-1); };
-                }
+                deleteButtn.id = "delButt" + (i - 1);
+                deleteButtn.onclick = () => { deleteAnswer(answerDiv.id, i-1); };
             }
+
             answerNum.value--;
         }
     </script>

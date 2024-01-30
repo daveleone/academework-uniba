@@ -67,6 +67,10 @@
         function disableEdit(topId){
             const editDiv = document.getElementById('editDiv' + topId);
             const topDiv = document.getElementById('topDiv' + topId);
+            const nameInput = document.getElementById('topName' + topId);
+            const descInput = document.getElementById('topDesc' + topId);
+            nameInput.value = null;
+            descInput.value = null;
             editDiv.style.display = 'none';
             topDiv.style.display = 'flex';
         }

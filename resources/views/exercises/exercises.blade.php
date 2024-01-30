@@ -11,14 +11,13 @@
                 @foreach ($exercises as $exercise)
                 <div style="display:flex; flex-direction: row;">
                     <div style="margin: 2rem; align: left;">
-                        <a href="">
+                        <a href="{{ route('exercise.show', ['id' => $exercise->id]) }}">
                             <p><b>Title: </b>{{ $exercise->name }}</p>
                             <p><b>Description: </b>{{ $exercise->description }}</p>
                             <p><b>Type: </b>{{ $exercise->type }}</p>
                             <p><b>Points: </b>{{ $exercise->points }}</p>
                         </a>
                     </div>
-                    <button>Edit</button>
                 </div>
                 @endforeach
             </div>

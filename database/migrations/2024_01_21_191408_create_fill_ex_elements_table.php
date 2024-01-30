@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedInteger('position');
             $table->longText('content');
             $table->text('type'); // text/input
-            $table->unsignedBigInteger('exerciseId');
-            $table->foreign('exerciseId')->references('id')->on('exercises')->onDelete('cascade');
+            $table->unsignedBigInteger('exercise_id');
+            $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
             $table->timestamps();
         });
     }

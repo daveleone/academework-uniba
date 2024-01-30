@@ -38,7 +38,7 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     })->name('td');
 
     Route::controller(SubjectsController::class)->group(function () {
-        Route::get('/subjects', 'show');
+        Route::get('/subjects', 'show')->name('subject.show');
         Route::post('/subjects', 'create')->name('subject.create');
         Route::put('/subjects', 'edit')->name('subject.edit');
         Route::delete('/subjects', 'delete')->name('subject.delete');
@@ -52,15 +52,17 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     });
 
     Route::controller(ExercisesController::class)->group(function () {
-        Route::get('/exercises/{id}', 'show')->name('topic.exercises');
+        Route::get('/topic/{id}', 'show')->name('topic.exercises');
         Route::post('/exercise-creator/{id}', 'create')->name('exercise.createInit');
         Route::post('/true-false-creator/{id}', 'createTf')->name('exercise.createTf');
         Route::post('/closed-creator/{id}', 'createClosed')->name('exercise.createClosed');
         Route::post('/open-creator/{id}', 'createOpen')->name('exercise.createOpen');
         Route::post('/fill-creator/{id}', 'createFill')->name('exercise.createFill');
+
+        Route::get('/exercise/{id}', 'showExercise')->name('exercise.show');
+        Route::delete('/exercise/{id}', 'delete')->name('exercise.delete');
+        Route::put('/exercise/{id}', 'edit')->name('exercise.edit');
     });
-
-
 });
 
 require __DIR__.'/auth.php';

@@ -74,34 +74,33 @@
             let n = parseInt(questionNum.value);
 
             divToDelete.remove();
-            if(p != n-1){
-                for(let i = p+1; i < n; i++){
-                    let questionDiv       = document.getElementById("questDiv"  + i);
-                    let questionLabel     = document.getElementById("questLab"  + i);
-                    let questionInput     = document.getElementById("question"  + i);
-                    let questionCheckbox  = document.getElementById("isTrue"    + i);
-                    let checkboxLabel     = document.getElementById("isTrueLab" + i);
-                    let deleteButtn       = document.getElementById("delButt"   + i);
+            for(let i = p+1; i < n; i++){
+                let questionDiv       = document.getElementById("questDiv"  + i);
+                let questionLabel     = document.getElementById("questLab"  + i);
+                let questionInput     = document.getElementById("question"  + i);
+                let questionCheckbox  = document.getElementById("isTrue"    + i);
+                let checkboxLabel     = document.getElementById("isTrueLab" + i);
+                let deleteButtn       = document.getElementById("delButt"   + i);
 
-                    questionDiv.id = "questDiv" + (i - 1);
+                questionDiv.id = "questDiv" + (i - 1);
 
-                    questionLabel.id = "questLab" + (i - 1);
-                    questionLabel.for = "question" + (i - 1);
-                    questionLabel.innerText = "Question "+ (i) + ": ";
+                questionLabel.id = "questLab" + (i - 1);
+                questionLabel.for = "question" + (i - 1);
+                questionLabel.innerText = "Question "+ (i) + ": ";
 
-                    questionInput.id = "question" + (i - 1);
-                    questionInput.name = "question" + (i - 1);
+                questionInput.id = "question" + (i - 1);
+                questionInput.name = "question" + (i - 1);
 
-                    questionCheckbox.id = "isTrue" + (i - 1);
-                    questionCheckbox.name = "isTrue" + (i - 1);
+                questionCheckbox.id = "isTrue" + (i - 1);
+                questionCheckbox.name = "isTrue" + (i - 1);
 
-                    checkboxLabel.id = "isTrueLab" + (i - 1);
-                    checkboxLabel.for = "isTrue" + (i - 1);
+                checkboxLabel.id = "isTrueLab" + (i - 1);
+                checkboxLabel.for = "isTrue" + (i - 1);
 
-                    deleteButtn.id = "delButt" + (i - 1);
-                    deleteButtn.onclick = () => { deleteQuestion(questionDiv.id, i-1); };
-                }
+                deleteButtn.id = "delButt" + (i - 1);
+                deleteButtn.onclick = () => { deleteQuestion(questionDiv.id, i-1); };
             }
+
             questionNum.value--;
         }
     </script>

@@ -4,18 +4,21 @@
         x creazione
         x modifica
         x cancellazione
-        - gestione diversi teachers
-    - Gestione topics
+        x +- gestione diversi teachers
+    x Gestione topics
         ! gestione errori
         x creazione
         x modifica
         x cancellazione
+        - gestione diversi teachers
     - Gestione esercizi
         ! gestione errori
         x Creazione esercizi
-        - modifica
-        - cancellazione
-        - visualizzazione
+        x visualizzazione
+        x modifica
+        x cancellazione
+        - gestione diversi teachers
 
 % Altro
+    - aggiornare users => teachers, students (merge)
     - factories e seeders per testing

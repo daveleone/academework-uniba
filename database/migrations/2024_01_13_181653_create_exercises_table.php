@@ -17,8 +17,10 @@ return new class extends Migration
             $table->longText('description');
             $table->string('type');
             $table->integer('points');
-            $table->unsignedBigInteger('topicId');
-            $table->foreign('topicId')->references('id')->on('topics')->onDelete('cascade');
+            $table->unsignedBigInteger('topic_id');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            //$table->unsignedBigInteger('teacher_id');
+            //$table->foreign('teacher_id')->references('id')->on('teacher'); //->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -7,7 +7,6 @@
     <div style="display: flex; align-items:center; justify-content:center; flex-direction: column;">
         <div style="background-color: white">
            @include('forms.create-subject')
-
            @foreach ($subjects as $subject)
            <div style="display:flex;" id="{{'subDiv'.$subject->id}}">
                <div style="margin: 2rem; align: left;">
@@ -65,6 +64,10 @@
         function disableEdit(subId){
             const editDiv = document.getElementById('editDiv' + subId);
             const subDiv = document.getElementById('subDiv' + subId);
+            const nameInput = document.getElementById('subName' + subId);
+            const descInput = document.getElementById('subDesc' + subId);
+            nameInput.value = null;
+            descInput.value = null;
             editDiv.style.display = 'none';
             subDiv.style.display = 'flex';
         }
