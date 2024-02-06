@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="py-12">
+        @if($courses->count() > 0)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="grid grid-cols-6 gap-4">
@@ -14,6 +15,13 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ __("You dont have any classes.")}}</p>
+            </div>
+        </div>
+        @endif
     </div>
 
     <script>

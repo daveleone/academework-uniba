@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\CourseStudent;
 use App\Models\Student;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -45,27 +43,32 @@ class StudentController extends Controller
     {
         $search = $request->get('query');
 
+        /* if ($request->ajax()) { */
+        /*     $output = view('partials.student_table', compact('students')); */
+        /**/
+        /*     return $output; */
+        /* } */
+
         if ($request->ajax()) {
             $students = Student::whereNotIn('id', function ($query) use ($course) {
                 $query->select('student_id')->from('course_student')->where('course_id', $course->id);
             })->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%');
-            })->get();
-
-            $output = '';
+                $query->where('name', 'LIKE', '%'.$search.'%')->orWhere('email', 'LIKE', '%'.$search.'%');
+            })->paginate(3);
 
             if (count($students) > 0) {
-                if (count($students) > 0) {
-                    $output = '<ul class="list-group">';
-                    foreach ($students as $row) {
-                        $output .= '<li class="list-group-item">' . $row->user->name . '</li>';
-                    }
-                    $output .= '</ul>';
-                } else {
-                    $output .= '<li class="list-group-item">' . 'No results' . '</li>';
-                }
-                return $output;
+                $output = view('auth.partials.student_table', compact('students'));
+
+                /*     $output = '<ul class="list-group">'; */
+                /*     foreach ($students as $row) { */
+                /*         $output .= '<li class="list-group-item">'.$row->user->name.'</li>'; */
+                /*     } */
+                /*     $output .= '</ul>'; */
+                /* } else { */
+                /*     $output .= '<li class="list-group-item">'.'No results'.'</li>'; */
             }
+
+            return $output;
         }
 
         return view('students', compact('course', 'students'));
