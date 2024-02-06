@@ -40,6 +40,7 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     // Route::put('/my-courses/{course}/students', [CourseController::class, 'addStudent'])->name('courses.students');
     Route::get('/students/{course}', [StudentController::class, 'show'])->name('students');
     Route::put('/students/{course}', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/students/{course}/search', [StudentController::class, 'search'])->name('students.search');
 });
 
 require __DIR__.'/auth.php';

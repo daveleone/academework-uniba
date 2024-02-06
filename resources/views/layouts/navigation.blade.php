@@ -20,7 +20,7 @@
                 @if (auth()->user()->isTeacher())
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
-                        {{ __('Create a course') }}
+                        {{ __('Create a class') }}
                     </x-nav-link>
                 </div>
                 @endif
@@ -48,7 +48,7 @@
 
                         @if (auth()->user()->isTeacher())
                         <x-dropdown-link :href="route('courses.show')">
-                            {{ __('My courses') }}
+                            {{ __('My classes') }}
                         </x-dropdown-link>
                         @endif
 
