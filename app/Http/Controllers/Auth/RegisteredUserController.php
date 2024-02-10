@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -35,7 +37,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:student,teacher'], // Validate role selection
+            'form_id' => ['required', 'in:student-form,teacher-form'],
         ]);
 
 
@@ -45,15 +47,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $roleName = $request->role;
-        $role = Role::where('name', $roleName)->first();
-
-        if (!$role) {
-            $role = Role::create(['name' => $roleName]);
-        }
-
-        if ($role) {
-            $user->roles()->attach($role);
+        if ($request->form_id === 'student-form') {
+            Student::create([
+                'user_id' => $user->id,
+                // Add other student-specific fields if needed
+            ]);
+        } elseif ($request->form_id === 'teacher-form') {
+            Teacher::create([
+                'user_id' => $user->id,
+                // Add other teacher-specific fields if needed
+            ]);
         }
 
         event(new Registered($user));

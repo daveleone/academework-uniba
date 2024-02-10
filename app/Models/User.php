@@ -43,13 +43,23 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles()
+    public function student()
     {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->hasOne(Student::class);
     }
 
-    public function hasAnyRole(...$roles)
+    public function teacher()
     {
-        return $this->roles()->whereIn('name', $roles)->exists();
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function isStudent()
+    {
+        return $this->student()->exists();
+    }
+
+    public function isTeacher()
+    {
+        return $this->teacher()->exists();
     }
 }
