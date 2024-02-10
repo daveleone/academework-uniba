@@ -3,7 +3,7 @@
         @csrf
         <div>
             <label for="ExName">Name: </label>
-            <input type="text"  id="ExName" name="ExName" required>
+            <x-text-input  type="text"  id="ExName" name="ExName" required />
         </div>
         <div>
             <label for="ExDescription">Description: </label>
