@@ -16,6 +16,7 @@
         x Creazione esercizi
         x visualizzazione
         x modifica
+            - fixare bug
         x cancellazione
         - ? gestione diversi teachers
     - Creazione quiz
@@ -28,7 +29,7 @@
     - svolgimento quiz
     - svolgimento quiz custom
     - svolgimento compito
-        - sala d'attesa (pulsante teacher)      
+        - sala d'attesa (pulsante teacher)
 
 % Styling
     - creazione materia / topic

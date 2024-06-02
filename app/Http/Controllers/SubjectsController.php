@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
-
-use Illuminate\View\View;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class SubjectsController extends Controller
 {
-    public function show(): View{
-        $subjects = Subject::where('teacher_id', Auth::user()->id)->get(); // modificare
+    public function show(): View
+    {
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();  // modificare
         return view('subjects', ['subjects' => $subjects]);
     }
 
-    public function create(): View{
+    public function create(): View
+    {
         Subject::create([
             'name' => Request()->input('SubName'),
             'description' => Request()->input('SubDescription'),
@@ -24,21 +24,23 @@ class SubjectsController extends Controller
         return $this->show();
     }
 
-    public function delete(): View{
+    public function delete(): View
+    {
         Subject::destroy(Request()->input('subId'));
         return $this->show();
     }
 
-    public function edit(): View{
+    public function edit(): View
+    {
         $subject = Subject::find(Request()->input('subId'));
-        $newName = Request()->input('subName'.$subject->id);
-        $newDesc = Request()->input('subDesc'.$subject->id);
+        $newName = Request()->input('subName' . $subject->id);
+        $newDesc = Request()->input('subDesc' . $subject->id);
 
-        if ($newName and $newName != ''){
+        if ($newName and $newName != '') {
             $subject->update(['name' => $newName]);
         }
 
-        if ($newDesc and $newDesc != ''){
+        if ($newDesc and $newDesc != '') {
             $subject->update(['description' => $newDesc]);
         }
         return $this->show();

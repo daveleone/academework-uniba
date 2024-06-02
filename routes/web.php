@@ -1,24 +1,24 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizzesController;
 use App\Http\Controllers\StudentController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
-use App\Http\Controllers\ExercisesController;
+use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+ * |--------------------------------------------------------------------------
+ * | Web Routes
+ * |--------------------------------------------------------------------------
+ * |
+ * | Here is where you can register web routes for your application. These
+ * | routes are loaded by the RouteServiceProvider and all of them will
+ * | be assigned to the "web" middleware group. Make something great!
+ * |
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth', 'role:teacher')->group(function(){
+Route::middleware('auth', 'role:teacher')->group(function () {  // implementare redirect per insegnanti/studenti
     Route::get('/teacher-dashboard', function () {
         return view('dashboard-teacher');
     })->name('td');
@@ -66,6 +66,10 @@ Route::middleware('auth', 'role:teacher')->group(function(){
         Route::put('/exercise/{id}', 'edit')->name('exercise.edit');
     });
 
+    Route::controller(QuizzesController::class)->group(function () {
+        Route::get('/quiz/{id}', 'show')->name('quizzes.show');
+    });
+
     // Here route accessible only to teachers
     Route::get('/create-course', [CourseController::class, 'index'])->name('courses.index');
     Route::post('/create-course', [CourseController::class, 'store'])->name('courses.store');
@@ -78,4 +82,4 @@ Route::middleware('auth', 'role:teacher')->group(function(){
     Route::get('/students/{course}/search', [StudentController::class, 'search'])->name('students.search');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
