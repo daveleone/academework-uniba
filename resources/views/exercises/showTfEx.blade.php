@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ $exercise->topic->name . ' / ' . $exercise->name }}
+            <a href="{{ route('topic.exercises', ['id' => $exercise->topic->id]) }}">{{ $exercise->topic->name }}</a> / {{$exercise->name}}
         </h2>
     </x-slot>
     <div class="py-12 flex flex-col items-center w-full text-lg">
@@ -28,11 +28,8 @@
             </ol>
             <div class="flex flex-row mt-[1rem]">
                 <button onclick="enableEdit()" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Edit</button>
-                <form action="{{ route('exercise.delete', ['id' => $exercise->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
-                </form>
+                    <button type="submit" data-modal-target="DeleteEx-modal-{{$exercise->id}}" data-modal-toggle="DeleteEx-modal-{{$exercise->id}}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                    @include('forms.exercise.delete', ['exercise' => $exercise])
             </div>
         </div>
 
@@ -53,7 +50,7 @@
                 <div class="mb-[1rem]">
                     <label for="exPoints" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Points: </label>
                     <input type="number" id="exPoints" name="exPoints" min="1" placeholder="{{ $exercise->points }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                </div class="mb-[1rem]">
+                </div>
                 @foreach ($exercise->elements()->orderBy('position')->get() as $element)
                 <div id="{{'questDiv' . $element->position}}" class="w-[17rem] my-[1rem]">
                     <label for="{{ 'question' . $element->position }}" id="{{'questLab'.$element->position}}" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">Question {{ $element->position + 1 }}: </label>

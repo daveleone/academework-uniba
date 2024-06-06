@@ -62,7 +62,7 @@
             deleteButtn.id = "delButt" + n;
             deleteButtn.style.display = "block";
             deleteButtn.onclick = () => {
-                deleteQuestion(newQuestion.id, n);
+                deleteQuestion(n);
             };
 
             newQuestion.querySelector("#divInputs" + n).appendChild(deleteButtn);
@@ -72,8 +72,8 @@
             questionNum.value++;
         }
 
-        function deleteQuestion(divId, p) { // p := posizione elemento
-            const divToDelete = document.getElementById(divId);
+        function deleteQuestion(p) { // p := posizione elemento
+            const divToDelete = document.getElementById("questDiv" + p);
             let n = parseInt(questionNum.value);
 
             divToDelete.remove();
@@ -84,6 +84,7 @@
                 let questionCheckbox = document.getElementById("isTrue" + i);
                 let checkboxLabel = document.getElementById("isTrueLab" + i);
                 let deleteButtn = document.getElementById("delButt" + i);
+                let inputsDiv = document.getElementById("divInputs" + i)
 
                 questionDiv.id = "questDiv" + (i - 1);
 
@@ -100,9 +101,11 @@
                 checkboxLabel.id = "isTrueLab" + (i - 1);
                 checkboxLabel.for = "isTrue" + (i - 1);
 
+                inputsDiv.id = "divInputs" + (i - 1);
+
                 deleteButtn.id = "delButt" + (i - 1);
                 deleteButtn.onclick = () => {
-                    deleteQuestion(questionDiv.id, i - 1);
+                    deleteQuestion(i - 1);
                 };
             }
 
