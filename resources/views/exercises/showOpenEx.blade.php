@@ -1,67 +1,167 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ $exercise->topic->name . ' / ' . $exercise->name }}
+        <h2
+            class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
+        >
+            <a
+                href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+            >
+                {{ $exercise->topic->name }}
+            </a>
+            / {{ $exercise->name }}
         </h2>
     </x-slot>
-    <div style="display: flex; align-items:center; justify-content:center; flex-direction: column;">
-        <div style="background-color: white" id="showDiv">
-           <p>{{ $exercise->description }}</p>
-            @foreach ($exercise->elements as $element)
-            <div>
-                <textarea name="answer" id="answer" disabled>{{ $element->answer }}</textarea>
-            </div>
+    <div class="flex w-full flex-col items-center py-12 text-lg">
+        <div
+            id="showDiv"
+            class="m-2.5 w-[22rem] rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
+        >
+            <p class="mb-3 text-gray-500 dark:text-gray-400">
+                {{ $exercise->description }}
+            </p>
+            @foreach($exercise->elements as $element)
+                <div>
+                    <textarea
+                        name="answer"
+                        id="answer"
+                        disabled
+                        placeholder=""
+                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    >
+{{ $element->answer }}</textarea
+                    >
+                </div>
             @endforeach
-            <button onclick="enableEdit()">Edit</button>
-            <form action="{{ route('exercise.delete', ['id' => $exercise->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form>
+
+            <div class="mt-[1rem] flex flex-row">
+                <button
+                    onclick="enableEdit()"
+                    class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                >
+                    Edit
+                </button>
+                <button
+                    type="submit"
+                    data-modal-target="DeleteEx-modal-{{ $exercise->id }}"
+                    data-modal-toggle="DeleteEx-modal-{{ $exercise->id }}"
+                    class="mb-2 me-2 rounded-lg bg-red-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                >
+                    Delete
+                </button>
+                @include("forms.exercise.delete", ["exercise" => $exercise])
+            </div>
         </div>
-        <div id="editDiv" style="display:none;">
-            <form action="{{ route('exercise.edit', ['id' => $exercise->id]) }}" method="POST">
+        <div
+            id="editDiv"
+            class="m-2.5 flex hidden w-[30rem] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
+        >
+            <form
+                action="{{ route("exercise.edit", ["id" => $exercise->id]) }}"
+                method="POST"
+                id="open-Form"
+            >
                 @csrf
-                @method('PUT')
-                <input type="hidden" name="exId" value="{{ $exercise->id }}">
-                <div>
-                    <label for="exName">Name: </label>
-                    <input type="text"  id="exName" name="exName" placeholder="{{ $exercise->name }}">
+                @method("PUT")
+                <input type="hidden" name="exId" value="{{ $exercise->id }}" />
+                <input
+                    type="hidden"
+                    id="questionNum"
+                    name="questionNum"
+                    value="{{ $exercise->elements->count() }}"
+                />
+                <div class="mb-[1rem]">
+                    <label
+                        for="exName"
+                        class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                        Name:
+                    </label>
+                    <input
+                        type="text"
+                        id="exName"
+                        name="exName"
+                        placeholder="{{ $exercise->name }}"
+                        class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                    />
                 </div>
-                <div>
-                    <label for="exDescription">Description: </label>
-                    <textarea id="exDescription" name="exDescription" placeholder="{{ $exercise->description }}"></textarea>
+                <div class="mb-[1rem]">
+                    <label
+                        for="exDescription"
+                        class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                        Description:
+                    </label>
+                    <textarea
+                        id="exDescription"
+                        name="exDescription"
+                        placeholder="{{ $exercise->description }}"
+                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    ></textarea>
                 </div>
-                <div>
-                    <label for="exPoints"> Points: </label>
-                    <input type="number" id="exPoints" name="exPoints" min="1" placeholder="{{ $exercise->points }}">
+                <div class="mb-[1rem]">
+                    <label
+                        for="exPoints"
+                        class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                        Points:
+                    </label>
+                    <input
+                        type="number"
+                        id="exPoints"
+                        name="exPoints"
+                        min="1"
+                        placeholder="{{ $exercise->points }}"
+                        class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                    />
                 </div>
                 @foreach ($exercise->elements as $element)
-                <div>
-                    <label for="exAnswer">Answer: </label>
-                    <textarea name="exAnswer" id="exAnswer" placeholder="{{ $element->answer }}"></textarea>
-                </div>
+                    <div>
+                        <label
+                            for="exAnswer"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Answer:
+                        </label>
+                        <textarea
+                            name="exAnswer"
+                            id="exAnswer"
+                            placeholder="{{ $element->answer }}"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        ></textarea>
+                    </div>
                 @endforeach
-                <button type="submit">Edit</button>
             </form>
-            <button onclick="disableEdit()">Abort</button>
+            <div class="mt-[2rem] flex flex-row">
+                <button
+                    type="submit"
+                    form="open-Form"
+                    class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                    Edit
+                </button>
+                <button
+                    type="button"
+                    onclick="disableEdit()"
+                    class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                >
+                    Abort
+                </button>
+            </div>
         </div>
     </div>
     <script>
-        function enableEdit(){
+        initialForm = document.getElementById('editDiv').innerHTML;
+        function enableEdit() {
             const showDiv = document.getElementById('showDiv');
             const editDiv = document.getElementById('editDiv');
             showDiv.style.display = 'none';
             editDiv.style.display = 'flex';
         }
 
-        function disableEdit(){
+        function disableEdit() {
             const editDiv = document.getElementById('editDiv');
             const showDiv = document.getElementById('showDiv');
-            //const nameInput = document.getElementById('subName' + subId);
-            //const descInput = document.getElementById('subDesc' + subId);
-            //nameInput.value = null;
-            //descInput.value = null;
+            editDiv.innerHTML = initialForm;
             editDiv.style.display = 'none';
             showDiv.style.display = 'block  ';
         }
