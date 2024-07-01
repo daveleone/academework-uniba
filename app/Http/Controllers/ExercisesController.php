@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\View\View;
-use App\Models\Subject;
 use App\Models\Topic;
 use App\Models\Exercise;
 use App\Models\tfExElement;
@@ -16,8 +15,12 @@ use Illuminate\Http\RedirectResponse;
 
 class ExercisesController extends Controller
 {
-    public function show($id): View{
+    public function show($id): View | RedirectResponse{
         $topic = Topic::find($id);
+        if(!$topic){
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
         $exercises = Exercise::where('topic_id', $topic->id)->get();
         return view('exercises.exercises',
         ['topic' => $topic, 'exercises' => $exercises]);
