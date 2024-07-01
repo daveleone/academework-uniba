@@ -11,128 +11,254 @@ use App\Models\tfExElement;
 use App\Models\closedExElement;
 use App\Models\openExElement;
 use App\Models\fillExElement;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class ExercisesController extends Controller
 {
-    public function show($id): View | RedirectResponse{
+    public function show($id): View | RedirectResponse
+    {
         $topic = Topic::find($id);
-        if(!$topic){
+        if (!$topic) {
             session()->flash('error', 'Topic not found');
             return to_route('subject.show');
         }
         $exercises = Exercise::where('topic_id', $topic->id)->get();
-        return view('exercises.exercises',
-        ['topic' => $topic, 'exercises' => $exercises]);
+        return view(
+            'exercises.exercises',
+            ['topic' => $topic, 'exercises' => $exercises]
+        );
     }
 
-    private function createExInit($topic) : Exercise{
-        $exercise = json_decode(Session::get('exerciseInit'));
-        Session::forget('exerciseInit');
-        $exercise = Exercise::create([
-            'name' => $exercise->name,
-            'description' => $exercise->description,
-            'type' => $exercise->type,
-            'points' => $exercise->points,
-            'topic_id' => $topic->id
-        ]);
-        return $exercise;
+    private function createExInit($topic): Exercise | RedirectResponse
+    {
+        try {
+            $exercise = json_decode(Session::get('exerciseInit'));
+            Session::forget('exerciseInit');
+            $exercise = Exercise::create([
+                'name' => $exercise->name,
+                'description' => $exercise->description,
+                'type' => $exercise->type,
+                'points' => $exercise->points,
+                'topic_id' => $topic->id
+            ]);
+            return $exercise;
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            echo 'Mimmone';
+            return to_route('topic.exercises', ['id' => $topic->id]);
+        }
     }
 
-    public function create($id) : View /* | RedirectResponse  boh */ {
+    public function create($id): View | RedirectResponse
+    {
+
         $topic = Topic::find($id);
-        $exercises = Exercise::where('topic_id', $topic->id)->get();
+
+        if (!$topic) {
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
+
+        $data = request()->validate([
+            'ExName' => 'required|alpha_num',
+            'ExDescription' => 'required|alpha_num',
+            'ExType' => 'required',
+            'ExPoints' => 'required|integer',
+        ]);
+
         $exercise = [
-            'name' => Request()->input('ExName'),
-            'description' => Request()->input('ExDescription'),
-            'type' => Request()->input('ExType'),
-            'points' => Request()->input('ExPoints'),
+            'name' => $data['ExName'],
+            'description' => $data['ExDescription'],
+            'type' => $data['ExType'],
+            'points' => $data['ExPoints'],
             'topic_id' => $topic->id
         ];
+
         Session::put('exerciseInit', json_encode($exercise));
-        $exType = Request()->input('ExType');
-        switch($exType){
+        switch ($data['ExType']) {
             case 'true/false':
-                return view('exercises.createTfEx',
-                ['topic' => $topic, 'exercises' => $exercises]);
+                return view(
+                    'exercises.createTfEx',
+                    ['topic' => $topic]
+                );
                 break;
             case 'open':
-                return view('exercises.createOpenEx',
-                ['topic' => $topic, 'exercises' => $exercises]);
+                return view(
+                    'exercises.createOpenEx',
+                    ['topic' => $topic]
+                );
                 break;
             case 'close':
-                return view('exercises.createClosedEx',
-                ['topic' => $topic, 'exercises' => $exercises]);
+                return view(
+                    'exercises.createClosedEx',
+                    ['topic' => $topic]
+                );
                 break;
             case 'fill-in':
-                return view('exercises.createFillEx',
-                ['topic' => $topic, 'exercises' => $exercises]);
+                return view(
+                    'exercises.createFillEx',
+                    ['topic' => $topic]
+                );
                 break;
-            //default:
-            //    return route('exercises.exercises',
-            //    ['topic' => $topic, 'exercises' => $exercises]);
-            //    break;
-            }
+            default:
+                session()->flash('error', 'Invalid type');
+                return to_route(
+                    'topic.exercises',
+                    ['id' => $id]
+                );
+                break;
+        }
     }
 
-    public function createTf($id) : RedirectResponse {
+    public function createTf($id): RedirectResponse
+    {
         $topic = Topic::find($id);
+
+        if (!$topic) {
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
+
         $exercise = $this->createExInit($topic);
+
+        if (!$exercise) {
+            session()->flash('error', 'Exercise initialization failed');
+            return to_route('topic.exercises', ['id' => $id]);
+        }
+
         $nQuestions = intval(Request()->input('questionNum'));
-        for($i = 0; $i < $nQuestions; $i++){
-            tfExElement::create([
-                'position' => $i,
-                'exercise_id' => $exercise->id,
-                'content' => Request()->input('question'.$i),
-                'truth' => Request()->input('isTrue'.$i, false) == "1" ? true : false
-            ]);
+
+        try {
+            for ($i = 0; $i < $nQuestions; $i++) {
+                tfExElement::create([
+                    'position' => $i,
+                    'exercise_id' => $exercise->id,
+                    'content' => Request()->input('question' . $i),
+                    'truth' => Request()->input('isTrue' . $i, false) == "1" ? true : false
+                ]);
+            }
+            session()->flash('success', $exercise->name . ' created');
+        } catch (\Exception $e) {
+            $exercise->delete();
+            session()->flash('error', $e->getMessage());
         }
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function createClosed($id) : RedirectResponse {
+    public function createClosed($id): RedirectResponse
+    {
         $topic = Topic::find($id);
+
+        if (!$topic) {
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
+
         $exercise = $this->createExInit($topic);
+
+        if (!$exercise) {
+            session()->flash('error', 'Exercise initialization failed');
+            return to_route('topic.exercises', ['id' => $id]);
+        }
+
         $nAnswers = intval(Request()->input('answerNum'));
-        for($i = 0; $i < $nAnswers; $i++){
-            closedExElement::create([
-                'position' => $i,
-                'exercise_id' => $exercise->id,
-                'content' => Request()->input('answer'.$i),
-                'truth' => Request()->input('isTrue', false) == $i ? true : false
-            ]);
+
+        try {
+            for ($i = 0; $i < $nAnswers; $i++) {
+                closedExElement::create([
+                    'position' => $i,
+                    'exercise_id' => $exercise->id,
+                    'content' => Request()->input('answer' . $i),
+                    'truth' => Request()->input('isTrue', false) == $i ? true : false
+                ]);
+            }
+            session()->flash('success', $exercise->name . ' created');
+        } catch (\Exception $e) {
+            $exercise->delete();
+            session()->flash('error', $e->getMessage());
         }
+
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function createOpen($id) : RedirectResponse {
+    public function createOpen($id): RedirectResponse
+    {
         $topic = Topic::find($id);
+
+        if (!$topic) {
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
+
         $exercise = $this->createExInit($topic);
-        openExElement::create([
-            'exercise_id' => $exercise->id,
-            'answer' => Request()->input('exAnswer'),
-        ]);
+
+        if (!$exercise) {
+            session()->flash('error', 'Exercise initialization failed');
+            return to_route('topic.exercises', ['id' => $id]);
+        }
+
+        try {
+            openExElement::create([
+                'exercise_id' => $exercise->id,
+                'answer' => Request()->input('exAnswer'),
+            ]);
+            session()->flash('success', $exercise->name . ' created');
+        } catch (\Exception $e) {
+            $exercise->delete();
+            session()->flash('error', $e->getMessage());
+        }
+
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function createFill($id) : RedirectResponse {
+    public function createFill($id): RedirectResponse
+    {
         $topic = Topic::find($id);
+
+        if (!$topic) {
+            session()->flash('error', 'Topic not found');
+            return to_route('subject.show');
+        }
+
         $exercise = $this->createExInit($topic);
+
+        if (!$exercise) {
+            session()->flash('error', 'Exercise initialization failed');
+            return to_route('topic.exercises', ['id' => $id]);
+        }
+
         $nElements = intval(Request()->input('elemNum'));
-        for($i = 0; $i < $nElements; $i++){
-            fillExElement::create([
-                'position' => $i,
-                'exercise_id' => $exercise->id,
-                'content' => Request()->input('element'.$i),
-                'type' => Request()->input('elemType'.$i)
-            ]);
+        try {
+            for ($i = 0; $i < $nElements; $i++) {
+                fillExElement::create([
+                    'position' => $i,
+                    'exercise_id' => $exercise->id,
+                    'content' => Request()->input('element' . $i),
+                    'type' => Request()->input('elemType' . $i)
+                ]);
+            }
+            session()->flash('success', $exercise->name . ' created');
+        } catch (\Exception $e) {
+            $exercise->delete();
+            session()->flash('error', $e->getMessage());
         }
+
+
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function showExercise($id) : View{
+    public function showExercise($id): View
+    {
         $exercise = Exercise::find($id);
-        switch($exercise->type){
+
+        if (!$exercise) {
+            session()->flash('error', 'Exercise not found');
+            return to_route('subject.show');
+        }
+
+        switch ($exercise->type) {
             case 'true/false':
                 return view('exercises.showTfEx', ['exercise' => $exercise]);
                 break;
@@ -145,112 +271,141 @@ class ExercisesController extends Controller
             case 'fill-in':
                 return view('exercises.showFillEx', ['exercise' => $exercise]);
                 break;
+            default:
+                session()->flash('error', 'Invalid type');
+                return to_route(
+                    'topic.exercises',
+                    ['id' => $id]
+                );
+                break;
         }
     }
 
-    public function delete($id) : RedirectResponse{
+    public function delete($id): RedirectResponse
+    {
         $exercise = Exercise::find($id);
-        $topicId = $exercise->topic->id;
-        $exercise->delete();
+        if (!$exercise) {
+            session()->flash('error', 'Exercise not found');
+            return to_route('subject.show');
+        }
+        try {
+            $topicId = $exercise->topic->id;
+            $exercise->delete();
+            session()->flash('success', 'Exercise deleted');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return to_route('subject.show');
+        }
         return to_route('topic.exercises', ['id' => $topicId]);
     }
 
-    public function edit($id)  : RedirectResponse{
+
+    public function edit($id): RedirectResponse
+    {
         $exercise = Exercise::find(Request()->input('exId'));
+        if (!$exercise) {
+            session()->flash('error', 'Exercise not found');
+            return to_route('subject.show');
+        }
+
         $newName = Request()->input('exName');
         $newDesc = Request()->input('exDescription');
         $newPoints = Request()->input('exPoints');
-        if ($newName and $newName != ''){
+        if ($newName and $newName != '') {
             $exercise->update(['name' => $newName]);
         }
 
-        if ($newDesc and $newDesc != ''){
+        if ($newDesc and $newDesc != '') {
             $exercise->update(['description' => $newDesc]);
         }
 
-        if ($newPoints and $newPoints != $exercise->points){
+        if ($newPoints and $newPoints != $exercise->points) {
             $exercise->update(['points' => $newPoints]);
         }
-        //ottimizzare?
-        switch($exercise->type){
-            case 'open':
-                foreach ($exercise->elements as $element){
-                    $newAnsw = Request()->input('exAnswer');
-                    if ($newAnsw and $newAnsw != ''){
-                        $element->update(['answer' => $newAnsw]);
+
+        try {
+            switch ($exercise->type) {
+                case 'open':
+                    foreach ($exercise->elements as $element) {
+                        $newAnsw = Request()->input('exAnswer');
+                        if ($newAnsw and $newAnsw != '') {
+                            $element->update(['answer' => $newAnsw]);
+                        }
                     }
-                }
-                break;
-            case 'close':
-                $nAns = Request()->input('answerNum');
-                $nElem = $exercise->elements->count();
-                if($nElem > $nAns){
-                    $exercise->elements()->where('position', '>=', $nAns)->delete();
-                    $nElem = $nAns;
-                }elseif($nElem < $nAns){
-                    for($i = $nElem; $i < $nAns; $i++){
-                        $exercise->elements()->create([
+                    break;
+                case 'close':
+                    $nAns = Request()->input('answerNum');
+                    $nElem = $exercise->elements->count();
+                    if ($nElem > $nAns) {
+                        $exercise->elements()->where('position', '>=', $nAns)->delete();
+                        $nElem = $nAns;
+                    } elseif ($nElem < $nAns) {
+                        for ($i = $nElem; $i < $nAns; $i++) {
+                            $exercise->elements()->create([
+                                'position' => $i,
+                                'content' => Request()->input('exAnswer' . $i),
+                                'truth' => Request()->input('isTrue', false) == $i ? true : false
+                            ]);
+                        }
+                    }
+                    foreach ($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element) {
+                        $element->update([
                             'position' => $i,
                             'content' => Request()->input('exAnswer' . $i),
                             'truth' => Request()->input('isTrue', false) == $i ? true : false
                         ]);
                     }
-                }
-                foreach($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element){
-                    $element->update([
-                        'position' => $i,
-                        'content' => Request()->input('exAnswer' . $i),
-                        'truth' => Request()->input('isTrue', false) == $i ? true : false
-                    ]);
-                }
-                break;
+                    break;
                 case 'true/false':
                     $nAns = Request()->input('questionNum');
                     $nElem = $exercise->elements->count();
-                    if($nElem > $nAns){
+                    if ($nElem > $nAns) {
                         $exercise->elements()->where('position', '>=', $nAns)->delete();
                         $nElem = $nAns;
-                    }elseif($nElem < $nAns){
-                        for($i = $nElem; $i < $nAns; $i++){
+                    } elseif ($nElem < $nAns) {
+                        for ($i = $nElem; $i < $nAns; $i++) {
                             $exercise->elements()->create([
                                 'position' => $i,
                                 'content' => Request()->input('question' . $i),
-                                'truth' => Request()->input('isTrue'.$i, false) == 1 ? true : false
+                                'truth' => Request()->input('isTrue' . $i, false) == 1 ? true : false
                             ]);
                         }
                     }
-                    foreach($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element){
+                    foreach ($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element) {
                         $element->update([
                             'position' => $i,
                             'content' => Request()->input('question' . $i),
-                            'truth' => Request()->input('isTrue'.$i, false) == 1 ? true : false
+                            'truth' => Request()->input('isTrue' . $i, false) == 1 ? true : false
                         ]);
                     }
                     break;
-                    case 'fill-in':
-                        $nAns = Request()->input('elemNum');
-                        $nElem = $exercise->elements->count();
-                        if($nElem > $nAns){
-                            $exercise->elements()->where('position', '>=', $nAns)->delete();
-                            $nElem = $nAns;
-                        }elseif($nElem < $nAns){
-                            for($i = $nElem; $i < $nAns; $i++){
-                                $exercise->elements()->create([
-                                    'position' => $i,
-                                    'content' => Request()->input('element' . $i),
-                                    'type' => Request()->input('elemType'.$i)
-                                ]);
-                            }
-                        }
-                        foreach($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element){
-                            $element->update([
+                case 'fill-in':
+                    $nAns = Request()->input('elemNum');
+                    $nElem = $exercise->elements->count();
+                    if ($nElem > $nAns) {
+                        $exercise->elements()->where('position', '>=', $nAns)->delete();
+                        $nElem = $nAns;
+                    } elseif ($nElem < $nAns) {
+                        for ($i = $nElem; $i < $nAns; $i++) {
+                            $exercise->elements()->create([
                                 'position' => $i,
                                 'content' => Request()->input('element' . $i),
-                                'type' => Request()->input('elemType'.$i)
+                                'type' => Request()->input('elemType' . $i)
                             ]);
                         }
-                        break;
-
+                    }
+                    foreach ($exercise->elements()->where('position', '<', $nElem)->orderBy('position')->get() as $i => $element) {
+                        $element->update([
+                            'position' => $i,
+                            'content' => Request()->input('element' . $i),
+                            'type' => Request()->input('elemType' . $i)
+                        ]);
+                    }
+                    break;
+            }
+            session()->flash('success', 'Exercise updated');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
         }
 
         return to_route('exercise.show', ['id' => $id]);

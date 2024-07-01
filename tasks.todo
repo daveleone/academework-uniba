@@ -4,21 +4,21 @@
         x creazione
         x modifica
         x cancellazione
-        x +- gestione diversi teachers
+        ! gestione diversi teachers
     x Gestione topics
         ! gestione errori
         x creazione
         x modifica
         x cancellazione
-        - ? gestione diversi teachers
+        ! gestione diversi teachers
     - Gestione esercizi
-        ! gestione errori
+        x gestione errori
         x Creazione esercizi
         x visualizzazione
         x modifica
-            - fixare bug
         x cancellazione
-        - ? gestione diversi teachers
+        x +- gestione diversi teachers
+
     - Creazione quiz
     - Assegnazione quiz
         - assegnarlo randomizzato
@@ -32,12 +32,12 @@
         - sala d'attesa (pulsante teacher)
 
 % Styling
-    - creazione materia / topic
-    - creazione esercizio
-        - true/false
-        - fill-in
-        - closed
-        - open
+    x creazione materia / topic
+    x creazione esercizio
+        x true/false
+        x fill-in
+        x closed
+        x open
 
     - sezione corsi ?
 

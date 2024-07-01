@@ -84,8 +84,12 @@
                             id="ExName"
                             class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                             placeholder="Type exercise name"
-                            required=""
+                            required
+                            value="{{ old('ExName' )}}"
                         />
+                        @error('ExName')
+                            <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2">
                         <label
@@ -101,7 +105,10 @@
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             placeholder="Write exercise description here"
                             required
-                        ></textarea>
+                        >{{ old('ExDescription')}}</textarea>
+                        @error('ExDescription')
+                            <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label
@@ -119,7 +126,12 @@
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             placeholder=""
                             required
+                            value="{{ old('ExPoints' )}}"
+
                         />
+                        @error('ExPoints')
+                            <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label
@@ -140,6 +152,9 @@
                             <option value="close">Closed question</option>
                             <option value="fill-in">Fill in text</option>
                         </select>
+                        @error('ExType')
+                            <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <button
