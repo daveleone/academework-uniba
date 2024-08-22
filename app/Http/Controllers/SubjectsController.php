@@ -10,38 +10,59 @@ class SubjectsController extends Controller
 {
     public function show(): View
     {
-        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();  // modificare
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();  //TODO: modificare
         return view('subjects', ['subjects' => $subjects]);
     }
 
     public function create(): View
     {
-        Subject::create([
-            'name' => Request()->input('SubName'),
-            'description' => Request()->input('SubDescription'),
-            'teacher_id' => Auth::user()->id
-        ]);
+        try {
+            Subject::create([
+                'name' => Request()->input('SubName'),
+                'description' => Request()->input('SubDescription'),
+                'teacher_id' => Auth::user()->id
+            ]);
+            session()->flash('success', Request()->input('SubName') . ' created');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
         return $this->show();
     }
 
     public function delete(): View
     {
-        Subject::destroy(Request()->input('subId'));
+        try {
+            Subject::destroy(Request()->input('subId'));
+            session()->flash('success', 'Subject deleted');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
         return $this->show();
     }
 
     public function edit(): View
     {
         $subject = Subject::find(Request()->input('subId'));
-        $newName = Request()->input('subName' . $subject->id);
-        $newDesc = Request()->input('subDesc' . $subject->id);
-
-        if ($newName and $newName != '') {
-            $subject->update(['name' => $newName]);
+        if (!$subject) {
+            session()->flash('error', 'Subject not found');
+            return $this->show();
         }
 
-        if ($newDesc and $newDesc != '') {
-            $subject->update(['description' => $newDesc]);
+        try{
+            $newName = Request()->input('subName' . $subject->id);
+            $newDesc = Request()->input('subDesc' . $subject->id);
+
+            if ($newName and $newName != '') {
+                $subject->update(['name' => $newName]);
+            }
+
+            if ($newDesc and $newDesc != '') {
+                $subject->update(['description' => $newDesc]);
+            }
+            session()->flash('success', 'Subject updated');
+
+        } catch (\Exception $e){
+            session()->flash('error', $e->getMessage());
         }
         return $this->show();
     }

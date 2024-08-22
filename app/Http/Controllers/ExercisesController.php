@@ -46,7 +46,6 @@ class ExercisesController extends Controller
             return $exercise;
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
-            echo 'Mimmone';
             return to_route('topic.exercises', ['id' => $topic->id]);
         }
     }
