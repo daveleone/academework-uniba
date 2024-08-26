@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\Topic;
 use App\Models\Exercise;
@@ -11,6 +12,7 @@ use App\Models\tfExElement;
 use App\Models\closedExElement;
 use App\Models\openExElement;
 use App\Models\fillExElement;
+use App\Models\Quiz;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -61,8 +63,8 @@ class ExercisesController extends Controller
         }
 
         $data = request()->validate([
-            'ExName' => 'required|alpha_num',
-            'ExDescription' => 'required|alpha_num',
+            'ExName' => 'required',
+            'ExDescription' => 'required',
             'ExType' => 'required',
             'ExPoints' => 'required|integer',
         ]);
@@ -257,9 +259,11 @@ class ExercisesController extends Controller
             return to_route('subject.show');
         }
 
+        $quizzes = Quiz::where('creator_id', Auth::user()->id)->get();
+        
         switch ($exercise->type) {
             case 'true/false':
-                return view('exercises.showTfEx', ['exercise' => $exercise]);
+                return view('exercises.showTfEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
                 break;
             case 'open':
                 return view('exercises.showOpenEx', ['exercise' => $exercise]);

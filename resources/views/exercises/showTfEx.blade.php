@@ -1,15 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2
-            class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-        >
-            <a
-                href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+        <div class="flex flex-row justify-between items-center">
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
             >
-                {{ $exercise->topic->name }}
-            </a>
-            / {{ $exercise->name }}
-        </h2>
+                <a
+                    href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+                >
+                    {{ $exercise->topic->name }}
+                </a>
+                / {{ $exercise->name }}
+            </h2>
+
+            @include('forms.exercise.add_to_quiz')
+        </div>
     </x-slot>
     <div class="flex w-full flex-col items-center py-12 text-lg">
         <div

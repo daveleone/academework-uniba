@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth', 'role:teacher')->group(function () {  // implementare redirect per insegnanti/studenti
+Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: implementare redirect per insegnanti/studenti
     Route::get('/teacher-dashboard', function () {
         return view('dashboard-teacher');
     })->name('td');
@@ -67,7 +67,9 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // implementare 
     });
 
     Route::controller(QuizzesController::class)->group(function () {
-        Route::get('/quiz/{id}', 'show')->name('quizzes.show');
+        Route::get('/quizzes', 'index')->name('quiz.index');
+        Route::post('/quizzes', 'create')->name('quiz.create');
+        Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
     });
 
     // Here route accessible only to teachers

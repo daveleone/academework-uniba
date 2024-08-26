@@ -1,23 +1,24 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ "Quiz " . $subject->name}}
-        </h2>
-    </x-slot>
-    <div style="display: flex; align-items:center; justify-content:center; flex-direction: column;">
-        <div style="background-color: white">
-            @include('forms.create-quiz')
+        <div class="flex flex-row items-center justify-between">
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
+            >
+                {{ __("My quizzes") }}
+            </h2>
 
+            @include("forms.quiz.create")
+        </div>
+    </x-slot>
+    <div
+        class="flex items-center flex-col"
+    >
+        <div class="py-12 flex flex-wrap justify-center w-4/5">
             @foreach ($quizzes as $quiz)
-            <div style="display:flex; flex-direction: row;">
-                <div style="margin: 2rem;">
-                    <a href="{{ route('exercise.show', ['id' => $exercise->id]) }}">
-                        <p><b>Title: </b>{{ $quiz->name }}</p>
-                        <p><b>Description: </b>{{ $quiz->description }}</p>
-                        <p><b>Points: </b>{{ $quiz->points }}</p>
-                    </a>
-                </div>
-            </div>
+                <x-cardNDE id="{{ $quiz->id }}" href="#">
+                    <x-slot name="name">{{ $quiz->name }}</x-slot>
+                    <x-slot name="description">{{ $quiz->description }}</x-slot>
+                </x-cardNDE>
             @endforeach
         </div>
     </div>
