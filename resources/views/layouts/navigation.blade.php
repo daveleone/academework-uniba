@@ -15,6 +15,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                </div>
+
+                @if (auth()->user()->isTeacher())
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                        {{ __('Create a class') }}
+                    </x-nav-link>
 
                     <x-nav-link :href="route('subject.show')" :active="request()->routeIs('subject.show')">
                         {{ __('My subjects') }}
@@ -23,15 +30,19 @@
                     <x-nav-link :href="route('quiz.index')" :active="request()->routeIs('quiz.index')">
                         {{ __('My quizzes') }}
                     </x-nav-link>
-                    
-                </div>
 
-                @if (auth()->user()->isTeacher())
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
-                        {{ __('Create a class') }}
+                    <x-nav-link :href="route('courses.show')">
+                        {{ __('My classes') }}
                     </x-nav-link>
                 </div>
+                @endif
+
+                @if(auth()->user()->isStudent())
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('student.show')" :active="request()->routeIs('student.show')">
+                            {{ __('My classes') }}
+                        </x-nav-link>
+                    </div>
                 @endif
             </div>
 
@@ -54,12 +65,6 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
-                        @if (auth()->user()->isTeacher())
-                        <x-dropdown-link :href="route('courses.show')">
-                            {{ __('My classes') }}
-                        </x-dropdown-link>
-                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

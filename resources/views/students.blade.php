@@ -7,7 +7,7 @@
     </div>
     <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="overflow-x-auto ">
-            <form action="{{ route('students.store', $course->id) }}" method="POST">
+            <form action="{{ route('student.store', $course->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 @if ($students->count() > 0)
@@ -21,7 +21,7 @@
     </main>
     @else
     <div class="bg-white dark:bg-gray-800 overflow-hidden max-w-7xl mx-auto shadow-sm sm:rounded-lg p-6 sm:px-6 lg:px-8 mt-4">
-        <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{__('Seems like there arent any students to be added to your class!')}}</p>
+        <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{__('Seems like there arent any student to be added to your class!')}}</p>
     </div>
     @endif
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm">
@@ -38,7 +38,7 @@
             let query = $(this).val();
             console.log(query);
             $.ajax({
-                url: "{{ route('students.search', $course->id) }}",
+                url: "{{ route('student.search', $course->id) }}",
                 type: "GET",
                 data: {
                     'query': query

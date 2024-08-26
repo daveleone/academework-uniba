@@ -5,6 +5,7 @@ use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizzesController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentCoursesController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth', 'role:student')->group(function () {
+    Route::controller(StudentCoursesController::class)->group(function () {
+        Route::get('/student/my-courses', 'show')->name('student.show');
+    });
 });
 
 Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: implementare redirect per insegnanti/studenti
@@ -72,16 +79,20 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
     });
 
-    // Here route accessible only to teachers
-    Route::get('/create-course', [CourseController::class, 'index'])->name('courses.index');
-    Route::post('/create-course', [CourseController::class, 'store'])->name('courses.store');
-    Route::get('/my-courses', [CourseController::class, 'show'])->name('courses.show');
-    Route::get('/my-courses/{course}', [CourseController::class, 'edit'])->name('courses.edit');
-    Route::put('/my-courses/{course}', [CourseController::class, 'update'])->name('courses.update');
-    // Route::put('/my-courses/{course}/students', [CourseController::class, 'addStudent'])->name('courses.students');
-    Route::get('/students/{course}', [StudentController::class, 'show'])->name('students');
-    Route::put('/students/{course}', [StudentController::class, 'store'])->name('students.store');
-    Route::get('/students/{course}/search', [StudentController::class, 'search'])->name('students.search');
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/create-course', 'index')->name('courses.index');
+        Route::post('/create-course', 'store')->name('courses.store');
+        Route::get('/my-courses', 'show')->name('courses.show');
+        Route::get('/my-courses/{course}', 'edit')->name('courses.edit');
+        Route::put('/my-courses/{course}', 'update')->name('courses.update');
+    });
+
+    Route::controller(StudentController::class)->group(function () {
+        Route::get('/student/{course}', 'show')->name('student');
+        Route::put('/student/{course}', 'store')->name('student.store');
+        Route::get('/student/{course}/search', 'search')->name('student.search');
+        Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
+    });
 });
 
 require __DIR__ . '/auth.php';
