@@ -58,15 +58,16 @@
             />
         </div>
     </div>
-    <form action="{{route('quiz.addExercise')}}" method="POST">
+    <form action="{{ route("quiz.addExercise") }}" method="POST">
         @csrf
-        @method('POST')
+        @method("POST")
         <ul
             class="h-48 overflow-y-auto px-3 pb-3 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownSearchButton"
+            id="quiz-list"
         >
-            <input type="hidden" name="exId" value="{{ $exercise->id }}">
-            @foreach($quizzes as $i => $quiz)
+            <input type="hidden" name="exId" value="{{ $exercise->id }}" />
+            @foreach ($quizzes as $i => $quiz)
                 <li>
                     <div
                         class="flex items-center rounded ps-2 hover:bg-gray-100 dark:hover:bg-gray-600"
@@ -90,12 +91,50 @@
         </ul>
         <button
             type="submit"
-            class="flex items-center rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 text-sm font-medium text-red-600 hover:bg-gray-100 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-blue-500 dark:hover:bg-gray-600 w-[100%]"
+            class="flex w-[100%] items-center rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 text-sm font-medium text-red-600 hover:bg-gray-100 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-blue-500 dark:hover:bg-gray-600"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 pr-1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 pr-1"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+            </svg>
             Add
         </button>
     </form>
 </div>
+
+<script>
+    // get input
+    let input = document.getElementById('input-group-search');
+    //get list of value
+    let list = document.querySelectorAll('#quiz-list li');
+
+    //function search on the list.
+    function search() {
+        for (let i = 0; i < list.length; i += 1) {
+            let label = list[i].querySelector('label');
+            //check if the element contains the value of the input
+            if (
+                label.innerText
+                    .toLowerCase()
+                    .includes(input.value.toLowerCase())
+            ) {
+                list[i].style.display = 'block';
+            } else {
+                list[i].style.display = 'none';
+            }
+        }
+    }
+
+    //to the change run search.
+    input.addEventListener('input', search);
+</script>
