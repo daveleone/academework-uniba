@@ -25,12 +25,16 @@ class TopicsController extends Controller
     public function create($id): View | RedirectResponse{
         $subject = Subject::find($id);
         if($subject){
-            Topic::create([
-                'name' => Request()->input('TopicName'),
-                'description' => Request()->input('TopicDescription'),
-                'subject_id' => $subject->id
-            ]);
-            session()->flash('success', Request()->input('TopicName') . ' created');
+            try{
+                Topic::create([
+                    'name' => Request()->input('TopicName'),
+                    'description' => Request()->input('TopicDescription'),
+                    'subject_id' => $subject->id
+                ]);
+                session()->flash('success', Request()->input('TopicName') . ' created');
+            } catch(\Exception $e){
+                session()->flash('error', $e->getMessage());
+            }
         } else {
             session()->flash('error', 'Subject not found');
             return to_route('subject.show');
