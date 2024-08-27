@@ -71,6 +71,8 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::get('/exercise/{id}', 'showExercise')->name('exercise.show');
         Route::delete('/exercise/{id}', 'delete')->name('exercise.delete');
         Route::put('/exercise/{id}', 'edit')->name('exercise.edit');
+
+        Route::get('/exercise/{id}/search', 'search')->name('exercise.search');
     });
 
     Route::controller(QuizzesController::class)->group(function () {

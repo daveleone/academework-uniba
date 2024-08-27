@@ -260,7 +260,7 @@ class ExercisesController extends Controller
         }
 
         $quizzes = Quiz::where('creator_id', Auth::user()->id)->get();
-        
+
         switch ($exercise->type) {
             case 'true/false':
                 return view('exercises.showTfEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);

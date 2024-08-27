@@ -57,15 +57,7 @@ class StudentController extends Controller
             })->paginate(3);
 
             if (count($students) > 0) {
-                $output = view('auth.partials.student_table', compact('students'));
-
-                /*     $output = '<ul class="list-group">'; */
-                /*     foreach ($student as $row) { */
-                /*         $output .= '<li class="list-group-item">'.$row->user->name.'</li>'; */
-                /*     } */
-                /*     $output .= '</ul>'; */
-                /* } else { */
-                /*     $output .= '<li class="list-group-item">'.'No results'.'</li>'; */
+                $output = view('partials.student_table', compact('students'));
             }
 
             return $output;
@@ -80,3 +72,12 @@ class StudentController extends Controller
         return redirect()->back()->with('success', 'Student removed from course successfully.');
     }
 }
+
+// OLD SEARCH FUNCTION
+/*     $output = '<ul class="list-group">'; */
+/*     foreach ($student as $row) { */
+/*         $output .= '<li class="list-group-item">'.$row->user->name.'</li>'; */
+/*     } */
+/*     $output .= '</ul>'; */
+/* } else { */
+/*     $output .= '<li class="list-group-item">'.'No results'.'</li>'; */
