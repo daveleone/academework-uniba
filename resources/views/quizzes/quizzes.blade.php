@@ -15,7 +15,7 @@
     >
         <div class="py-12 flex flex-wrap justify-center w-4/5">
             @foreach ($quizzes as $quiz)
-                <x-cardNDE id="{{ $quiz->id }}" href="#">
+                <x-cardNDE id="{{ $quiz->id }}" href="{{ route('quiz.show', ['id' => $quiz->id]) }}">
                     <x-slot name="name">{{ $quiz->name }}</x-slot>
                     <x-slot name="description">{{ $quiz->description }}</x-slot>
                 </x-cardNDE>

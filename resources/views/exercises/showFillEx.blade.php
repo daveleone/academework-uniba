@@ -1,48 +1,27 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2
-            class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-        >
-            <a
-                href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+        <div class="flex flex-row justify-between items-center">
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
             >
-                {{ $exercise->topic->name }}
-            </a>
-            / {{ $exercise->name }}
-        </h2>
+                <a
+                    href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+                >
+                    {{ $exercise->topic->name }}
+                </a>
+                / {{ $exercise->name }}
+            </h2>
+
+            @include('forms.exercise.add_to_quiz')
+        </div>
     </x-slot>
     <div class="flex w-full flex-col items-center py-12 text-lg">
         <div
-            class="m-2.5 rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
             id="showDiv"
         >
-            <p class="mb-3 text-gray-500 dark:text-gray-400">
-                <strong class="font-semibold text-gray-900 dark:text-white">
-                    {{ __("Description: ") }}
-                </strong>
-                {{ $exercise->description }}
-            </p>
 
-            <p class="mb-3 text-gray-500 dark:text-gray-400">
-                @foreach ($exercise->elements()->orderBy("position")->get() as $element)
-                    @switch($element->type)
-                        @case("text")
-                            {{ $element->content }}
-
-                            @break
-                        @case("input")
-                            <input
-                                type="text"
-                                id="{{ "answer" . $element->position }}"
-                                value="{{ $element->content }}"
-                                disabled
-                                class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 mb-[1rem] rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
-                            />
-
-                            @break
-                    @endswitch
-                @endforeach
-            </p>
+            @include('exercises.cards.fill')
+            
             <div class="mt-[1rem] flex flex-row">
                 <button
                     onclick="enableEdit()"

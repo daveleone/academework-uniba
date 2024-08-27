@@ -67,4 +67,10 @@ class QuizzesController extends Controller
         }
         return to_route('quiz.index');
     }
+
+    public function show($id) : View
+    {
+        $quiz = Quiz::find($id);
+        return view('quizzes.show', ['quiz' => $quiz]);
+    }
 }

@@ -266,13 +266,13 @@ class ExercisesController extends Controller
                 return view('exercises.showTfEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
                 break;
             case 'open':
-                return view('exercises.showOpenEx', ['exercise' => $exercise]);
+                return view('exercises.showOpenEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
                 break;
             case 'close':
-                return view('exercises.showClosedEx', ['exercise' => $exercise]);
+                return view('exercises.showClosedEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
                 break;
             case 'fill-in':
-                return view('exercises.showFillEx', ['exercise' => $exercise]);
+                return view('exercises.showFillEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
                 break;
             default:
                 session()->flash('error', 'Invalid type');

@@ -1,38 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2
-            class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-        >
-            <a
-                href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+        <div class="flex flex-row justify-between items-center">
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
             >
-                {{ $exercise->topic->name }}
-            </a>
-            / {{ $exercise->name }}
-        </h2>
+                <a
+                    href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
+                >
+                    {{ $exercise->topic->name }}
+                </a>
+                / {{ $exercise->name }}
+            </h2>
+
+            @include('forms.exercise.add_to_quiz')
+        </div>
     </x-slot>
     <div class="flex w-full flex-col items-center py-12 text-lg">
-        <div
-            id="showDiv"
-            class="m-2.5 w-[22rem] rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
-        >
-            <p class="mb-3 text-gray-500 dark:text-gray-400">
-                {{ $exercise->description }}
-            </p>
-            @foreach($exercise->elements as $element)
-                <div>
-                    <textarea
-                        name="answer"
-                        id="answer"
-                        disabled
-                        placeholder=""
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                    >
-{{ $element->answer }}</textarea
-                    >
-                </div>
-            @endforeach
+        <div id="showDiv">
 
+            @include('exercises.cards.open')
+            
             <div class="mt-[1rem] flex flex-row">
                 <button
                     onclick="enableEdit()"
