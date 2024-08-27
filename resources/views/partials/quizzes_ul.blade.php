@@ -1,11 +1,11 @@
 <ul
     class="h-48 overflow-y-auto px-3 pb-3 text-sm text-gray-700 dark:text-gray-200"
     aria-labelledby="dropdownSearchButton"
-    id="quizList"
+
 >
-    <input type="hidden" name="exId" value="{{ $exercise->id }}">
+{{--    <input type="hidden" name="exId" value="{{ $exercise->id }}">--}}
     @foreach($quizzes as $i => $quiz)
-        <li>
+        <li id="quizList">
             <div
                 class="flex items-center rounded ps-2 hover:bg-gray-100 dark:hover:bg-gray-600"
             >
@@ -26,3 +26,4 @@
         </li>
     @endforeach
 </ul>
+

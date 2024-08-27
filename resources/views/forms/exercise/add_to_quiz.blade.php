@@ -29,7 +29,7 @@
     class="z-10 hidden w-60 rounded-lg bg-white shadow dark:bg-gray-700"
 >
     <div class="p-3">
-        <label id="search" for="input-group-search" class="sr-only">{{__('Search quiz')}}</label>
+        <label for="input-group-search" class="sr-only">{{__('Search quiz')}}</label>
         <div class="relative">
             <div
                 class="rtl:inset-r-0 pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
@@ -58,37 +58,10 @@
             />
         </div>
     </div>
-    <form action="{{route('quiz.addExercise')}}" method="POST">
+    <form action="{{route('quiz.addExercise', $exercise->id)}}" method="POST">
         @csrf
         @method('POST')
         @include('partials.quizzes_ul')
-{{--        <ul--}}
-{{--            class="h-48 overflow-y-auto px-3 pb-3 text-sm text-gray-700 dark:text-gray-200"--}}
-{{--            aria-labelledby="dropdownSearchButton"--}}
-{{--        >--}}
-{{--            <input type="hidden" name="exId" value="{{ $exercise->id }}">--}}
-{{--            @foreach($quizzes as $i => $quiz)--}}
-{{--                <li>--}}
-{{--                    <div--}}
-{{--                        class="flex items-center rounded ps-2 hover:bg-gray-100 dark:hover:bg-gray-600"--}}
-{{--                    >--}}
-{{--                        <input--}}
-{{--                            id="checkbox-quiz-{{ $i }}"--}}
-{{--                            name="checkbox-quiz-{{ $i }}"--}}
-{{--                            type="checkbox"--}}
-{{--                            value="{{ $quiz->id }}"--}}
-{{--                            class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-700"--}}
-{{--                        />--}}
-{{--                        <label--}}
-{{--                            for="checkbox-quiz-{{ $i }}"--}}
-{{--                            class="ms-2 w-full rounded py-2 text-sm font-medium text-gray-900 dark:text-gray-300"--}}
-{{--                        >--}}
-{{--                            {{ $quiz->name }}--}}
-{{--                        </label>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
         <button
             type="submit"
             class="flex items-center rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 text-sm font-medium text-red-600 hover:bg-gray-100 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-blue-500 dark:hover:bg-gray-600 w-[100%]"
@@ -104,9 +77,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#search').on('keyup', function () {
+        $('#input-group-search').on('keyup', function () {
             let query = $(this).val();
-            console.log(query);
             $.ajax({
                 url: "{{ route('exercise.search', $exercise->id) }}",
                 type: "GET",
@@ -114,7 +86,7 @@
                     'query': query
                 },
                 success: function (data) {
-                    $('#quizList').html(data); // Update the HTML content with the search results
+                    $('#dropdownSearch ul').html(data.html); // Update only the ul content
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);

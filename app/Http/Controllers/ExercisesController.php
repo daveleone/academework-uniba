@@ -413,4 +413,24 @@ class ExercisesController extends Controller
 
         return to_route('exercise.show', ['id' => $id]);
     }
+
+    public function search(Request $request, Exercise $exercise)
+    {
+        $search = $request->get('query');
+        $quizzes = [];
+        $output = '';
+
+        if($request->ajax())
+        {
+            $quizzes = Quiz::where('creator_id', Auth::user()->id)
+                ->where('name', 'like', '%' . $search . '%')
+                ->get();
+
+            $output = view('partials.quizzes_ul', compact('quizzes'))->render();
+
+            return response()->json(['html' => $output]);
+        }
+
+        return view('add_to_quiz', compact('quizzes'));
+    }
 }

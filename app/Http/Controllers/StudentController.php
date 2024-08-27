@@ -63,7 +63,7 @@ class StudentController extends Controller
             return $output;
         }
 
-        return view('student', compact('course', 'students'));
+        return view('students', compact('course', 'students'));
     }
 
     public function delete(Course $course, Student $student)
