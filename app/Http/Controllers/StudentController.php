@@ -13,7 +13,7 @@ class StudentController extends Controller
     {
         $request->validate([
             'selected_students' => 'array|required',
-            'selected_students.*' => 'exists:student,id',
+            'selected_students.*' => 'exists:students,id',
         ]);
 
         // Get the array of selected student IDs
@@ -36,7 +36,7 @@ class StudentController extends Controller
             $query->where('course_id', $course->id);
         })->paginate(3);
 
-        return view('student', compact('course', 'students'));
+        return view('students', compact('course', 'students'));
     }
 
     public function search(Request $request, Course $course)

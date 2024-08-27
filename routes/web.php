@@ -85,6 +85,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::get('/my-courses', 'show')->name('courses.show');
         Route::get('/my-courses/{course}', 'edit')->name('courses.edit');
         Route::put('/my-courses/{course}', 'update')->name('courses.update');
+        Route::delete('/my-courses/{course}', 'destroy')->name('courses.destroy');
     });
 
     Route::controller(StudentController::class)->group(function () {
