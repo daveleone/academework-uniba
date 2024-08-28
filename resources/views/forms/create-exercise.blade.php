@@ -27,7 +27,7 @@
     id="CreateEx-modal"
     tabindex="-1"
     aria-hidden="true"
-    class="fixed inset-0 z-50 flex hidden h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-50"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
 >
     <div class="relative max-h-full w-full max-w-md p-4">
         <!-- Modal content -->

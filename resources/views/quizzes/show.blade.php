@@ -6,6 +6,8 @@
             >
                 {{ $quiz->name }}
             </h2>
+
+            @include('forms.quiz.add_to_course')
         </div>
     </x-slot>
     <div

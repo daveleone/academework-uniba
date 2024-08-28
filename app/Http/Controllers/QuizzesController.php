@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Quiz;
 use App\Models\exercise_quiz;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 
 class QuizzesController extends Controller
 {
@@ -71,6 +72,7 @@ class QuizzesController extends Controller
     public function show($id) : View
     {
         $quiz = Quiz::find($id);
-        return view('quizzes.show', ['quiz' => $quiz]);
+        $courses = Course::where('teacher_id', Auth::user()->id)->get();
+        return view('quizzes.show', ['quiz' => $quiz, 'courses' => $courses]);
     }
 }

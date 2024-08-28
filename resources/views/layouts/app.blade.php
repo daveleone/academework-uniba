@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
+<html lang="{{ str_replace("_", "-", app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,7 +16,7 @@
 
         <!-- Scripts -->
         @vite(["resources/css/app.css", "resources/js/app.js"])
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />    
     </head>
 
     <body class="font-sans antialiased">
@@ -109,5 +109,6 @@
                 }, 500);
             }
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     </body>
 </html>
