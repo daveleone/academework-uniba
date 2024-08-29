@@ -5,7 +5,7 @@
     class="text-s inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
 >
-    Add exercise
+    {{__('Add exercise')}}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -37,7 +37,7 @@
                 class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5"
             >
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Create New Exercise
+                    {{__('Create New Exercise')}}
                 </h3>
                 <button
                     type="button"
@@ -59,7 +59,7 @@
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                         />
                     </svg>
-                    <span class="sr-only">Close modal</span>
+                    <span class="sr-only">{{__('Close modal')}}</span>
                 </button>
             </div>
             <!-- Modal body -->
@@ -76,14 +76,14 @@
                             for="ExName"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Exercise name
+                            {{__('Exercise name')}}
                         </label>
                         <input
                             type="text"
                             name="ExName"
                             id="ExName"
                             class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
-                            placeholder="Type exercise name"
+                            placeholder="{{__('Type exercise name')}}"
                             required
                             value="{{ old('ExName' )}}"
                         />
@@ -96,14 +96,14 @@
                             for="ExDescription"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Exercise's Description
+                            {{__("Exercise's Description")}}
                         </label>
                         <textarea
                             id="ExDescription"
                             name="ExDescription"
                             rows="4"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            placeholder="Write exercise description here"
+                            placeholder="{{__('Write exercise description here')}}"
                             required
                         >{{ old('ExDescription')}}</textarea>
                         @error('ExDescription')
@@ -115,7 +115,7 @@
                             for="ExPoints"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Exercise points
+                            {{__('Exercise points')}}
                         </label>
                         <input
                             type="number"
@@ -124,7 +124,7 @@
                             min="1"
                             required
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            placeholder=""
+                            placeholder="{{__('')}}"
                             required
                             value="{{ old('ExPoints' )}}"
 
@@ -138,7 +138,7 @@
                             for="ExType"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Select the type
+                            {{__('Select the type')}}
                         </label>
                         <select
                             form="CreateEx"
@@ -173,7 +173,7 @@
                             clip-rule="evenodd"
                         ></path>
                     </svg>
-                    Add new exercise
+                    {{__('Add new exercise')}}
                 </button>
             </form>
         </div>
