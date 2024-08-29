@@ -13,7 +13,7 @@ class course_quiz extends Model
         'quiz_id',
         'course_id',
         'start_time',
-        'time_limit',
+        'duration_minutes',
         'repeatable' 
     ];
     

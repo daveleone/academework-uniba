@@ -78,6 +78,8 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::get('/quiz/{id}', 'show')->name('quiz.show');
         Route::post('/quizzes', 'create')->name('quiz.create');
         Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
+        Route::post('/add-to-course', 'addToCourse')->name('quiz.addToCourse');
+
     });
 
     Route::controller(CourseController::class)->group(function () {

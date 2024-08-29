@@ -5,7 +5,7 @@
     class="text-s inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
 >
-    {{__('Add to course')}}
+    {{ __("Add to course") }}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -27,7 +27,7 @@
     id="AddToCourse-modal"
     tabindex="-1"
     aria-hidden="true"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
 >
     <div class="relative max-h-full w-full max-w-md p-4">
         <!-- Modal content -->
@@ -37,7 +37,7 @@
                 class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5"
             >
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    {{__('Add to quiz')}}
+                    {{ __("Add to course") }}
                 </h3>
                 <button
                     type="button"
@@ -59,56 +59,150 @@
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                         />
                     </svg>
-                    <span class="sr-only">{{__('Close modal')}}</span>
+                    <span class="sr-only">{{ __("Close modal") }}</span>
                 </button>
             </div>
             <!-- Modal body -->
             <form
-                action="#"
+                action="{{ route("quiz.addToCourse") }}"
                 method="post"
                 class="p-4 md:p-5"
             >
                 @csrf
-                <div class="grid gap-4 mb-4 grid-cols-2">
+                <div class="mb-4 grid grid-cols-2 gap-4">
                     <div class="col-span-2">
-                        @include('forms.quiz.dropdown_search_courses')
+                        @include("forms.quiz.search_courses")
                     </div>
-                    <div class="col-span-2">
-                        <div class="flex items-start mb-5">
-                            <div class="flex items-center h-5">
-                              <input id="repeatable" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-                            </div>
-                            <label for="repeatable" name="repeatable" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__('Repeatable')}}</label>
-                        </div>
-                    </div>
-                    <div class="col-span-2">
+                    <div>
+                        <label
+                            for="datepicker"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Select date:
+                        </label>
                         <div class="relative max-w-sm">
-                          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                              </svg>
-                          </div>
-                          <input id="datepicker-title" name="date" datepicker datepicker-title="Start time" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-                        </div>
-                    </div>
-                    <div class="col-span-2">
-                        <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select hour:</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
+                            >
+                                <svg
+                                    class="h-4 w-4 text-gray-500 dark:text-gray-400"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
                                 </svg>
                             </div>
-                            <input type="time" id="time" name="time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="09:00" max="18:00" value="00:00" required />
+                            <input
+                                id="datepicker"
+                                name="date"
+                                datepicker
+                                datepicker-title="Start time"
+                                type="text"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                placeholder="Select date"
+                            />
                         </div>
                     </div>
+                    <div>
+                        <label
+                            for="time"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Select hour:
+                        </label>
+                        <div class="relative">
+                            <div
+                                class="pointer-events-none absolute inset-y-0 end-0 top-0 flex items-center pe-3.5"
+                            >
+                                <svg
+                                    class="h-4 w-4 text-gray-500 dark:text-gray-400"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="time"
+                                id="time"
+                                name="time"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-none text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-5 flex items-start">
+                        <div class="flex h-5 items-center">
+                            <input
+                                id="repeatable"
+                                name="repeatable"
+                                type="checkbox"
+                                value="1"
+                                class="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                            />
+                        </div>
+                        <label
+                            for="repeatable"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        >
+                            {{ __("Repeatable") }}
+                        </label>
+                    </div>
+
+                    <div class="flex flex-row">
+                        <label
+                            for="time_limit"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            {{ __("Time limit (minutes):") }}
+                        </label>
+                        <input
+                            type="number"
+                            id="time_limit"
+                            name="time_limit"
+                            min="1"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        />
+                    </div>
+
+                    <input
+                        type="hidden"
+                        name="offset"
+                        id="offset"
+                        value="getOffset()"
+                    />
+                    <script>
+                        const offsetInput = document.getElementById('offset');
+                        offsetInput.value = new Date().getTimezoneOffset();
+                    </script>
+                    <button
+                        type="submit"
+                        class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                        <svg
+                            class="-ms-1 me-1 h-5 w-5"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"
+                            ></path>
+                        </svg>
+                        {{ __("Add to courses") }}
+                    </button>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    {{__('Add to courses')}}
-                </button>
             </form>
         </div>
     </div>
