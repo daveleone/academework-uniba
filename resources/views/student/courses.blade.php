@@ -6,7 +6,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="grid grid-cols-6 gap-4">
                     @foreach ($courses as $course)
-                        <div>
+                        <div class="w-full clickable-course cursor-pointer" data-href="{{ route('student.exercises', $course->id) }}">
                             <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300">
                                 <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{$course->course_name}}</p>
                                 <p class="text-gray-700 dark:text-gray-300">{{$course->course_description}}</p>
@@ -25,3 +25,13 @@
         @endif
     </div>
 </x-app-layout>
+
+<script>
+    document.querySelectorAll('.clickable-course').forEach(function(div) {
+        div.addEventListener('click', function() {
+            var href = this.getAttribute('data-href');
+
+            window.location.href = href;
+        });
+    });
+</script>

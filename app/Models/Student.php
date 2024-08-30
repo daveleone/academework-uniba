@@ -10,6 +10,10 @@ class Student extends Model
 {
     protected $fillable = [
         'user_id',
+        'grade',
+        'average_grade',
+        'last_grade',
+        'last_grade_date'
     ];
 
     public function user(){
@@ -24,6 +28,11 @@ class Student extends Model
     public function marks()
     {
         return $this->hasMany(Mark::class);
+    }
+
+    public function quizGrades()
+    {
+        return $this->hasMany(StudentQuizGrade::class);
     }
 
     use HasFactory;
