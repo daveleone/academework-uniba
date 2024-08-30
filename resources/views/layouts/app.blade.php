@@ -16,7 +16,7 @@
 
         <!-- Scripts -->
         @vite(["resources/css/app.css", "resources/js/app.js"])
-        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />    
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     </head>
 
     <body class="font-sans antialiased">

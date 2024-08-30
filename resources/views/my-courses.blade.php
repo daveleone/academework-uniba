@@ -1,5 +1,16 @@
 <x-app-layout>
-    <div class="py-12">
+
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+        <div class="grid grid-cols-6 gap-4">
+            <div class="col-span-6 sm:col-span-2 justify-self-end">
+                <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                    {{ __('Create a class') }}
+                </x-nav-link>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-4">
         @if($courses->count() > 0)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">

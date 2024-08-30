@@ -19,10 +19,6 @@
 
                 @if (auth()->user()->isTeacher())
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
-                        {{ __('Create a class') }}
-                    </x-nav-link>
-
                     <x-nav-link :href="route('subject.show')" :active="request()->routeIs('subject.show')">
                         {{ __('My subjects') }}
                     </x-nav-link>
