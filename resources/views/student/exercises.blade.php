@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Course Exercises') }} - {{ $course->value('course_name') }}
+            {{ __('Course Exercises') }} - {{ $course->course_name }}
         </h2>
     </x-slot>
 
@@ -17,16 +17,16 @@
                                     <p class="text-gray-600 mb-4">{{ $quizData->description }}</p>
                                     <div class="space-y-2">
                                         <p class="text-sm">
-                                            <span class="font-medium">Start time:</span>
-                                            {{ $quizData->start_time ? $quizData->start_time->format('Y-m-d H:i') : 'Not set' }}
+                                            <span class="font-medium">{{__('Start time')}}:</span>
+                                            {{ $quizData->pivot->start_time ? \Carbon\Carbon::parse($quizData->pivot->start_time)->format('d/m/y H:i') : 'Not set' }}
                                         </p>
                                         <p class="text-sm">
-                                            <span class="font-medium">Duration:</span>
-                                            {{ $quizData->duration_minutes }} {{__('minutes')}}
+                                            <span class="font-medium">{{__('Duration')}}:</span>
+                                            {{ $quizData->pivot->duration_minutes }} {{__('minutes')}}
                                         </p>
                                         <p class="text-sm">
-                                            <span class="font-medium">Repeatable:</span>
-                                            {{ $quizData['repeatable'] ? 'Yes' : 'No' }}
+                                            <span class="font-medium">{{__('Repeatable')}}:</span>
+                                            {{ $quizData->pivot->repeatable ? 'Yes' : 'No' }}
                                         </p>
                                     </div>
                                     <div class="mt-4">

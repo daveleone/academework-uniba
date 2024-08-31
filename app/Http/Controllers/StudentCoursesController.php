@@ -23,9 +23,10 @@ class StudentCoursesController extends Controller
         return view('student.courses', compact('courses'));
     }
 
-    public function retrieve_quiz(Request $request, Course $course)
+    public function retrieve_quiz(Request $request, $id)
     {
-        $course_id = $course->value('id');
+        $course = Course::find($id);
+        $course_id = Course::find($id)->id;
         $user_id = Auth::id();
         $student_id = Student::where('user_id', $user_id)->value('id');
 
@@ -54,11 +55,13 @@ class StudentCoursesController extends Controller
 //        }
 
         // da rivedere la tabella course_quiz, spostare start_time, duration_time, repeatable direttamente nella tabella quizzes
-        $quizzes = Quiz::whereIn('id', function($query) use ($course_id) {
-            $query->select('quiz_id')
-                ->from('course_quiz')
-                ->where('course_id', $course_id);
-        })->get();
+//        $quizzes = Quiz::whereIn('id', function($query) use ($course_id) {
+//            $query->select('quiz_id')
+//                ->from('course_quiz')
+//                ->where('course_id', $course_id);
+//        })-
+
+        $quizzes = $course->quizzes;
 
         return view('student.exercises', compact('course', 'quizzes'));
     }
