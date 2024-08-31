@@ -75,10 +75,13 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
 
     Route::controller(QuizzesController::class)->group(function () {
         Route::get('/quizzes', 'index')->name('quiz.index');
+        Route::delete('/quizzes', 'delete')->name('quiz.delete');
+        Route::put('/quizzes', 'edit')->name('quiz.edit');
         Route::get('/quiz/{id}', 'show')->name('quiz.show');
         Route::post('/quizzes', 'create')->name('quiz.create');
         Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
         Route::post('/add-to-course', 'addToCourse')->name('quiz.addToCourse');
+        Route::delete('/quiz/{id}', 'removeEx')->name('quiz.removeEx');
 
     });
 
