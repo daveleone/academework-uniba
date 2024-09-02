@@ -10,10 +10,6 @@ class Student extends Model
 {
     protected $fillable = [
         'user_id',
-        'grade',
-        'average_grade',
-        'last_grade',
-        'last_grade_date'
     ];
 
     public function user(){

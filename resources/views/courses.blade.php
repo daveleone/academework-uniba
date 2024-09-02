@@ -2,6 +2,7 @@
     <x-guest-layout>
         <div>
             <form action="{{ route('courses.store') }}" method="POST">
+                @method('POST')
                 @csrf
                 <div>
                     <x-input-label for="name" :value="__('Class Name')"/>

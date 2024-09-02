@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->integer('grade')->nullable();
-            $table->integer('average_grade')->nullable();
-            $table->integer('last_grade')->nullable();
-            $table->date('last_grade_date')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

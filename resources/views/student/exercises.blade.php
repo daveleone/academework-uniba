@@ -12,6 +12,9 @@
                     @if(count($quizzes) > 0)
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             @foreach($quizzes as $quizData)
+                                @php
+                                    $quiz_id = $quizData->id;
+                                @endphp
                                 <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
                                     <h3 class="text-lg font-semibold mb-2">{{ $quizData->name }}</h3>
                                     <p class="text-gray-600 mb-4">{{ $quizData->description }}</p>
@@ -29,12 +32,21 @@
                                             {{ $quizData->pivot->repeatable ? 'Yes' : 'No' }}
                                         </p>
                                     </div>
-                                    <div class="mt-4">
 
-                                        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                            {{__('Start quiz')}}
-                                        </a>
-                                    </div>
+                                    @if(!$exam_taken[$quiz_id])
+
+                                        <div class="mt-4">
+                                            <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" href="{{route('student.exam', ['courses'=>$course->id, 'quiz'=>$quizData->id]) }}">
+                                                {{__('Start quiz')}}
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div class="mt-4">
+                                            <p class="bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                                {{__('Quiz already taken')}}
+                                            </p>
+                                        </div>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>

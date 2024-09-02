@@ -40,7 +40,12 @@ Route::middleware('auth', 'role:student')->group(function () {
     Route::controller(StudentCoursesController::class)->group(function () {
         Route::get('/student/classes', 'show')->name('student.show');
         Route::get('/student/classes/{courses}/exercises', 'retrieve_quiz')->name('student.exercises');
+        Route::get('/student/classes/{courses}/exercises/{quiz}/start', 'exercises')->name('student.exam');
+//        Route::post('/student/classes/{courses}/exercises/{quiz}', 'exercises')->name('student.exam');
+//        Route::get('/student/classes/{courses}/exercises', 'showExercise')->name('student.solve');
+        Route::post('/student/classes/{courses}/exercises/{quiz}/submit', 'submitExam')->name('student.submitExam');
     });
+
 });
 
 Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: implementare redirect per insegnanti/studenti
