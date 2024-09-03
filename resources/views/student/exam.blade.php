@@ -1,45 +1,3 @@
-{{--<x-app-layout>--}}
-{{--    <form action="" method="post">--}}
-{{--        @foreach($exercises as $exercise)--}}
-{{--            @switch($exercise->type)--}}
-{{--                @case('true/false')--}}
-{{--                    @include('student.exercises.tf_question')--}}
-{{--                    @break--}}
-{{--                @case('open')--}}
-{{--                    @break--}}
-{{--                @case('close')--}}
-{{--                    @break--}}
-{{--                @case('fill-in')--}}
-{{--                    @break--}}
-{{--            @endswitch--}}
-{{--        @endforeach--}}
-{{--    </form>--}}
-{{--    <x-primary-button type="submit">{{__('Done')}}</x-primary-button>--}}
-{{--</x-app-layout>--}}
-
-{{--<x-app-layout>--}}
-{{--    <form action="{{ route('student.submitExam', ['courses' => $course_id, 'quiz' => $quiz_id]) }}" method="POST">--}}
-{{--        @csrf--}}
-{{--        @foreach($exercises as $exercise)--}}
-{{--            @switch($exercise->type)--}}
-{{--                @case('true/false')--}}
-{{--                    @include('student.exercises.tf_question')--}}
-{{--                    @break--}}
-{{--                @case('open')--}}
-{{--                    @include('student.exercises.open_question')--}}
-{{--                    @break--}}
-{{--                @case('close')--}}
-{{--                    @include('student.exercises.closed_question')--}}
-{{--                    @break--}}
-{{--                @case('fill-in')--}}
-{{--                    @include('student.exercises.fill_question')--}}
-{{--                    @break--}}
-{{--            @endswitch--}}
-{{--        @endforeach--}}
-{{--        <x-primary-button type="submit">{{ __('Submit Exam') }}</x-primary-button>--}}
-{{--    </form>--}}
-{{--</x-app-layout>--}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -57,7 +15,7 @@
 
                     <form id="exam-form" action="{{ route('student.submitExam', ['courses' => $course, 'quiz' => $quiz]) }}" method="POST">
                         @csrf
-                        @foreach($exercises as $exercise)
+                        @foreach($exercises->shuffle()->all() as $exercise)
                             <div class="mb-6">
                                 <h3 class="text-lg font-semibold mb-2">{{ $exercise->question }}</h3>
                                 @switch($exercise->type)

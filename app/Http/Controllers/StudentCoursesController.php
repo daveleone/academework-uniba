@@ -18,7 +18,9 @@ use App\Models\Quiz;
 use App\Models\Student;
 use App\Models\TfAnsElement;
 use App\Models\tfExElement;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -47,7 +49,6 @@ class StudentCoursesController extends Controller
             ->where('course_id', $course_id)
             ->exists();
 
-
         $repeatable = $course->quizzes()->pluck('repeatable', 'quiz_id');
 
         $marks = Mark::where('student_id', $student_id)
@@ -71,19 +72,30 @@ class StudentCoursesController extends Controller
         return view('student.exercises', compact('course', 'quizzes', 'exam_taken'));
     }
 
-//    public function exercises($course, $quiz)
-//    {
-//        $courses = Course::find($course);
-//        $course_id = Course::find($course)->id;
-//
-//        $quizzes = Quiz::find($quiz);
-//        $quiz_id = Quiz::find($quiz)->id;
-//
-//        $exercise_id = exercise_quiz::where('quiz_id', $quiz)->pluck('exercise_id');
-//        $exercises = Exercise::whereIn('id', $exercise_id)->get();
-//
-//        return view('student.exam', compact('exercises', 'course_id', 'quiz_id'));
-//    }
+    public function studentClassDetails(Course $course)
+    {
+        $user_id = Auth::id();
+        $student = Student::where('user_id', $user_id)->firstOrFail();
+        $teacher = $course->teacher->user;
+        $averageGrade = $student->averageGradeForCourse($course->id);
+        $courseId = $course->id;
+
+        $nonRepeatableQuizzes = Mark::whereHas('quiz', function($query) use ($courseId) {
+            $query->whereHas('courses', function($subQuery) use ($courseId) {
+                $subQuery->where('course_id', $courseId)
+                    ->where('course_quiz.repeatable', false);
+            });
+        })->paginate(3, ['*'], 'nonRepeatableQuizzes');
+
+        $repeatableQuizzes = Mark::whereHas('quiz', function($query) use ($courseId) {
+            $query->whereHas('courses', function($subQuery) use ($courseId) {
+                $subQuery->where('course_id', $courseId)
+                    ->where('course_quiz.repeatable', true);
+            });
+        })->paginate(3, ['*'], 'repeatableQuizzes');
+
+        return view('student.class_details', compact('course', 'teacher', 'averageGrade', 'nonRepeatableQuizzes', 'repeatableQuizzes'));
+    }
 
     public function exercises($course, $quiz)
     {
@@ -103,17 +115,6 @@ class StudentCoursesController extends Controller
 
         $courseQuiz = $course->quizzes()->where('quiz_id', $quiz->id)->first();
 
-//        $repeatable = $course->quizzes()->where('quiz_id', $quiz->id)->value('repeatable');
-//
-//        $mark_assigned = Mark::where('quiz_id', $quiz->id)
-//            ->where('student_id', $student_id)
-//            ->exists();
-//
-//        if($mark_assigned && !$repeatable){
-//            $exam_taken = true;
-//            return redirect()->route('student.exercises', ['courses' => $course->id, 'exam_take' => $exam_taken])->with('error', 'You already took the exam.');
-//        }
-
         if (!$courseQuiz) {
             return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', 'This quiz is not associated with the course.');
         }
@@ -126,7 +127,7 @@ class StudentCoursesController extends Controller
             $start_time = Carbon::parse($courseQuiz->pivot->start_time);
         }
 
-        if($now->lt($start_time) && $start_time != null)
+        if($now->lte($start_time) && $start_time != null)
         {
             return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', 'This quiz has not started yet.');
         }
@@ -183,9 +184,8 @@ class StudentCoursesController extends Controller
 
         $totalScore = 0;
 
-
-
         foreach ($exercises as $exercise) {
+
             $givenAnswer = GivenAnswer::create([
                 'student_id' => $student_id,
                 'quiz_id' => $quiz_id,
@@ -213,11 +213,28 @@ class StudentCoursesController extends Controller
             }
         }
 
-        Mark::create([
-            'student_id' => $student_id,
-            'quiz_id' => $quiz_id,
-            'mark' => $totalScore
-        ]);
+        if ($courseQuiz->pivot->repeatable) {
+            $mark = Mark::where('student_id', $student_id)
+                ->where('quiz_id', $quiz_id)
+                ->first();
+
+            if ($mark) {
+                $mark->mark = $totalScore;
+                $mark->save();
+            } else {
+                Mark::create([
+                    'student_id' => $student_id,
+                    'quiz_id' => $quiz_id,
+                    'mark' => $totalScore
+                ]);
+            }
+        } else {
+            Mark::create([
+                'student_id' => $student_id,
+                'quiz_id' => $quiz_id,
+                'mark' => $totalScore
+            ]);
+        }
 
         Session::forget($sessionKey);
 
@@ -300,10 +317,11 @@ class StudentCoursesController extends Controller
 
     private function calculateTfScore(GivenAnswer $givenAnswer, Exercise $exercise, $student_id)
     {
-        $score = 0;
         $points = Exercise::where('id', $exercise->id)->value('points');
         $truthElements = TfExElement::where('exercise_id', $exercise->id)->get();
         $tfAnswers = TfAnsElement::where('answer_id', $givenAnswer->id)->get();
+        $score = $points / $truthElements->count();
+        $answerCount = 0;
 
         foreach ($truthElements as $element) {
 
@@ -311,12 +329,12 @@ class StudentCoursesController extends Controller
 
             if ($answer) {
                 if ($element->truth == $answer->content) {
-                    $score += $points;
+                    $answerCount++;
                 }
             }
         }
 
-        return $score;
+        return $score * $answerCount;
     }
 
     private function calculateClosedScore(GivenAnswer $givenAnswer, Exercise $exercise, $student_id)
@@ -324,11 +342,10 @@ class StudentCoursesController extends Controller
         $score = 0;
 
         $points = Exercise::where('id', $exercise->id)->value('points');
-        $truth = closedExElement::where('exercise_id', $exercise->id)->value('truth');
+        $closedAnswer = ClosedAnsElement::where('answer_id', $givenAnswer->id)->where('content', 1)->value('ex_elem_id');
+        $truth = closedExElement::where('id', $closedAnswer)->value('truth');
 
-        $closedAnswer = ClosedAnsElement::where('answer_id', $givenAnswer->id)->value('content');
-
-        if($truth == $closedAnswer)
+        if($truth)
         {
             $score = $points;
         }
@@ -338,26 +355,32 @@ class StudentCoursesController extends Controller
 
     private function calculateFillScore(GivenAnswer $givenAnswer, Exercise $exercise, $student_id)
     {
-        $score = 0;
         $points = Exercise::where('id', $exercise->id)->value('points');
-
         $fillExElements = FillExElement::where('exercise_id', $exercise->id)
             ->where('type', 'input')
             ->get();
 
+        $answerCount = 0;
+
+        $score = $points / $fillExElements->count();
+
         $fillAnswers = FillAnsElement::where('answer_id', $givenAnswer->id)->get();
 
-        foreach ($fillExElements as $element) {
+        foreach ($fillExElements as $element)
+        {
             $answer = $fillAnswers->firstWhere('ex_elem_id', $element->id);
 
-            if ($answer) {
-                if (strtolower($element->content) == strtolower($answer->content)) {
-                    $score += $points;
+
+            if ($answer)
+            {
+                if (preg_replace("/[^A-zÀ-ú0-9]+/", "", strtolower($element->content)) == preg_replace("/[^A-zÀ-ú0-9]+/", "", strtolower($answer->content)))
+                {
+                    $answerCount++;
                 }
             }
         }
 
-        return $score;
+        return $score * $answerCount;
 
     }
 }

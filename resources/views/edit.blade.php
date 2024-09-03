@@ -114,16 +114,22 @@
                 @foreach ($course->students as $student)
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            {{ $student->user->name }}
+                            <a href="{{ route('student.details', ['course' => $course->id, 'student' => $student->id]) }}" class="hover:underline">
+                                {{ $student->user->name }}
+                            </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            TEST
+                            {{ $student->user->surname }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            TEST
+                            @if($lastGrade = $student->lastGradeForCourse($course->id))
+                                {{ $lastGrade->mark }}
+                            @else
+                                {{ __('N/A') }}
+                            @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            TEST
+                            {{ round($student->averageGradeForCourse($course->id), 2) ?? __('N/A') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
                             <button type="submit" class="text-red-600 hover:text-red-900" onclick="openModalStudent()">

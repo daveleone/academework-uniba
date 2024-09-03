@@ -1,7 +1,7 @@
 <div class="mb-4">
     <h3 class="font-semibold">{{ $exercise->name }}</h3>
     <p>{{ $exercise->description }}</p>
-    @foreach($exercise->elements as $element)
+    @foreach($exercise->elements->shuffle()->all() as $element)
         <div class="mt-2">
             <p>{{ $element->content }}</p>
             <div class="mt-1">

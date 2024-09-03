@@ -12,6 +12,11 @@ class Mark extends Model
     protected $fillable = [
         'student_id',
         'quiz_id',
-        'mark'      
+        'mark'
     ];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
 }

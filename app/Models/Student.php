@@ -26,10 +26,30 @@ class Student extends Model
         return $this->hasMany(Mark::class);
     }
 
-    public function quizGrades()
+    public function averageGradeForCourse($courseId)
     {
-        return $this->hasMany(StudentQuizGrade::class);
+        return $this->marks()
+            ->whereHas('quiz', function($query) use ($courseId) {
+                $query->whereHas('courses', function($subQuery) use ($courseId) {
+                    $subQuery->where('course_id', $courseId)
+                        ->where('course_quiz.repeatable', false);
+                });
+            })
+            ->avg('mark');
     }
+
+    public function lastGradeForCourse($courseId)
+    {
+        return $this->marks()
+            ->whereHas('quiz.courses', function($query) use ($courseId) {
+                $query->where('course_id', $courseId)
+                    ->where('course_quiz.repeatable', false);
+            })
+            ->latest('created_at')
+            ->first();
+    }
+
+
 
     use HasFactory;
 }
