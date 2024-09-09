@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\QuizzesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCoursesController;
@@ -39,7 +40,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth', 'role:student')->group(function () {
     Route::controller(StudentCoursesController::class)->group(function () {
-        Route::get('/student/my-courses', 'show')->name('student.show');
+        Route::get('/student/classes', 'show')->name('student.show');
+        Route::get('/student/classes/{courses}/exercises', 'retrieve_quiz')->name('student.exercises');
+        Route::get('/student/classes/{courses}/exercises/{quiz}/start', 'exercises')->name('student.exam');
+        Route::post('/student/classes/{courses}/exercises/{quiz}/submit', 'submitExam')->name('student.submitExam');
+        Route::get('/student/course/{course}/details', 'studentClassDetails')->name('student.class_details');
     });
 });
 
@@ -102,6 +107,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::put('/student/{course}', 'store')->name('student.store');
         Route::get('/student/{course}/search', 'search')->name('student.search');
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
+        Route::get('//courses/{course}/student/{student}', 'details')->name('student.details');
     });
 
     Route::get('locale/{lang}',[LocaleController::class,'setLocale']);

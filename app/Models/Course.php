@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
     protected $fillable = [
         'course_name',
         'course_description',
+        'teacher_id',
     ];
 
     public function teacher()
@@ -26,7 +28,12 @@ class Course extends Model
     {
         return $this->hasMany(Mark::class);
     }
-    
-    
+
+    public function quizzes() : BelongsToMany
+    {
+        return $this->belongsToMany(Quiz::class, 'course_quiz')
+            ->withPivot('start_time','duration_minutes','repeatable');
+    }
+
     use HasFactory;
 }

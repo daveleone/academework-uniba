@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\CourseStudent;
+use App\Models\Mark;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -72,6 +73,19 @@ class StudentController extends Controller
         }
 
         return view('student', compact('course', 'students'));
+    }
+
+    public function details(Course $course, Student $student)
+    {
+        $quizzes = $course->quizzes()->where('repeatable', false)->get();
+
+        $marks = Mark::where('student_id', $student->id)
+            ->whereIn('quiz_id', $quizzes->pluck('id'))
+            ->get();
+
+        $averageGrade = $marks->avg('mark');
+
+        return view('student.details', compact('course', 'student', 'quizzes', 'marks', 'averageGrade'));
     }
 
     public function delete(Course $course, Student $student)

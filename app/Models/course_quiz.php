@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class course_quiz extends Model
+class course_quiz extends Pivot
 {
     use HasFactory;
 
@@ -14,8 +14,8 @@ class course_quiz extends Model
         'course_id',
         'start_time',
         'duration_minutes',
-        'repeatable' 
+        'repeatable'
     ];
-    
+
     protected $table = "course_quiz";
 }
