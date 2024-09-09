@@ -26,7 +26,7 @@
                     onclick="enableEdit()"
                     class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                 >
-                    Edit
+                    @lang('trad.Edit')
                 </button>
                 <button
                     type="submit"
@@ -34,7 +34,7 @@
                     data-modal-toggle="DeleteEx-modal-{{ $exercise->id }}"
                     class="mb-2 me-2 rounded-lg bg-red-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
-                    Delete
+                    @lang('trad.Delete')
                 </button>
                 @include("forms.exercise.delete", ["exercise" => $exercise])
             </div>
@@ -63,7 +63,7 @@
                         for="exName"
                         class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        Name:
+                        @lang('trad.Name'):
                     </label>
                     <input
                         type="text"
@@ -78,7 +78,7 @@
                         for="exDescription"
                         class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        Description:
+                        @lang('trad.Description'):
                     </label>
                     <textarea
                         id="exDescription"
@@ -92,7 +92,7 @@
                         for="exPoints"
                         class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        Points:
+                        @lang('trad.Points'):
                     </label>
                     <input
                         type="number"
@@ -113,7 +113,7 @@
                             id="{{ "ansLab" . $element->position }}"
                             class="mb-2 flex text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Answer {{ $element->position + 1 }}:
+                            N {{ $element->position + 1 }}:
                         </label>
                         <div
                             class="ml-[1rem] flex flex-row items-center justify-evenly"
@@ -144,7 +144,7 @@
                                     id="{{ "isTrueLab" . $element->position }}"
                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                 >
-                                    True?
+                                    @lang('trad.True?')
                                 </label>
                             </div>
                         </div>
@@ -157,19 +157,19 @@
                     form="closed-Form"
                     class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                    Edit
+                    @lang('trad.Edit')
                 </button>
                 <button
                     onclick="addAnswer()"
                     class="mb-2 me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
-                    Add answer
+                    @lang('trad.Add answer')
                 </button>
                 <button
                     onclick="disableEdit()"
                     class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                 >
-                    Abort
+                    @lang('trad.Abort')
                 </button>
             </div>
         </div>
@@ -192,7 +192,7 @@
                 clip-rule="evenodd"
             />
         </svg>
-        <span class="sr-only">Delete</span>
+        <span class="sr-only">@lang('trad.Delete')</span>
     </button>
 
     <script>

@@ -14,7 +14,7 @@
                 </div>
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="ms-4">
-                        {{ __('Create class') }}
+                        @lang('trad.Create class')
                     </x-primary-button>
                 </div>
             </form>

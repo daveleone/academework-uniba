@@ -259,7 +259,16 @@ class ExercisesController extends Controller
             return to_route('subject.show');
         }
 
-        $quizzes = Quiz::where('creator_id', Auth::user()->id)->get();
+        // $quizzes = Quiz::where('creator_id', Auth::user()->id)->get();
+
+        
+        $quizzes = Quiz::whereNotIn('id', function($query) use ($id){
+            $query->select('quiz_id')
+                  ->from('exercise_quiz')
+                  ->where('exercise_id', $id);
+        })
+            ->where('creator_id', Auth::user()->id)
+            ->get();
         
         switch ($exercise->type) {
             case 'true/false':

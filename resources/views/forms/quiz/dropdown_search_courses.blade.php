@@ -5,7 +5,7 @@
     class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
 >
-    {{__('Add to course')}}
+    @lang('trad.Add to course')
     <svg
         class="ms-3 h-2.5 w-2.5"
         aria-hidden="true"
@@ -29,7 +29,7 @@
     class="z-10 hidden w-60 rounded-lg bg-white shadow dark:bg-gray-700"
 >
     <div class="p-3">
-        <label for="input-group-search" class="sr-only">{{__('Search course')}}</label>
+        <label for="input-group-search" class="sr-only">{@lang('trad.Search course')</label>
         <div class="relative">
             <div
                 class="rtl:inset-r-0 pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
@@ -107,7 +107,7 @@
                     d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
             </svg>
-            {{__('Add')}}
+            @lang('trad.Add')
         </button>
     </form>
 </div>

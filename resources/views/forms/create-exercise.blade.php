@@ -5,7 +5,7 @@
     class="text-s inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
 >
-    {{__('Add exercise')}}
+    @lang('trad.Add exercise')
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -37,7 +37,7 @@
                 class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5"
             >
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    {{__('Create New Exercise')}}
+                    @lang('trad.Create New Exercise')
                 </h3>
                 <button
                     type="button"
@@ -76,7 +76,7 @@
                             for="ExName"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            {{__('Exercise name')}}
+                            @lang('trad.Exercise name')
                         </label>
                         <input
                             type="text"
@@ -96,7 +96,7 @@
                             for="ExDescription"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            {{__("Exercise's Description")}}
+                            @lang('trad.Exercise\'s Description')
                         </label>
                         <textarea
                             id="ExDescription"
@@ -115,7 +115,7 @@
                             for="ExPoints"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            {{__('Exercise points')}}
+                            @lang('trad.Exercise points')
                         </label>
                         <input
                             type="number"
@@ -138,7 +138,7 @@
                             for="ExType"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            {{__('Select the type')}}
+                            @lang('trad.Select the type')
                         </label>
                         <select
                             form="CreateEx"
@@ -147,10 +147,10 @@
                             name="ExType"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         >
-                            <option value="true/false">True or false</option>
-                            <option value="open">Open question</option>
-                            <option value="close">Closed question</option>
-                            <option value="fill-in">Fill in text</option>
+                            <option value="true/false">@lang('trad.True or false')</option>
+                            <option value="open">@lang('trad.Open question')</option>
+                            <option value="close">@lang('trad.Closed question')</option>
+                            <option value="fill-in">@lang('trad.Fill in text')</option>
                         </select>
                         @error('ExType')
                             <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
@@ -173,7 +173,7 @@
                             clip-rule="evenodd"
                         ></path>
                     </svg>
-                    {{__('Add new exercise')}}
+                    @lang('trad.Add new exercise')
                 </button>
             </form>
         </div>

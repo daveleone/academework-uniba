@@ -9,6 +9,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCoursesController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\LocaleController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,10 +82,14 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
 
     Route::controller(QuizzesController::class)->group(function () {
         Route::get('/quizzes', 'index')->name('quiz.index');
+        Route::delete('/quizzes', 'delete')->name('quiz.delete');
+        Route::put('/quizzes', 'edit')->name('quiz.edit');
         Route::get('/quiz/{id}', 'show')->name('quiz.show');
         Route::post('/quizzes', 'create')->name('quiz.create');
         Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
         Route::post('/add-to-course', 'addToCourse')->name('quiz.addToCourse');
+        Route::delete('/quiz/{id}', 'removeEx')->name('quiz.removeEx');
+        Route::get('/quiz/{id}/download', 'downloadPdf')->name('quiz.download');
 
     });
 
@@ -103,6 +109,8 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
         Route::get('//courses/{course}/student/{student}', 'details')->name('student.details');
     });
+
+    Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 });
 
 require __DIR__ . '/auth.php';

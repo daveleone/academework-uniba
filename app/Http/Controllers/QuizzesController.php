@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\course_quiz;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuizzesController extends Controller
 {
@@ -20,7 +21,7 @@ class QuizzesController extends Controller
         return view('quizzes.quizzes', ['quizzes' => $quizzes]);
     }
 
-    public function create(): View
+    public function create(): RedirectResponse
     {
         try {
            
@@ -38,7 +39,45 @@ class QuizzesController extends Controller
         } catch(\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
-        return $this->index();
+        return to_route('quiz.index');
+    }
+
+    public function delete(): RedirectResponse
+    {
+        try {
+            Quiz::destroy(Request()->input('quizId'));
+            session()->flash('success', 'Quiz deleted');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+        return to_route('quiz.index');
+    }
+
+    public function edit() : RedirectResponse
+    {
+        $quiz = Quiz::find(Request()->input('quizId'));
+        if (!$quiz) {
+            session()->flash('error', 'quiz not found');
+            return to_route('quiz.index');
+        }
+
+        try{
+            $newName = Request()->input('quizName' . $quiz->id);
+            $newDesc = Request()->input('quizDesc' . $quiz->id);
+
+            if ($newName and $newName != '') {
+                $quiz->update(['name' => $newName]);
+            }
+
+            if ($newDesc and $newDesc != '') {
+                $quiz->update(['description' => $newDesc]);
+            }
+            session()->flash('success', 'quiz updated');
+
+        } catch (\Exception $e){
+            session()->flash('error', $e->getMessage());
+        }
+        return to_route('quiz.index');
     }
 
 
@@ -71,15 +110,34 @@ class QuizzesController extends Controller
         return to_route('quiz.index');
     }
 
+    public function removeEx($id) : RedirectResponse
+    {
+        try {
+            exercise_quiz::where('quiz_id', $id)
+                ->where('exercise_id', Request()->input('exId'))
+                ->delete();
+            session()->flash('success', 'Exercise removed');
+        } catch (\Exception $e){
+            session()->flash('error', $e->getMessage());
+        }
+        return to_route('quiz.show', ['id' => $id]);
+    }
+
     public function show($id) : View
     {
         $quiz = Quiz::find($id);
-        $courses = Course::where('teacher_id', Auth::user()->id)->get(); //TODO: escludere i corsi a cui il quiz è già assegnato
+        $courses = Course::whereNotIn('id', function($query) use ($id) {
+            $query->select('course_id')
+                  ->from('course_quiz')
+                  ->where('quiz_id', $id);
+        })
+            ->where('teacher_id', Auth::user()->id)
+            ->get();
         return view('quizzes.show', ['quiz' => $quiz, 'courses' => $courses]);
     }
 
 
-    public function addToCourse() : View
+    public function addToCourse() : RedirectResponse
     {
         $data = Request()->all();
         $coursesId = [];
@@ -87,27 +145,16 @@ class QuizzesController extends Controller
             if(strpos($key, "checkbox-course-") === 0 and is_numeric($val))
                 array_push($coursesId, $val);
         }
-
-        // Per debug
-        // echo "<h1>";
-        // echo $data['time'];
-        // echo "<br>";
-        // echo $data['date'];
-        // echo "<br>";
-        // echo $data['offset'];
-        // echo "<br>";
-        // echo "</h1>";
-        
+       
         $quizId = $data['quizId'];
+
+        if(!$quizId or !is_numeric($quizId))
+            return to_route('quiz.index');
 
         $time = $data["time"];
         $date = $data["date"];
         $offset = $data["offset"];
-
-        $repeatable = false;
-        if(array_key_exists("repeatable", $data))
-            $repeatable = true;
-        
+        $repeatable = array_key_exists("repeatable", $data) ? true : false; 
         $datetimeString = null;
         $datetime = null;
         
@@ -125,7 +172,7 @@ class QuizzesController extends Controller
             $datetime = Carbon::createFromFormat('m/d/Y H:i P', $datetimeString . ' ' . $offsetString);
         }
         
-        if($coursesId and is_numeric($quizId)){
+        if($coursesId){
             try {
                 foreach($coursesId as $courseId){
                     course_quiz::create([
@@ -143,6 +190,16 @@ class QuizzesController extends Controller
         } else {
             session()->flash('error', 'Addition to quiz failed');
         }
-        return $this->show($quizId);
+        return to_route('quiz.show', ['id' => $quizId]);
     }
+
+
+    public function downloadPdf($id)
+    {
+    $quiz = Quiz::with(['exercises'])->findOrFail($id);
+    $pdf = PDF::loadView('quizzes.pdf', compact('quiz'));
+    return $pdf->download($quiz->name . '.pdf');
+    }
+
 }
+    

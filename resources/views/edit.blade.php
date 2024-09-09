@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-span-6 sm:col-span-2 justify-self-end">
                         <x-primary-button class="mt-8">
-                            {{__('Update')}}
+                        @lang('trad.Update')
                         </x-primary-button>
                     </div>
                 </div>
@@ -28,11 +28,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
         <div class="flex justify-between items-center">
             <x-nav-link :href="route('student', $course->id)" class="px-4 py-2">
-                {{ __('Add Students') }}
+                @lang('trad.Add Students')
             </x-nav-link>
 
             <x-danger-button type="submit" class="bg-red-500 hover:bg-red-700" onclick="openModal()">
-                {{ __('Delete Course') }}
+                @lang('trad.Delete Course')
             </x-danger-button>
         </div>
     </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="items-center px-4 py-3">
                     <button id="cancelBtn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        {{__('Cancel')}}
+                        @lang('trad.Cancel')
                     </button>
                     <button id="deleteBtn" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
                         {{__('Delete')}}
@@ -72,10 +72,10 @@
                 </div>
                 <div class="items-center px-4 py-3">
                     <button id="cancelBtn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        {{__('Cancel')}}
+                        @lang('trad.Cancel')
                     </button>
                     <button id="deleteBtn" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
-                        {{__('Delete')}}
+                        @lang('trad.Cancel')
                     </button>
                 </div>
             </div>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="items-center px-4 py-3">
                     <button id="cancelBtnStudent" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        {{__('Cancel')}}
+                        @lang('trad.Cancel')
                     </button>
                     <button id="deleteBtnStudent" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
                         {{__('Delete')}}
