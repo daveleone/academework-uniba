@@ -1,0 +1,49 @@
+% Sezione teacher
+    - Gestione Subject
+        ! gestione errori
+        x creazione
+        x modifica
+        x cancellazione
+        ! gestione diversi teachers
+    x Gestione topics
+        ! gestione errori
+        x creazione
+        x modifica
+        x cancellazione
+        ! gestione diversi teachers
+    - Gestione esercizi
+        x gestione errori
+        x Creazione esercizi
+        x visualizzazione
+        x modifica
+        x cancellazione
+        x +- gestione diversi teachers
+
+    - Creazione quiz
+    - Assegnazione quiz
+        - assegnarlo randomizzato
+    - ricevere risultati quiz
+
+% Sezione studente
+    - visualizzazione classi
+    - svolgimento quiz
+    - svolgimento quiz custom
+    - svolgimento compito
+        - sala d'attesa (pulsante teacher)
+
+% Styling
+    x creazione materia / topic
+    x creazione esercizio
+        x true/false
+        x fill-in
+        x closed
+        x open
+
+    - sezione corsi ?
+
+% Altro
+    - esportazione pdf
+    - supporto multilingue
+
+    - aggiornare users => teachers, students (merge)
+    - factories e seeders per testing
