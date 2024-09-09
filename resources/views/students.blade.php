@@ -13,7 +13,7 @@
                 @if ($students->count() > 0)
                 @include('auth.partials.student_table')
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
-                    Save Selected Students
+                    @lang('trad.Save Selected Students')
                 </button>
             </form>
         </div>
@@ -21,12 +21,12 @@
     </main>
     @else
     <div class="bg-white dark:bg-gray-800 overflow-hidden max-w-7xl mx-auto shadow-sm sm:rounded-lg p-6 sm:px-6 lg:px-8 mt-4">
-        <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{__('Seems like there arent any student to be added to your class!')}}</p>
+        <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">@lang('trad.Seems like there arent any student to be added to your class!')</p>
     </div>
     @endif
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm">
         <x-nav-link :href="route('courses.edit', $course->id)">
-            {{__('Go back to view the class')}}
+            @lang('trad.Go back to view the class')
         </x-nav-link>
     </div>
 </x-app-layout>

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-row justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                <a href="{{ route('subject.topics', ['id' => $topic->subject->id]) }}">{{ $topic->subject->name }}</a> / {{$topic->name}} Exercises
+                <a href="{{ route('subject.topics', ['id' => $topic->subject->id]) }}">{{ $topic->subject->name }}</a> / {{$topic->name}} @lang('trad.Exercises')
             </h2>
 
             @include('forms.create-exercise')

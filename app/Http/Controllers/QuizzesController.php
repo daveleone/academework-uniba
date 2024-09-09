@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\course_quiz;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuizzesController extends Controller
 {
@@ -191,4 +192,14 @@ class QuizzesController extends Controller
         }
         return to_route('quiz.show', ['id' => $quizId]);
     }
+
+
+    public function downloadPdf($id)
+    {
+    $quiz = Quiz::with(['exercises'])->findOrFail($id);
+    $pdf = PDF::loadView('quizzes.pdf', compact('quiz'));
+    return $pdf->download($quiz->name . '.pdf');
+    }
+
 }
+    

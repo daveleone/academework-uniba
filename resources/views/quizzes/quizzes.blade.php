@@ -4,7 +4,7 @@
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
             >
-                {{ __("My quizzes") }}
+            @lang('trad.My quizzes')
             </h2>
 
             @include("forms.quiz.create")
@@ -16,12 +16,16 @@
         <div class="py-12 flex flex-wrap justify-center w-4/5">
             @foreach ($quizzes as $quiz)
                 <x-cardNDE id="{{ $quiz->id }}" editModal="EditQuiz-modal-{{ $quiz->id }}" deleteModal="DeleteQuiz-modal-{{ $quiz->id }}" href="{{ route('quiz.show', ['id' => $quiz->id]) }}">
+                    
                     <x-slot name="name">{{ $quiz->name }}</x-slot>
                     <x-slot name="description">{{ $quiz->description }}</x-slot>
+                    
                 </x-cardNDE>
                 @include('forms.quiz.edit')
                 @include('forms.quiz.delete')
+                <a href="{{ route('quiz.download', ['id' => $quiz->id]) }}" class="btn btn-primary">Download PDF</a>
             @endforeach
         </div>
+        
     </div>
 </x-app-layout>

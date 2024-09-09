@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,7 +31,7 @@ class Exercise extends Model
         return $this->belongsTo(Topic::class);
     }
 
-    public function elements() : HasMany | Collection{
+    public function elements() : HasMany | EloquentCollection |Collection{
         switch ($this->type){
             case 'true/false':
                 return $this->hasMany(tfExElement::class);

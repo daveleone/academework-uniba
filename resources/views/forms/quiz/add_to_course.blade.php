@@ -5,7 +5,7 @@
     class="text-s inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
 >
-    {{ __("Add to course") }}
+    @lang('trad.Add to course')
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -37,7 +37,7 @@
                 class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5"
             >
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    {{ __("Add to course") }}
+                    @lang('trad.Add to course')
                 </h3>
                 <button
                     type="button"
@@ -59,7 +59,7 @@
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                         />
                     </svg>
-                    <span class="sr-only">{{ __("Close modal") }}</span>
+                    <span class="sr-only">@lang('trad.Close modal')</span>
                 </button>
             </div>
             <!-- Modal body -->
@@ -112,7 +112,7 @@
                             for="time"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Select hour:
+                        @lang('trad.Select hour:')
                         </label>
                         <div class="relative">
                             <div
@@ -154,7 +154,7 @@
                             for="repeatable"
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            {{ __("Repeatable") }}
+                            @lang('trad.Repeatable')
                         </label>
                     </div>
 
@@ -163,7 +163,7 @@
                             for="time_limit"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            {{ __("Time limit (minutes):") }}
+                            @lang('trad.Time limit (minutes):')
                         </label>
                         <input
                             type="number"
@@ -200,7 +200,7 @@
                                 clip-rule="evenodd"
                             ></path>
                         </svg>
-                        {{ __("Add to courses") }}
+                        @lang('trad.Add to course')
                     </button>
                 </div>
             </form>

@@ -8,6 +8,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCoursesController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\LocaleController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +84,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::post('/add-to-quiz', 'addExercise')->name('quiz.addExercise');
         Route::post('/add-to-course', 'addToCourse')->name('quiz.addToCourse');
         Route::delete('/quiz/{id}', 'removeEx')->name('quiz.removeEx');
+        Route::get('/quiz/{id}/download', 'downloadPdf')->name('quiz.download');
 
     });
 
@@ -100,6 +103,8 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::get('/student/{course}/search', 'search')->name('student.search');
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
     });
+
+    Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 });
 
 require __DIR__ . '/auth.php';

@@ -13,7 +13,7 @@
                 <input type="checkbox" id="{{ 'answer' . $element->position }}" value="{{ $element->position }}" @if ($element->truth) checked @endif disabled>
             </div>
             @endforeach
-            <button onclick="enableEdit()">Edit</button>
+            <button onclick="enableEdit()">@lang('trad.Edit')</button>
             <form action="{{ route('exercise.delete', ['id' => $exercise->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -29,15 +29,15 @@
                 <input type="hidden" id="questionNum" name="questionNum" value="{{ $exercise->elements->count() }}">
                 <div id="tf-FormDiv">
                     <div>
-                        <label for="exName">Name: </label>
+                        <label for="exName">@lang('trad.Name'): </label>
                         <input type="text" id="exName" name="exName" placeholder="{{ $exercise->name }}">
                     </div>
                     <div>
-                        <label for="exDescription">Description: </label>
+                        <label for="exDescription">@lang('trad.Description'): </label>
                         <textarea id="exDescription" name="exDescription" placeholder="{{ $exercise->description }}"></textarea>
                     </div>
                     <div>
-                        <label for="exPoints"> Points: </label>
+                        <label for="exPoints"> @lang('trad.Points'): </label>
                         <input type="number" id="exPoints" name="exPoints" min="1" placeholder="{{ $exercise->points }}">
                     </div>
                     @foreach ($exercise->elements()->orderBy('position')->get() as $element)
@@ -52,9 +52,9 @@
                     @endforeach
                 </div>
             </form>
-            <button type="submit" form="tf-Form">Edit</button>
-            <button onclick="addQuestion()">Add answer</button>
-            <button onclick="disableEdit()">Abort</button>
+            <button type="submit" form="tf-Form">@lang('trad.Edit')</button>
+            <button onclick="addQuestion()">@lang('trad.Add answer')</button>
+            <button onclick="disableEdit()">@lang('trad.Abort')</button>
         </div>
     </div>
 

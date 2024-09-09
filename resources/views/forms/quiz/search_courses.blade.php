@@ -3,7 +3,7 @@
     class="h-[10rem] bg-white dark:bg-gray-700"
 >
     <div class="p-3">
-        <label for="input-group-search" class="sr-only">{{__('Search course')}}</label>
+        <label for="input-group-search" class="sr-only">@lang('trad.Search course')</label>
         <div class="relative">
             <div
                 class="rtl:inset-r-0 pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
