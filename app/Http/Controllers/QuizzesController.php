@@ -20,7 +20,7 @@ class QuizzesController extends Controller
         return view('quizzes.quizzes', ['quizzes' => $quizzes]);
     }
 
-    public function create(): View
+    public function create(): RedirectResponse
     {
         try {
            
@@ -38,7 +38,7 @@ class QuizzesController extends Controller
         } catch(\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
-        return $this->index();
+        return to_route('quiz.index');
     }
 
     public function delete(): RedirectResponse
@@ -136,7 +136,7 @@ class QuizzesController extends Controller
     }
 
 
-    public function addToCourse() : View
+    public function addToCourse() : RedirectResponse
     {
         $data = Request()->all();
         $coursesId = [];
@@ -147,14 +147,13 @@ class QuizzesController extends Controller
        
         $quizId = $data['quizId'];
 
+        if(!$quizId or !is_numeric($quizId))
+            return to_route('quiz.index');
+
         $time = $data["time"];
         $date = $data["date"];
         $offset = $data["offset"];
-
-        $repeatable = false;
-        if(array_key_exists("repeatable", $data))
-            $repeatable = true;
-        
+        $repeatable = array_key_exists("repeatable", $data) ? true : false; 
         $datetimeString = null;
         $datetime = null;
         
@@ -172,7 +171,7 @@ class QuizzesController extends Controller
             $datetime = Carbon::createFromFormat('m/d/Y H:i P', $datetimeString . ' ' . $offsetString);
         }
         
-        if($coursesId and is_numeric($quizId)){
+        if($coursesId){
             try {
                 foreach($coursesId as $courseId){
                     course_quiz::create([
@@ -190,6 +189,6 @@ class QuizzesController extends Controller
         } else {
             session()->flash('error', 'Addition to quiz failed');
         }
-        return $this->show($quizId);
+        return to_route('quiz.show', ['id' => $quizId]);
     }
 }

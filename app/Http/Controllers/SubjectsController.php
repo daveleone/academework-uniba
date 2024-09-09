@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class SubjectsController extends Controller
 {
     public function show(): View
     {
-        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();  //TODO: modificare
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();
         return view('subjects', ['subjects' => $subjects]);
     }
 
-    public function create(): View
+    public function create(): RedirectResponse
     {
         try {
             Subject::create([
@@ -26,10 +27,10 @@ class SubjectsController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
-        return $this->show();
+        return to_route('subject.show');
     }
 
-    public function delete(): View
+    public function delete(): RedirectResponse
     {
         try {
             Subject::destroy(Request()->input('subId'));
@@ -37,15 +38,15 @@ class SubjectsController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
-        return $this->show();
+        return to_route('subject.show');
     }
 
-    public function edit(): View
+    public function edit(): RedirectResponse
     {
         $subject = Subject::find(Request()->input('subId'));
         if (!$subject) {
             session()->flash('error', 'Subject not found');
-            return $this->show();
+            return to_route('subject.show');
         }
 
         try{
@@ -64,6 +65,6 @@ class SubjectsController extends Controller
         } catch (\Exception $e){
             session()->flash('error', $e->getMessage());
         }
-        return $this->show();
+        return to_route('subject.show');
     }
 }

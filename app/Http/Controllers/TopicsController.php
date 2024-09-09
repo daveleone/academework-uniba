@@ -22,7 +22,7 @@ class TopicsController extends Controller
         return view('topics', ['subject' => $subject, 'topics' => $topics]);
     }
 
-    public function create($id): View | RedirectResponse{
+    public function create($id): RedirectResponse{
         $subject = Subject::find($id);
         if($subject){
             try{
@@ -39,21 +39,21 @@ class TopicsController extends Controller
             session()->flash('error', 'Subject not found');
             return to_route('subject.show');
         }
-        return $this->show($id);
+        return to_route('subject.topics', ['id' => $id]);
     }
 
-    public function delete($id): View | RedirectResponse{
+    public function delete($id): RedirectResponse{
         try {
             Topic::destroy(Request()->input('topId'));
             session()->flash('success', 'Topic deleted');
-            return $this->show($id);
+            return to_route('subject.topics', ['id' => $id]);
         } catch (\Exception $e){
             session()->flash('error', $e->getMessage());
             return to_route('subject.show');
         }
     }
 
-    public function edit($id): View | RedirectResponse{
+    public function edit($id): RedirectResponse{
         $topic = Topic::find(Request()->input('topId'));
 
         if (!$topic) {
@@ -73,7 +73,7 @@ class TopicsController extends Controller
                 $topic->update(['description' => $newDesc]);
             }
             session()->flash('success', 'Topic updated');
-            return $this->show($id);
+            return to_route('subject.topics', ['id' => $id]);
         } catch (\Exception $e){
             session()->flash('error', $e->getMessage());
             return to_route('subject.show');
