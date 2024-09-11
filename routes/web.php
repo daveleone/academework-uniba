@@ -107,7 +107,9 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::put('/student/{course}', 'store')->name('student.store');
         Route::get('/student/{course}/search', 'search')->name('student.search');
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
-        Route::get('//courses/{course}/student/{student}', 'details')->name('student.details');
+        Route::get('/courses/{course}/student/{student}', 'details')->name('student.details');
+        Route::get('/courses/{course}/student/{student}/{quiz}/review', 'changeVote')->name('student.changeVote');
+        Route::put('/courses/{course}/student/{student}/{quiz}/review', 'updateVote')->name('student.updateVote');
     });
 
     Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
