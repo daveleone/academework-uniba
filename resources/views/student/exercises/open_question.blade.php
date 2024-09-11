@@ -2,7 +2,7 @@
     <h3 class="font-semibold">{{ $exercise->name }}</h3>
     <p>{{ $exercise->description }}</p>
     <div class="mt-2">
-        <label for="open_{{ $exercise->id }}" class="block text-sm font-medium text-gray-700">Your answer:</label>
+        <label for="open_{{ $exercise->id }}" class="block text-sm font-medium text-gray-700">@lang('trad.Your answer'):</label>
         <textarea 
             id="open_{{ $exercise->id }}" 
             name="open_{{ $exercise->id }}" 
