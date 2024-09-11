@@ -4,7 +4,7 @@
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6 sm:col-span-2 justify-self-end">
                 <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
-                    {{ __('Create a class') }}
+                    @lang('trad.Create a class')
                 </x-nav-link>
             </div>
         </div>

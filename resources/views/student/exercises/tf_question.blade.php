@@ -7,11 +7,11 @@
             <div class="mt-1">
                 <label class="inline-flex items-center">
                     <input type="radio" name="tf_{{ $exercise->id }}_{{ $element->id }}" value="1" class="form-radio" required>
-                    <span class="ml-2">True</span>
+                    <span class="ml-2">@lang('trad.True')</span>
                 </label>
                 <label class="inline-flex items-center ml-6">
                     <input type="radio" name="tf_{{ $exercise->id }}_{{ $element->id }}" value="0" class="form-radio" required>
-                    <span class="ml-2">False</span>
+                    <span class="ml-2">@lang('trad.False')</span>
                 </label>
             </div>
         </div>
