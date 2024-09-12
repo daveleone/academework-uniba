@@ -4,8 +4,37 @@ return [
     'English' => 'English',
     'Italian' => 'Italian',
     'Spanish' => 'Spanish',
+    'Create New Class' => 'Create New Class',
+    'Class Description' => 'Class Description',
+    'Create Class' => 'Create Class',
    'Remember me' => 'Remember me',
    'Register' => 'Register',
+
+    "Your Classes" => "Your Classes",
+    "Edit class" => "Edit class",
+    "No classes" => "No classes",
+    "Get started by creating a new class" => "Get started by creating a new class",
+    "New Class" => "New Class",
+
+
+    'Edit Course' => 'Edit Course',
+    'Update Course' => 'Update Course',
+    'Enrolled Students' => 'Enrolled Students',
+    'N A' => 'N/A',
+    'No students enrolled' => 'No students enrolled',
+    'Get started by adding a new student to this course' => 'Get started by adding a new student to this course',
+    'Add Student' => 'Add Student',
+    'Are you sure you want to delete this course?' => 'Are you sure you want to delete this course?',
+    'Once this course is deleted all of its resources and data will be permanently deleted' => 'Once this course is deleted, all of its resources and data will be permanently deleted',
+    'Are you sure you want to remove this student from the course?' => 'Are you sure you want to remove this student from the course?',
+    'Once this student is removed all of their data related to this course will be permanently deleted' => 'Once this student is removed, all of their data related to this course will be permanently deleted',
+
+
+    "Email" => "Email",
+    "Review" => "Review",
+
+
+
    'Forgot your password?' => 'Forgot your password?',
    'Login' => 'Login',
    'You\'re logged in!' => 'You\'re logged in!',

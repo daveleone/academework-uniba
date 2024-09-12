@@ -1,222 +1,114 @@
 <x-app-layout>
-    <form action="{{ route('courses.update', $course->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="grid grid-cols-6 gap-4">
-                    <div class="col-span-6 sm:col-span-2">
-                        <x-input-label for="course_name" :value="__('Course Name')" />
-                        <!-- <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $course->course_name }}</p> -->
-                        <x-text-input id="course_name" class="block mt-1 " type="text" name="course_name" value="{{ $course->course_name }}" />
-                    </div>
-                    <div class="col-span-6 sm:col-span-2">
-                        <x-input-label for="course_description" :value="__('Course Description')" />
-                        <!-- <p class="text-gray-700 dark:text-gray-200">{{ $course->course_description }}</p> -->
-                        <x-text-input id="course_description" class="block mt-1 " type="text" name="course_description" value="{{ $course->course_description }}" />
-                    </div>
-                    <div class="col-span-6 sm:col-span-2 justify-self-end">
-                        <x-primary-button class="mt-8">
-                        @lang('trad.Update')
-                        </x-primary-button>
-                    </div>
+    <div class="min-h-screen bg-gray-100 from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-8 inline-flex items-center">
+                <a href="{{ route('courses.show') }}">
+                    <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                </a>
+
+                <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Edit Course')</h1>
+            </div>
+
+            <div class="bg-white shadow-md rounded-lg overflow-hidden mb-8 transition duration-300 ease-in-out transform">
+                <div class="p-6">
+                    <form action="{{ route('courses.update', $course->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="course_description" />{{ __('trad.Course Name') }}</label>
+                                <input type="text" name="course_name" id="course_name" value="{{ old('course_name', $course->course_name) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
+                            </div>
+                            <div>
+                                <label for="course_description" />{{ __('trad.Course Description') }}</label>
+                                <input type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <x-primary-button class="ml-3 hover:shadow-lg hover:-translate-y-1">
+                                <x-heroicon-s-pencil class="w-5 h-5 mr-2" />
+                                @lang('trad.Update Course')
+                            </x-primary-button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </form>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
-        <div class="flex justify-between items-center">
-            <x-nav-link :href="route('student', $course->id)" class="px-4 py-2">
-                @lang('trad.Add Students')
-            </x-nav-link>
+            <div class="flex justify-between items-center mb-8">
+                <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 hover:shadow-lg hover:-translate-y-1">
+                    <x-heroicon-s-user-plus class="w-5 h-5 mr-2" />
+                    @lang('trad.Add Students')
+                </a>
 
-            <x-danger-button type="submit" class="bg-red-500 hover:bg-red-700" onclick="openModal()">
-                @lang('trad.Delete Course')
-            </x-danger-button>
-        </div>
-    </div>
-
-    <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">D@lang('trad.Delete Course')</h3>
-                <div class="mt-2 px-7 py-3">
-                    <p class="text-sm text-gray-500">
-                    @lang('trad.Are you sure you want to delete this course? This action cannot be undone.')
-                    </p>
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button id="cancelBtn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        @lang('trad.Cancel')
-                    </button>
-                    <button id="deleteBtn" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
-                        @lang('trad.Delete')
-                    </button>
-                </div>
+                <x-danger-button
+                    x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-course-deletion')"
+                    class="hover:shadow-lg hover:-translate-y-1"
+                >
+                    <x-heroicon-s-trash class="w-5 h-5 mr-2" />
+                    @lang('trad.Delete Course')
+                </x-danger-button>
             </div>
-        </div>
-    </div>
 
-    <form id="delete-course-form" action="{{ route('courses.destroy', $course->id) }}" method="POST" class="hidden">
-        @csrf
-        @method('DELETE')
-    </form>
-
-    <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3 text-center">
-                <h3 id="modalTitle" class="text-lg leading-6 font-medium text-gray-900"></h3>
-                <div class="mt-2 px-7 py-3">
-                    <p id="modalMessage" class="text-sm text-gray-500"></p>
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button id="cancelBtn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        @lang('trad.Cancel')
-                    </button>
-                    <button id="deleteBtn" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
-                        @lang('trad.Cancel')
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <form id="delete-course-form" action="{{ route('courses.destroy', $course->id) }}" method="POST" class="hidden">
-        @csrf
-        @method('DELETE')
-    </form>
-
-
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        @lang('trad.Name')  
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        @lang('trad.Surname')
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        @lang('trad.Last Grade')
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        @lang('trad.Average Grade')
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        @lang('trad.Actions')
-                    </th>
-                </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200">
-                @foreach ($course->students as $student)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            <a href="{{ route('student.details', ['course' => $course->id, 'student' => $student->id]) }}" class="hover:underline">
-                                {{ $student->user->name }}
-                            </a>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            {{ $student->user->surname }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            @if($lastGrade = $student->lastGradeForCourse($course->id))
-                                {{ $lastGrade->mark }}
-                            @else
-                                {{ __('N/A') }}
-                            @endif
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            {{ round($student->averageGradeForCourse($course->id), 2) ?? __('N/A') }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
-                            <button type="submit" class="text-red-600 hover:text-red-900" onclick="openModalStudent()">
-                                @lang('trad.Delete')
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="deleteModalStudent" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">@lang('trad.Remove Student')</h3>
-                <div class="mt-2 px-7 py-3">
-                    <p class="text-sm text-gray-500">
-                    @lang('trad.Are you sure you want to delete this student? This action cannot be undone.')
-                    </p>
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button id="cancelBtnStudent" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        @lang('trad.Cancel')
-                    </button>
-                    <button id="deleteBtnStudent" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-24 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
-                        @lang('trad.Delete')
-                    </button>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">@lang('trad.Enrolled Students')</h2>
+                    @if($course->students->isNotEmpty())
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Name')</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Surname')</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Last Grade')</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Average Grade')</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Actions')</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($course->students as $student)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{ route('student.details', ['course' => $course->id, 'student' => $student->id]) }}" class="text-indigo-600 hover:text-indigo-900">{{ $student->user->name }}</a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $student->user->surname }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $student->lastGradeForCourse($course->id)?->mark ?? __('trad.N A') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ round($student->averageGradeForCourse($course->id), 2) ?? __('trad.N A') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <x-danger-button
+                                                x-data=""
+                                                x-on:click.prevent="$dispatch('open-modal', 'confirm-student-deletion-{{ $student->id }}')"
+                                                class="hover:shadow-lg hover:-translate-y-1"
+                                            >
+                                                <x-heroicon-s-trash class="w-4 h-4" />
+                                            </x-danger-button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="text-center py-12">
+                            <x-heroicon-o-users class="mx-auto h-12 w-12 text-gray-400" />
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No students enrolled')</h3>
+                            <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by adding a new student to this course')</p>
+                            <div class="mt-6">
+                                <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <x-heroicon-s-user-plus class="-ml-1 mr-2 h-5 w-5" />
+                                    @lang('trad.Add Student')
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
-    @foreach($course->students as $student)
-        <form id="delete-student-form" action="{{ route('student.delete', ['course' => $course->id, 'student' => $student->id]) }}" method="POST" class="hidden">
-            @csrf
-            @method('DELETE')
-        </form>
+    @include('partials.class_modal_remove')
+
+    @foreach ($course->students as $student)
+        @include('partials.student_modal_remove')
     @endforeach
-
-
-    <script>
-        function openModalStudent() {
-            document.getElementById('deleteModalStudent').classList.remove('hidden');
-        }
-
-        function closeModalStudent() {
-            document.getElementById('deleteModalStudent').classList.add('hidden');
-        }
-
-        document.getElementById('cancelBtnStudent').addEventListener('click', closeModalStudent);
-
-        document.getElementById('deleteBtnStudent').addEventListener('click', function() {
-            document.getElementById('delete-student-form').submit();
-        });
-
-        // Close the modal if clicked outside of it
-        window.onclick = function(event) {
-            var modal = document.getElementById('deleteModalStudent');
-            if (event.target == modal) {
-                closeModalStudent();
-            }
-        }
-    </script>
-
-    <script>
-        function openModal() {
-            document.getElementById('deleteModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
-        }
-
-        document.getElementById('cancelBtn').addEventListener('click', closeModal);
-
-        document.getElementById('deleteBtn').addEventListener('click', function() {
-            document.getElementById('delete-course-form').submit();
-        });
-
-        // Close the modal if clicked outside of it
-        window.onclick = function(event) {
-            var modal = document.getElementById('deleteModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
 </x-app-layout>

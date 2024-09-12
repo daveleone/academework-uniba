@@ -1,47 +1,51 @@
 <x-app-layout>
-
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
-        <div class="grid grid-cols-6 gap-4">
-            <div class="col-span-6 sm:col-span-2 justify-self-end">
-                <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+    <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    @lang('trad.Your Classes')
+                </h1>
+                <a href="{{ route('courses.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+                    <x-heroicon-s-plus class="w-5 h-5 mr-2" />
                     @lang('trad.Create a class')
-                </x-nav-link>
+                </a>
             </div>
-        </div>
-    </div>
 
-    <div class="py-4">
-        @if($courses->count() > 0)
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="grid grid-cols-6 gap-4">
+            @if($courses->count() > 0)
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($courses as $course)
-                        <div class="w-full clickable-course cursor-pointer" data-href="{{ route('courses.edit', $course->id) }}">
-                            <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{$course->course_name}}</p>
-                                <p class="text-gray-700 dark:text-gray-300">{{$course->course_description}}</p>
+                        <a href="{{ route('courses.edit', $course->id) }}" class="block">
+                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition duration-300 ease-in-out">
+                                <div class="p-6">
+                                    <x-heroicon-o-academic-cap class="w-7 h-7" />
+                                    <h2 class="text-xl font-semibold text-gray-900 mb-2">{{ $course->course_name }}</h2>
+                                    <p class="text-gray-600">{{ $course->course_description }}</p>
+                                </div>
+                                <div class="px-6 py-4 bg-gray-50 flex justify-end">
+                                    <span class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                        @lang('trad.Edit class')
+                                            <x-heroicon-s-chevron-right class="ml-1 w-5 h-5" />
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
-            </div>
+            @else
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-center">
+                        <x-heroicon-o-academic-cap class="mx-auto h-12 w-12 text-gray-400" />
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No classes')</h3>
+                        <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by creating a new class')</p>
+                        <div class="mt-6">
+                            <a href="{{ route('courses.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+                                <x-heroicon-s-plus class="w-5 h-5 mr-2" />
+                                @lang('trad.New Class')
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
-        @else
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">@lang('trad.You dont have any classes.')</p>
-            </div>
-        </div>
-        @endif
     </div>
-
-    <script>
-        document.querySelectorAll('.clickable-course').forEach(function(div) {
-            div.addEventListener('click', function() {
-                var href = this.getAttribute('data-href');
-
-                window.location.href = href;
-            });
-        });
-    </script>
 </x-app-layout>
