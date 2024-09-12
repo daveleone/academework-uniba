@@ -23,7 +23,6 @@
                 </x-cardNDE>
                 @include('forms.quiz.edit')
                 @include('forms.quiz.delete')
-                <a href="{{ route('quiz.download', ['id' => $quiz->id]) }}" class="btn btn-primary">Download PDF</a>
             @endforeach
         </div>
         
