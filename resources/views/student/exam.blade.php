@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Exam') }} - {{ $course->course_name ?? '' }} - {{ $quiz->name ?? '' }}
+            @lang('trad.Exam') - {{ $course->course_name ?? '' }} - {{ $quiz->name ?? '' }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if(isset($remainingTime))
-                        <div id="timer" class="text-xl font-bold mb-4">Time remaining: <span id="time-left"></span></div>
+                        <div id="timer" class="text-xl font-bold mb-4">@lang('trad.Time remaining'): <span id="time-left"></span></div>
                     @endif
 
                     <form id="exam-form" action="{{ route('student.submitExam', ['courses' => $course, 'quiz' => $quiz]) }}" method="POST">
@@ -34,7 +34,7 @@
                                 @endswitch
                             </div>
                         @endforeach
-                        <x-primary-button type="submit" id="submit-btn">{{ __('Submit Exam') }}</x-primary-button>
+                        <x-primary-button type="submit" id="submit-btn">@lang('trad.Submit Exam')</x-primary-button>
                     </form>
                 </div>
             </div>

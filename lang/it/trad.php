@@ -1,6 +1,7 @@
 <?php
 
 return [
+   
    'Remember me' => 'Ricordati di me',
    'Register' => 'Registrati',
    'Forgot your password?' => 'Password dimenticata?',
@@ -102,14 +103,29 @@ return [
    'Teacher' => 'Insegnante',
    'Already registered?' => 'Già registrato?',
    'Register as Student' => 'Registrati come studente',
-   'Register as Teacher' => 'Registrati come insegnante'
-   
-
-
-
-   
-
-
+   'Register as Teacher' => 'Registrati come insegnante',
+   'Exam' => 'Esame',
+   'Submit Exam' => 'Invia Esame',
+   'Time remaining: ' => 'Tempo rimanente: ',
+   'Are you sure you want to leave? Your exam progress may be lost.' => 'Sei sicuro di voler uscire? I tuoi progressi nell\'esame potrebbero andare persi.',
+   'Average Grade (Non-repeatable Quizzes):' => 'Voto medio (Quiz non ripetibili):',
+   'Non-Repeatable Quiz Grades' => 'Voti dei quiz non ripetibili',
+   'Repeatable Quiz Grades' => 'Voti dei quiz ripetibili',
+   'Student Details' => 'Dettagli dello studente',
+   'Name:' => 'Nome:',
+   'Email:' => 'Email:',
+   'Average Grade:' => 'Voto medio:',
+   'Quiz History' => 'Storico dei quiz',
+   'Quiz Name' => 'Nome del quiz',
+   'Grade' => 'Voto',
+   'Date' => 'Data',
+   "Exam" => "Exam",
+   "Submit Exam" => "Submit Exam",
+   "Time remaining: " => "Time remaining: ",
+   "Are you sure you want to leave? Your exam progress may be lost." => "Sicuro di voler uscire? I progressi andranno persi.",
+   "Show Grades" => "Mostra voti",
+   "No quizzes have been assigned to this course yet." => "Nessun quis è assegnato a questo corso.",
+   "Success" => "Successo"
 ];
 
 ?>

@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Course Exercises') }} - {{ $course->course_name }}
+                 {{ $course->course_name }}
             </h2>
             <a href="{{ route('student.class_details', ['course' => $course->id]) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                {{ __('Show Grades') }}
+                @lang('trad.Show Grades')
             </a>
         </div>
     </x-slot>
@@ -25,30 +25,29 @@
                                     <p class="text-gray-600 mb-4">{{ $quizData->description }}</p>
                                     <div class="space-y-2">
                                         <p class="text-sm">
-                                            <span class="font-medium">{{__('Start time')}}:</span>
+                                            <span class="font-medium">@lang('trad.Start time'):</span>
                                             {{ $quizData->pivot->start_time ? \Carbon\Carbon::parse($quizData->pivot->start_time)->format('d/m/y H:i') : 'Not set' }}
                                         </p>
                                         <p class="text-sm">
-                                            <span class="font-medium">{{__('Duration')}}:</span>
-                                            {{ $quizData->pivot->duration_minutes }} {{__('minutes')}}
+                                            <span class="font-medium">@lang('trad.Duration'):</span>
+                                            {{ $quizData->pivot->duration_minutes }} @lang('trad.minutes')
                                         </p>
                                         <p class="text-sm">
-                                            <span class="font-medium">{{__('Repeatable')}}:</span>
+                                            <span class="font-medium">@lang('trad.Repeatable'):</span>
                                             {{ $quizData->pivot->repeatable ? 'Yes' : 'No' }}
                                         </p>
                                     </div>
 
                                     @if(!$exam_taken[$quiz_id])
-
                                         <div class="mt-4">
                                             <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" href="{{route('student.exam', ['courses'=>$course->id, 'quiz'=>$quizData->id]) }}">
-                                                {{__('Start quiz')}}
+                                                @lang('trad.Start quiz')
                                             </a>
                                         </div>
                                     @else
                                         <div class="mt-4">
                                             <p class="bg-gray-600 text-white font-bold py-2 px-4 rounded">
-                                                {{__('Quiz already taken')}}
+                                                @lang('trad.Quiz already taken')
                                             </p>
                                         </div>
                                     @endif
@@ -56,7 +55,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p class="text-gray-600">{{__('No quizzes have been assigned to this course yet.')}}</p>
+                        <p class="text-gray-600">@lang('trad.No quizzes have been assigned to this course yet.')</p>
                     @endif
                 </div>
             </div>

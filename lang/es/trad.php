@@ -102,7 +102,29 @@ return [
    'Teacher' => 'Profesor',
    'Already registered?' => '¿Ya registrado?',
    'Register as Student' => 'Registrarse como estudiante',
-   'Register as Teacher' => 'Registrarse como profesor'
+   'Register as Teacher' => 'Registrarse como profesor',
+   'Exam' => 'Examen',
+   'Submit Exam' => 'Enviar Examen',
+   'Time remaining: ' => 'Tiempo restante: ',
+   'Are you sure you want to leave? Your exam progress may be lost.' => '¿Estás seguro de que quieres salir? Es posible que se pierda el progreso de tu examen.',
+   'Average Grade (Non-repeatable Quizzes):' => 'Nota media (Cuestionarios no repetibles):',
+   'Non-Repeatable Quiz Grades' => 'Notas de cuestionarios no repetibles',
+   'Repeatable Quiz Grades' => 'Notas de cuestionarios repetibles',
+   'Student Details' => 'Detalles del estudiante',
+   'Name:' => 'Nombre:',
+   'Email:' => 'Correo electrónico:',
+   'Average Grade:' => 'Nota media:',
+   'Quiz History' => 'Historial de cuestionarios',
+   'Quiz Name' => 'Nombre del cuestionario',
+   'Grade' => 'Nota',
+   'Date' => 'Fecha',
+   "Exam" => "Examen",
+   "Submit Exam" => "Enviar Examen",
+   "Time remaining: " => "Tiempo restante: ",
+   "Are you sure you want to leave? Your exam progress may be lost." => "¿Estás seguro de que quieres salir? Es posible que se pierda el progreso de tu examen.",
+   "Show Grades" => "Mostrar calificaciones",
+   "No quizzes have been assigned to this course yet." => "Aún no se han asignado cuestionarios a este curso."
+
 ];
 
 ?>
