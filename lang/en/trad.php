@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'English' => 'English',
+    'Italian' => 'Italian',
+    'Spanish' => 'Spanish',
    'Remember me' => 'Remember me',
    'Register' => 'Register',
    'Forgot your password?' => 'Forgot your password?',
@@ -129,9 +132,6 @@ return [
    'Are you sure you want to remove this student? This action cannot be undone.' => 'Are you sure you want to remove this student? This action cannot be undone.',
    'Log Out' => 'Log Out',
    'Language' => 'Language',
-   'English' => 'English',
-   'Italian' => 'Italian',
-   'Spanish' => 'Spanish'
 ];
 
 ?>

@@ -1,7 +1,10 @@
 <?php
 
 return [
-   
+    'Language' => 'Lingua',
+   'English' => 'Inglese',
+    'Italian' => 'Italiano',
+    'Spanish' => 'Spagnolo',
    'Remember me' => 'Ricordati di me',
    'Register' => 'Registrati',
    'Forgot your password?' => 'Password dimenticata?',
@@ -35,7 +38,7 @@ return [
    'Exercise name' => 'Nome esercizio',
    'Exercise\'s Description' => 'Descrizione esercizio',
    'Exercise points' => 'Punti esercizio',
-   'Select the type' => 'Seleziona tipologia', 
+   'Select the type' => 'Seleziona tipologia',
    'True or false' => 'Vero o falso',
    'Open question' => 'Domanda aperta',
    'Closed question' => 'Domanda chiusa',

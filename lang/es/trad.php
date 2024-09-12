@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'Language' => 'Idioma',
+    'English' => 'Inglés',
+    'Italian' => 'Italiano',
+    'Spanish' => 'Español',
    'Remember me' => 'Recuérdame',
    'Register' => 'Registrarse',
    'Forgot your password?' => '¿Olvidaste tu contraseña?',
