@@ -12,7 +12,7 @@
             @endphp
 
             <div class="mt-4">
-                <h4 class="font-medium text-gray-700 mb-2">@lang('trad.Answer'):</h4>
+                <h4 class="font-medium text-gray-700 mb-2">@lang('trad.Your answer'):</h4>
                 @if($answer)
                     <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-400 transition-all duration-300 hover:border-indigo-600">
                         <p class="text-gray-600">{{ $answer->content }}</p>
@@ -22,6 +22,13 @@
                         <p class="text-gray-500 italic">@lang('trad.Not answered')</p>
                     </div>
                 @endif
+            </div>
+
+            <div class="mt-6">
+                <h4 class="font-medium text-gray-700 mb-2">@lang('trad.Answer given by the professor'):</h4>
+                <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                    <p class="text-gray-600">{{ $element->answer ?? __('trad.No sample answer provided') }}</p>
+                </div>
             </div>
         </div>
     @endforeach

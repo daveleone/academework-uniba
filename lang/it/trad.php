@@ -33,6 +33,8 @@ return [
     'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una volta rimosso lo studente, tutti i suoi dati relativi a questo classe saranno eliminati permanentemente',
     'Remove Student' => 'Rimuovi Studente',
 
+
+
     "Email" => "Email",
     "N/A" => "N/D",
     "Review" => "Revisione",
@@ -61,6 +63,30 @@ return [
 
     'View Topics' => 'Mostra argomenti',
 
+    'Add Selected Students' => 'Aggiungi studente/i selezionato',
+
+
+    'No quizzes found in this category.' => 'Nessun quiz trovato in questa categoria.',
+    'No quizzes available' => 'Nessun quiz disponibile',
+    'View class' => 'Mostra classe',
+
+    'Average Grade (Non-repeatable Quizzes)' => 'Voto Medio (Quiz non ripetibili)',
+
+    'Course Details' => 'Dettagli del Corso',
+
+    'Start time' => 'Data d\'inizio',
+    'Duration' => 'Durata',
+    'minutes' => 'minuti',
+    'minute' => 'minuto',
+    'Not set' => 'Non impostata',
+    'Fill in...' => 'Completa...',
+
+    'Exam' => 'Esame',
+
+    'Correct' => 'Giusto',
+    'Correct answer' => 'Risposta giusta',
+    'Your answer' => 'La tua risposta',
+    'Answer given by the professor' => 'Risposta data dal professore',
 
     'Remember me' => 'Ricordati di me',
     'Register' => 'Registrati',
@@ -111,6 +137,11 @@ return [
     'Closed question' => 'Domanda chiusa',
     'Fill in text' => 'Testo a riempimento',
     'Add new exercise' => 'Aggiungi nuovo esercizio',
+
+    'Add Students to Course' => 'Aggiungi studenti alla classe',
+    'No available students' => 'Nessun studente disponibile',
+    'All students are already enrolled in this course' => 'Tutti gli studenti sono già iscritti alla classe',
+    'Search for students' => 'Cerca studenti',
 
     'Description' => 'Descrizione',
     'Next' => 'Prossimo',

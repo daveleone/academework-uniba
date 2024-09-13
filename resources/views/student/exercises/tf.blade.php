@@ -7,9 +7,9 @@
                     <h3 class="text-xl font-semibold text-gray-800">@lang('trad.Statement') {{ $index + 1 }}</h3>
                 </div>
                 <p class="text-gray-700 mb-6">{{ $element->content }}</p>
-
                 @php
                     $answer = $tfAnswer->firstWhere('ex_elem_id', $element->id);
+                    $correctAnswer = $element->truth; // Assuming this field exists
                 @endphp
 
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
@@ -17,11 +17,11 @@
                     @if($answer)
                         <div class="flex space-x-3">
                             <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300
-                                {{ $answer->content == 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600' }}">
+                                {{ $answer->content == 1 ? ($correctAnswer == 1 ? 'bg-green-600 text-white' : 'bg-red-600 text-white') : 'bg-gray-200 text-gray-600' }}">
                                 @lang('trad.True')
                             </button>
                             <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300
-                                {{ $answer->content == 0 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600' }}">
+                                {{ $answer->content == 0 ? ($correctAnswer == 0 ? 'bg-green-600 text-white' : 'bg-red-600 text-white') : 'bg-gray-200 text-gray-600' }}">
                                 @lang('trad.False')
                             </button>
                         </div>
@@ -30,6 +30,12 @@
                             @lang('trad.Not answered')
                         </span>
                     @endif
+                </div>
+                <div class="mt-4 text-sm">
+                    <span class="font-medium text-gray-700">@lang('trad.Correct answer'):</span>
+                    <span class="ml-2 font-semibold text-green-600">
+                        {{ $correctAnswer ? __('trad.True') : __('trad.False') }}
+                    </span>
                 </div>
             </div>
         @endforeach

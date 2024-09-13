@@ -9,6 +9,7 @@
 
             @php
                 $answer = $closeAnswer->firstWhere('ex_elem_id', $element->id);
+                $correctAnswer = $element->truth; // Assuming this field exists
             @endphp
 
             <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
@@ -23,6 +24,16 @@
                         @lang('trad.Not answered')
                     </span>
                 @endif
+            </div>
+            <div class="mt-4 text-sm">
+                <span class="font-medium text-gray-700">@lang('trad.Correct answer'):</span>
+                <span class="ml-2 font-semibold text-green-600">
+                    @if($correctAnswer)
+                        @lang('trad.True')
+                    @else
+                        @lang('trad.False')
+                    @endif
+                </span>
             </div>
         </div>
     @endforeach

@@ -73,6 +73,30 @@ return [
     'Are you sure you want to delete this subject?' => '¿Estás seguro de que deseas eliminar esta asignatura?',
     'Once this subject is deleted all of its data will be permanently deleted' => 'Una vez que esta asignatura sea eliminada, todos sus datos se eliminarán permanentemente.',
 
+    'Add Students to Course' => 'Agregar estudiantes a la clase',
+    'No available students' => 'No hay estudiantes disponibles',
+    'All students are already enrolled in this course' => 'Todos los estudiantes ya están inscritos en esta clase',
+    'Search for students' => 'Buscar estudiantes',
+
+    'Add Selected Students' => 'Agregar estudiante/s seleccionado',
+    'Average Grade (Non-repeatable Quizzes)' => 'Nota media (Cuestionarios no repetibles)',
+
+    'Start time' => 'Hora de inicio',
+    'Duration' => 'Duración',
+    'Start quiz' => 'Iniciar cuestionario',
+    'Quiz already taken' => 'Cuestionario ya realizado',
+    'minutes' => 'minutos',
+    'minute' => 'minuto',
+    'Not set' => 'No fijado',
+    'No quizzes available' => 'No hay cuestionarios disponibles',
+    'View class' => 'Ver clase',
+    'Fill in...' => 'Rellenar ...',
+
+    'Correct' => 'Correcto',
+    'Correct answer' => 'Respuesta correcta',
+    'Your answer' => 'Tu respuesta',
+    'Answer given by the professor' => 'Respusta dada por el professore',
+
 
     'Remember me' => 'Recuérdame',
     'Register' => 'Registrarse',

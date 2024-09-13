@@ -19,28 +19,29 @@ use App\Models\TfAnsElement;
 use App\Models\tfExElement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
     public function store(Request $request, Course $course)
     {
         $request->validate([
-            'selected_students' => 'array|required',
-            'selected_students.*' => 'exists:students,id',
+            'students' => 'array|required',
+            'students.*' => 'exists:students,id',
         ]);
 
         // Get the array of selected student IDs
-        $selectedStudentIds = $request->input('selected_students');
+        $selectedStudentIds = $request->input('students');
 
-        // Loop through the selected student
+        // Loop through the selected students
         foreach ($selectedStudentIds as $studentId) {
-            $courseStudent = new CourseStudent();
-            $courseStudent->course_id = $course->id;
-            $courseStudent->student_id = $studentId;
-            $courseStudent->save();
+            // Check if the relationship doesn't already exist
+            if (!$course->students()->where('student_id', $studentId)->exists()) {
+                $course->students()->attach($studentId);
+            }
         }
 
-        return redirect()->route('student', $course->id);
+        return redirect()->route('courses.edit', $course->id)->with('success', __('trad.Students added successfully'));
     }
 
     public function show(Course $course)
@@ -95,6 +96,8 @@ class StudentController extends Controller
         $openAnswer = null;
         $closeAnswer = null;
 
+        $user = Auth::user();
+
         $mark = Mark::where('student_id', $student->id)
             ->where('quiz_id', $quiz->id)
             ->first();
@@ -123,7 +126,11 @@ class StudentController extends Controller
             }
         }
 
-        return view('student.change-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        if($user->isTeacher()){
+            return view('student.change-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        }elseif ($user->isStudent()) {
+            return view('student.review-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        }
     }
 
     private function retrieveFillAnswer($matchAnswer)

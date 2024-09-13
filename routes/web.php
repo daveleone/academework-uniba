@@ -46,6 +46,10 @@ Route::middleware('auth', 'role:student')->group(function () {
         Route::post('/student/classes/{courses}/exercises/{quiz}/submit', 'submitExam')->name('student.submitExam');
         Route::get('/student/course/{course}/details', 'studentClassDetails')->name('student.class_details');
     });
+
+    Route::controller(StudentController::class)->group(function () {
+        Route::get('/student/course/{course}/details/{student}/{quiz}/review', 'changeVote')->name('student.reviewVote');
+    });
 });
 
 Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: implementare redirect per insegnanti/studenti
@@ -111,8 +115,8 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::get('/courses/{course}/student/{student}/{quiz}/review', 'changeVote')->name('student.changeVote');
         Route::put('/courses/{course}/student/{student}/{quiz}/review', 'updateVote')->name('student.updateVote');
     });
-
-    Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 });
+
+Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 
 require __DIR__ . '/auth.php';

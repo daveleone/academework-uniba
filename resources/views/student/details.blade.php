@@ -49,17 +49,19 @@
                                 @php
                                     $mark = $marks->firstWhere('quiz_id', $quiz->id);
                                 @endphp
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $quiz->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $mark ? number_format($mark->mark, 2, '.', '') : __('trad.N/A') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $mark ? $mark->created_at->format('Y-m-d H:i') : __('trad.N/A') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('student.changeVote', ['course' => $course->id, 'student' => $student->id, 'quiz' => $quiz->id]) }}" class="text-indigo-600 hover:text-indigo-900 flex items-center">
-                                            <x-heroicon-o-pencil-square class="w-4 h-4 mr-1" />
-                                            @lang('trad.Review')
-                                        </a>
-                                    </td>
-                                </tr>
+                                @if(isset($mark))
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $quiz->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $mark ? number_format($mark->mark, 2, '.', '') : __('trad.N/A') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $mark ? $mark->created_at->format('Y-m-d H:i') : __('trad.N/A') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="{{ route('student.changeVote', ['course' => $course->id, 'student' => $student->id, 'quiz' => $quiz->id]) }}" class="text-indigo-600 hover:text-indigo-900 flex items-center">
+                                                <x-heroicon-o-pencil-square class="w-4 h-4 mr-1" />
+                                                @lang('trad.Review')
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

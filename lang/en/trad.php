@@ -32,6 +32,19 @@ return [
     'Are you sure you want to delete this subject?' => 'Are you sure you want to delete this subject?',
     'Once this subject is deleted all of its data will be permanently deleted' => 'Once this subject is deleted all of its data will be permanently deleted',
 
+    'Add Students to Course' => 'Add student to class',
+    'No available students' => 'No available students',
+    'All students are already enrolled in this course' => 'All students are already enrolled in this class',
+    'Search for students' => 'Search for students',
+
+    'Add Selected Students' => 'Add selected student/s',
+
+    'No quizzes found in this category.' => 'No quizzes found in this category.',
+
+    'Average Grade (Non-repeatable Quizzes)' => 'Average Grade (Non-repeatable Quizzes)',
+
+    'Course Details' => 'Class Details',
+
 
     "Email" => "Email",
     "Review" => "Review",
@@ -44,9 +57,20 @@ return [
 
     'View Topics' => 'View topics',
     'Delete subject' => 'Delete subject',
+    'No quizzes available' => 'No quizzes available',
+    'View class' => 'View class',
 
     "No exercises found" => "No exercises found",
     "There are no exercises for this quiz" => "There are no exercises for this quiz",
+
+    'Start time' => 'Start time',
+    'Duration' => 'Duration',
+    'Start quiz' => 'Start quiz',
+    'Quiz already taken' => 'Quiz already taken',
+    'minutes' => 'minutes',
+    'minute' => 'minute',
+    'Not set' => 'Not set',
+    'Fill in...' => 'Fill in...',
 
     'Exercise' => 'Exercise',
     'Unknown exercise type' => 'Unknown exercise type',
@@ -58,6 +82,11 @@ return [
     'Fill in the blanks' => 'Fill in the blanks',
     'Blank' => 'Blank',
     'Statement' => 'Statement',
+
+    'Correct' => 'Correct',
+    'Correct answer' => 'Correct answer',
+    'Your answer' => 'Your Answer',
+    'Answer given by the professor' => 'Answer given by the professor',
 
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",
