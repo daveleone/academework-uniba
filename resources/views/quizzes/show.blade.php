@@ -1,24 +1,23 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex flex-row items-center align-center justify-between">
-            <div class="flex flex-row items-center">
-                <h2
-                    class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-                >
-                    {{ $quiz->name }}
-                </h2>
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div class="inline-flex items-center">
+                    <a href="{{ route('quiz.index') }}">
+                        <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        {{ $quiz->name }}
+                    </h1>
+                    <a href="{{ route('quiz.download', ['id' => $quiz->id]) }}" class="ml-4 text-indigo-600 hover:text-indigo-900">
+                        <x-heroicon-o-arrow-down-tray class="w-6 h-6" />
+                    </a>
+                </div>
 
-                <!-- Pdf Download -->
-                <a href="{{ route('quiz.download', ['id' => $quiz->id]) }}" class="btn btn-primary ml-2 dark:text-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6  hover:stroke-gray-400">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
-                    </svg>
-                </a>
+                <div>
+                    @include('forms.quiz.add_to_course')
+                </div>
             </div>
-            
-            @include('forms.quiz.add_to_course')
-        </div>
-    </x-slot>
     <div
         class="flex items-center flex-col"
     >
