@@ -45,6 +45,9 @@ return [
     'View Topics' => 'View topics',
     'Delete subject' => 'Delete subject',
 
+    "View Exercise" => "View Exercise",
+    "View Exercises" => "View Exercises",
+    
     "No exercises found" => "No exercises found",
     "There are no exercises for this quiz" => "There are no exercises for this quiz",
 
@@ -88,6 +91,7 @@ return [
    'Search course' => 'Search class',
    'Add' => 'Add',
    'Edit quiz' => 'Edit quiz',
+   "View Quiz" => "View Quiz",
    'Are you sure you want to remove' => 'Are you sure you want to remove',
    'Create New Subject' => 'Create New Subject',
    'Add new subject' => 'Add new subject',
