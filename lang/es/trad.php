@@ -97,6 +97,8 @@ return [
     'Your answer' => 'Tu respuesta',
     'Answer given by the professor' => 'Respusta dada por el professore',
 
+    '- topics' => '- Tema',
+    'View Exercises' => 'Ver ejercicios',
 
     'Remember me' => 'Recuérdame',
     'Register' => 'Registrarse',

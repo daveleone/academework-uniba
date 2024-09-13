@@ -62,7 +62,7 @@ return [
 
     "View Exercise" => "View Exercise",
     "View Exercises" => "View Exercises",
-    
+
     "No exercises found" => "No exercises found",
     "There are no exercises for this quiz" => "There are no exercises for this quiz",
 
@@ -90,6 +90,9 @@ return [
     'Correct answer' => 'Correct answer',
     'Your answer' => 'Your Answer',
     'Answer given by the professor' => 'Answer given by the professor',
+
+    '- topics' => '- Topics',
+
 
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",

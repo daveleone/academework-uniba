@@ -1,27 +1,26 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex flex-row justify-between items-center">
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-            >
-                <a
-                    href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
-                >
-                    {{ $exercise->topic->name }}
-                </a>
-                / {{ $exercise->name }}
-            </h2>
-
-            @include('forms.exercise.add_to_quiz')
-        </div>
-    </x-slot>
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div class="mb-8 inline-flex items-center">
+                    <a href="{{ route('topic.exercises', ['id' => $exercise->topic->id]) }}">
+                        <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        {{ $exercise->topic->name }} / {{ $exercise->name }}
+                    </h1>
+                </div>
+                <div class="mb-8 inline-flex items-center">
+                    @include('forms.exercise.add_to_quiz')
+                </div>
+            </div>
     <div class="flex w-full flex-col items-center py-12 text-lg">
         <div
             id="showDiv"
         >
 
             @include('exercises.cards.fill')
-            
+
             <div class="mt-[1rem] flex flex-row">
                 <button
                     onclick="enableEdit()"
@@ -171,7 +170,7 @@
                     class="mb-2 me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
                     Add input
-                </button>                
+                </button>
                 <button
                     type="button"
                     onclick="disableEdit()"
@@ -256,7 +255,7 @@
             elemDiv.id = 'elemDiv' + n;
             elemDiv.className =
                 'mb-[1rem] w-[17rem] flex flex-row items-center justify-between';
-            
+
             elemType.type = 'hidden';
             elemType.value = 'text';
             elemType.id = 'elemType' + n;
@@ -268,7 +267,7 @@
 
             elem.className =
                 'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500';
-            
+
             elemDiv.appendChild(elem);
             elemDiv.appendChild(elemType);
 
@@ -307,7 +306,7 @@
             elem.required = true;
             elem.className =
                 'block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500';
-            
+
             elemDiv.appendChild(elem);
             elemDiv.appendChild(elemType);
 

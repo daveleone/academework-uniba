@@ -1,26 +1,25 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex flex-row justify-between items-center">
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-            >
-                <a
-                    href="{{ route("topic.exercises", ["id" => $exercise->topic->id]) }}"
-                >
-                    {{ $exercise->topic->name }}
-                </a>
-                / {{ $exercise->name }}
-            </h2>
-
-            @include('forms.exercise.add_to_quiz')
-        </div>
-    </x-slot>
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div class="mb-8 inline-flex items-center">
+                    <a href="{{ route('topic.exercises', ['id' => $exercise->topic->id]) }}">
+                        <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        {{ $exercise->topic->name }} / {{ $exercise->name }}
+                    </h1>
+                </div>
+                <div class="mb-8 inline-flex items-center">
+                    @include('forms.exercise.add_to_quiz')
+                </div>
+            </div>
 
     <div class="flex w-full flex-col items-center py-12 text-lg">
         <div id="showDiv">
 
             @include('exercises.cards.closed')
-            
+
             <div class="mt-[1rem] flex flex-row">
                 <button
                     onclick="enableEdit()"
