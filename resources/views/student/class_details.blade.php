@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">{{ $course->name }} @lang('trad.Course Details)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">{{ $course->name }} @lang('trad.Course Details')</h2>
             <p class="text-gray-700 dark:text-gray-300"><strong class="text-gray-900 dark:text-white">@lang('trad.Teacher'):</strong> {{ $teacher->name }}</p>
             <p class="text-gray-700 dark:text-gray-300"><strong class="text-gray-900 dark:text-white">@lang('trad.Average Grade (Non-repeatable Quizzes):')</strong> {{ number_format($averageGrade, 2, '.', '') }}</p>
 

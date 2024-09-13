@@ -1,43 +1,49 @@
+@php
+    $maxPoints = $exercises->sum('points');
+    $openPoints = $exercises->where('type', 'open')->value('points');
+@endphp
+
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Exam conducted by: {{ $student->user->name }}. Quiz: {{ $quiz->name }}
-        </h2>
-    </x-slot>
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div class="inline-flex items-center">
+                    <a href="{{ route('student.details', ['course' => $course, 'student' => $student]) }}" class="hover:text-indigo-800 transition duration-150 ease-in-out">
+                        <x-heroicon-o-chevron-left class="w-6 h-6 mr-2" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        @lang('trad.Quiz review')
+                    </h1>
+                </div>
+            </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold mb-4">{{$student->user->name}}'s Mark</h3>
-
-                            @php
-                                $maxPoints = $exercises->sum('points');
-                                $openPoints = $exercises->where('type', 'open')->value('points');
-                            @endphp
-                            <form action="{{ route('student.updateVote', ['course' => $course->id, 'student' => $student->id, 'quiz' => $quiz->id]) }}" method="POST" class="space-y-4">
-                                @csrf
-                                @method('PUT')
-                                <div class="flex items-center space-x-4">
-                                    <label for="mark" class="font-medium">Mark:</label>
-                                    <input type="number" id="mark" name="mark" value="{{ $mark->mark }}" min="{{$mark->mark}}" max="{{ $mark->mark + $openPoints }}" step="0.5" class="mt-1 block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <span class="text-gray-500">/ {{ $maxPoints }}</span>
-                                </div>
-                                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                                    Update Mark
-                                </button>
-                            </form>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">@lang('trad.Student mark')</h2>
+                    <form action="{{ route('student.updateVote', ['course' => $course->id, 'student' => $student->id, 'quiz' => $quiz->id]) }}" method="POST" class="space-y-4">
+                        @csrf
+                        @method('PUT')
+                        <div class="flex items-center space-x-4">
+                            <label for="mark" class="font-medium text-gray-700">@lang('trad.Mark'):</label>
+                            <input type="number" id="mark" name="mark" value="{{ $mark->mark }}" min="{{$mark->mark}}" max="{{ $mark->mark + $openPoints }}" step="0.5" class="mt-1 block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <span class="text-gray-500">/ {{ $maxPoints }}</span>
                         </div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+                            <x-heroicon-s-pencil class="w-5 h-5 mr-2" />
+                            @lang('trad.Update mark')
+                        </button>
+                    </form>
+                </div>
+            </div>
 
+            @if($exercises->count() > 0)
+                <div class="mb-6">
                     @foreach($exercises as $exercise)
-                        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold mb-2">{{ $exercise->name }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $exercise->description }}</p>
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition duration-300 ease-in-out mb-6">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">@lang('trad.Exercise')</h3>
+                                <p class="text-gray-600 mb-4">{{ $exercise->description }}</p>
 
-                            <div class="bg-white p-4 rounded-md">
                                 @switch($exercise->type)
                                     @case('true/false')
                                         @include('student.exercises.tf', ['exercise' => $exercise, 'tfAnswer' => $tfAnswer])
@@ -52,12 +58,22 @@
                                         @include('student.exercises.fill', ['exercise' => $exercise, 'fillAnswer' => $fillAnswer])
                                         @break
                                     @default
+                                        <p class="text-red-500">@lang('trad.Unknown exercise type')</p>
                                 @endswitch
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </div>
+
+            @else
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-center">
+                        <x-heroicon-o-clipboard-document-list class="mx-auto h-12 w-12 text-gray-400" />
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No exercises found')</h3>
+                        <p class="mt-1 text-sm text-gray-500">@lang('trad.There are no exercises for this quiz')</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

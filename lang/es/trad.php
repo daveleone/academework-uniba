@@ -13,10 +13,10 @@ return [
     "New Class" => "Nueva Clase",
 
 
-    'Edit Course' => 'Editar Curso',
-    'Course Name' => 'Nombre del Curso',
-    'Course Description' => 'Descripción del Curso',
-    'Update Course' => 'Actualizar Curso',
+    'Edit Course' => 'Editar clase',
+    'Course Name' => 'Nombre del clase',
+    'Course Description' => 'Descripción del clase',
+    'Update Course' => 'Actualizar clase',
     'Enrolled Students' => 'Estudiantes Matriculados',
     'Surname' => 'Apellido',
     'Last Grade' => 'Última Calificación',
@@ -24,18 +24,54 @@ return [
     'Actions' => 'Acciones',
     'N A' => 'N/D',
     'No students enrolled' => 'No hay estudiantes matriculados',
-    'Get started by adding a new student to this course' => 'Comience añadiendo un nuevo estudiante a este curso',
+    'Get started by adding a new student to this course' => 'Comience añadiendo un nuevo estudiante a este clase',
     'Add Student' => 'Añadir Estudiante',
-    'Are you sure you want to delete this course?' => '¿Está seguro de que desea eliminar este curso?',
-    'Once this course is deleted all of its resources and data will be permanently deleted' => 'Una vez que se elimine este curso, todos sus recursos y datos se eliminarán permanentemente',
-    'Are you sure you want to remove this student from the course?' => '¿Está seguro de que desea eliminar a este estudiante del curso?',
-    'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una vez que se elimine a este estudiante, todos sus datos relacionados con este curso se eliminarán permanentemente',
+    'Are you sure you want to delete this course?' => '¿Está seguro de que desea eliminar este clase?',
+    'Once this course is deleted all of its resources and data will be permanently deleted' => 'Una vez que se elimine este clase, todos sus reclases y datos se eliminarán permanentemente',
+    'Are you sure you want to remove this student from the course?' => '¿Está seguro de que desea eliminar a este estudiante del clase?',
+    'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una vez que se elimine a este estudiante, todos sus datos relacionados con este clase se eliminarán permanentemente',
     'Remove Student' => 'Eliminar Estudiante',
+
+    "No exercises found" => "No hay estudiantes encontrados",
+    "There are no exercises for this quiz" => "No hay estudiantes encontrados para este quiz",
 
 
     "Email" => "Correo Electrónico",
     "N/A" => "N/D",
     "Review" => "Revisar",
+
+    "Quiz review" => "Revisión del cuestionario",
+
+    "Student mark" => "Calificación del alumno",
+    "Mark" => "Grado",
+    "Update mark" => "Actualizar grado",
+
+    'View Topics' => 'Ver temas',
+
+    'Exercise' => 'Ejercicio',
+    'Unknown exercise type' => 'Tipo de ejercicio desconocido',
+
+    "Pagination Navigation" => "Navegación de Paginación",
+    "Previous" => "Anterior",
+    "Showing" => "Mostrando",
+    "to" => "a",
+    "of" => "de",
+    "results" => "resultados",
+    "Go to page :page" => "Ir a la página :page",
+
+    'Question' => 'Pregunta',
+    'Answer' => 'Respuesta',
+    'True' => 'Verdadero',
+    'False' => 'Falso',
+    'Not answered' => 'Sin respuesta',
+    'Fill in the blanks' => 'Completa los espacios en blanco',
+    'Blank' => 'En blanco',
+    'Statement' => 'Afirmación',
+
+    'Delete subject' => 'Eliminar materia',
+
+    'Are you sure you want to delete this subject?' => '¿Estás seguro de que deseas eliminar esta asignatura?',
+    'Once this subject is deleted all of its data will be permanently deleted' => 'Una vez que esta asignatura sea eliminada, todos sus datos se eliminarán permanentemente.',
 
 
     'Remember me' => 'Recuérdame',
@@ -50,7 +86,7 @@ return [
     'Profile' => 'Perfil',
     'Create class' => 'Crear clase',
     'Subjects' => 'Materias',
-    'Add to course' => 'Añadir al curso',
+    'Add to course' => 'Añadir al clase',
     'Close modal' => 'Cerrar modal',
     'Select hour:' => 'Seleccionar hora:',
     'Repeatable' => 'Repetible',
@@ -58,7 +94,7 @@ return [
     'Create New Quiz' => 'Crear nuevo cuestionario',
     'Are you sure you want to delete' => '¿Estás seguro de que quieres eliminar',
     'Yes, I\'m sure' => 'Sí, estoy seguro',
-    'Search course' => 'Buscar curso',
+    'Search course' => 'Buscar clase',
     'Add' => 'Añadir',
     'Edit quiz' => 'Editar cuestionario',
     'Are you sure you want to remove' => '¿Estás seguro de que quieres eliminarlo?',
@@ -105,7 +141,7 @@ return [
     'Topic\'s Description' => 'Descripción del tema',
     'Update' => 'Actualizar',
     'Add Students' => 'Añadir estudiantes',
-    'Delete Course' => 'Eliminar curso',
+    'Delete Course' => 'Eliminar clase',
     'Profile Information' => 'Información del perfil',
     'Update your account\'s profile information and email address.' => 'Actualiza la información de tu cuenta y dirección de correo electrónico.',
     'Your email address is unverified.' => 'Tu dirección de correo electrónico no está verificada.',

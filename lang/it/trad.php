@@ -14,10 +14,10 @@ return [
     "New Class" => "Nuova Classe",
 
 
-    'Edit Course' => 'Modifica Corso',
-    'Course Name' => 'Nome del Corso',
-    'Course Description' => 'Descrizione del Corso',
-    'Update Course' => 'Aggiorna Corso',
+    'Edit Course' => 'Modifica classe',
+    'Course Name' => 'Nome del classe',
+    'Course Description' => 'Descrizione del classe',
+    'Update Course' => 'Aggiorna classe',
     'Enrolled Students' => 'Studenti Iscritti',
     'Surname' => 'Cognome',
     'Last Grade' => 'Ultimo Voto',
@@ -25,18 +25,41 @@ return [
     'Actions' => 'Azioni',
     'N A' => 'N/D',
     'No students enrolled' => 'Nessuno studente iscritto',
-    'Get started by adding a new student to this course' => 'Inizia aggiungendo un nuovo studente a questo corso',
+    'Get started by adding a new student to this course' => 'Inizia aggiungendo un nuovo studente a questo classe',
     'Add Student' => 'Aggiungi Studente',
-    'Are you sure you want to delete this course?' => 'Sei sicuro di voler eliminare questo corso?',
-    'Once this course is deleted all of its resources and data will be permanently deleted' => 'Una volta eliminato il corso, tutte le sue risorse e i dati saranno eliminati permanentemente',
-    'Are you sure you want to remove this student from the course?' => 'Sei sicuro di voler rimuovere questo studente dal corso?',
-    'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una volta rimosso lo studente, tutti i suoi dati relativi a questo corso saranno eliminati permanentemente',
+    'Are you sure you want to delete this course?' => 'Sei sicuro di voler eliminare questo classe?',
+    'Once this course is deleted all of its resources and data will be permanently deleted' => 'Una volta eliminata la classe, tutte le sue risorse e i dati saranno eliminati permanentemente',
+    'Are you sure you want to remove this student from the course?' => 'Sei sicuro di voler rimuovere questo studente dal classe?',
+    'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una volta rimosso lo studente, tutti i suoi dati relativi a questo classe saranno eliminati permanentemente',
     'Remove Student' => 'Rimuovi Studente',
-
 
     "Email" => "Email",
     "N/A" => "N/D",
     "Review" => "Revisione",
+
+    "Quiz review" => "Revisione quiz",
+
+    'Exercise' => 'Esercizio',
+    'Unknown exercise type' => 'Tipo di esercizio sconosciuto',
+
+    "No exercises found" => "Nessun esercizio trovato",
+    "There are no exercises for this quiz" => "Non ci sono esercizi per questo quiz",
+
+
+    'Question' => 'Domanda',
+    'Answer' => 'Risposta',
+    'True' => 'Vero',
+    'False' => 'Falso',
+    'Not answered' => 'Non risposto',
+    'Fill in the blanks' => 'Completa gli spazi vuoti',
+    'Blank' => 'Vuoto',
+    'Statement' => 'Affermazione',
+
+    'Student mark' => 'Voto studente',
+    'Update mark' => 'Aggiorna voto',
+    'Mark' => 'Voto',
+
+    'View Topics' => 'Mostra argomenti',
 
 
     'Remember me' => 'Ricordati di me',
@@ -53,7 +76,7 @@ return [
     'Class Description' => 'Descrizione Classe',
     'Create New Class' => 'Crea una nuova Classe',
     'Subjects' => 'Materie',
-    'Add to course' => 'Aggiungi al corso',
+    'Add to course' => 'Aggiungi alla classe',
     'Close modal' => 'Chiudi modale',
     'Select hour:' => 'Seleziona ora',
     'Repeatable' => 'Ripetibile',
@@ -65,8 +88,16 @@ return [
 
     'Edit quiz' => 'Modifica quiz',
     'Are you sure you want to remove' => 'Sei sicuro di rimuoverlo',
-    'Create New Subject' => 'Crea una nuova classe',
+    'Create New Subject' => 'Crea una nuova materia',
     'Add new subject' => 'Aggiungi una nuova materia',
+    'Subject Name' => 'Nome materia',
+    'Subject Description' => 'Descrizione materia',
+    'Create Subject' => 'Crea materia',
+
+    'Delete subject' => 'Elimina materia',
+
+    'Are you sure you want to delete this subject?' => 'Sei sicuro di voler eliminare questa materia?',
+    'Once this subject is deleted all of its data will be permanently deleted' => 'Una volta che questa materia verrà eliminata, tutti i suoi dati verrano persi.',
 
     'Edit subject' => 'Modifica materia',
     'Add exercise' => 'Aggiungi esercizio',
@@ -98,6 +129,15 @@ return [
     'Add to quiz' => 'Aggiungi al quiz',
     'Search quiz' => 'Cerca quiz',
 
+    "Pagination Navigation" => "Navigazione Paginazione",
+    "Previous" => "Precedente",
+    "Showing" => "Mostrando",
+    "to" => "a",
+    "of" => "di",
+    "results" => "risultati",
+    "Go to page :page" => "Vai alla pagina :page",
+
+
     'Exercises' => 'Esercizi',
     'Add topic' => 'Aggiungi topic',
     'Create New Topic' => 'Crea nuovo topic',
@@ -107,7 +147,7 @@ return [
     'Topic\'s Description' => 'Descrizione del topic',
     'Update' => 'Aggiorna',
     'Add Students' => 'Aggiungi studenti',
-    'Delete Course' => 'Elimina corso',
+    'Delete Course' => 'Elimina classe',
     'Profile Information' => 'Informazioni del profilo',
     'Update your account\'s profile information and email address.' => 'Aggiorna le informazioni del tuo accout',
     'Your email address is unverified.' => 'Indirizzo Email non verificata',
@@ -147,7 +187,7 @@ return [
     'Non-Repeatable Quiz Grades' => 'Voti dei quiz non ripetibili',
     'Repeatable Quiz Grades' => 'Voti dei quiz ripetibili',
     'Student Details' => 'Dettagli dello studente',
-    'Name:' => 'Nome:',
+    'Name' => 'Nome',
     'Email:' => 'Email:',
     'Average Grade:' => 'Voto medio:',
     'Quiz History' => 'Storico dei quiz',
@@ -155,7 +195,7 @@ return [
     'Grade' => 'Voto',
     'Date' => 'Data',
     "Show Grades" => "Mostra voti",
-    "No quizzes have been assigned to this course yet." => "Nessun quis è assegnato a questo corso.",
+    "No quizzes have been assigned to this course yet." => "Nessun quiz è assegnato a questa classe.",
     "Success" => "Successo"
 ];
 

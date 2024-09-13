@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="min-h-screen bg-gray-100 from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="mb-8 inline-flex items-center">
                 <a href="{{ route('courses.show') }}">
@@ -24,36 +24,42 @@
                                 <input type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
                             </div>
                         </div>
-                        <div class="mt-6 flex justify-end">
-                            <x-primary-button class="ml-3 hover:shadow-lg hover:-translate-y-1">
+                        <div class="mt-6 flex justify-between">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
                                 <x-heroicon-s-pencil class="w-5 h-5 mr-2" />
                                 @lang('trad.Update Course')
-                            </x-primary-button>
+                            </button>
+
+                            <x-danger-button
+                                x-data=""
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-course-deletion')"
+                                class="hover:shadow-lg hover:-translate-y-1"
+                            >
+                                <x-heroicon-s-trash class="w-5 h-5 mr-2" />
+                                @lang('trad.Delete Course')
+                            </x-danger-button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center mb-8">
-                <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 hover:shadow-lg hover:-translate-y-1">
-                    <x-heroicon-s-user-plus class="w-5 h-5 mr-2" />
-                    @lang('trad.Add Students')
-                </a>
 
-                <x-danger-button
-                    x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-course-deletion')"
-                    class="hover:shadow-lg hover:-translate-y-1"
-                >
-                    <x-heroicon-s-trash class="w-5 h-5 mr-2" />
-                    @lang('trad.Delete Course')
-                </x-danger-button>
-            </div>
+
 
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">@lang('trad.Enrolled Students')</h2>
-                    @if($course->students->isNotEmpty())
+
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-4">@lang('trad.Enrolled Students')</h2>
+                        @if($course->students->isNotEmpty())
+                            <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+                                <x-heroicon-s-user-plus class="w-5 h-5 mr-2" />
+                                @lang('trad.Add Students')
+                            </a>
+                        @endif
+                    </div>
+
+                @if($course->students->isNotEmpty())
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">

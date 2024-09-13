@@ -37,7 +37,7 @@ class CourseController extends Controller
     {
         $teacher_id = $request->user()->id;
 
-        $courses = Course::where('teacher_id', $teacher_id)->get();
+        $courses = Course::where('teacher_id', $teacher_id)->paginate(9);
 
         return view('my-courses', compact('courses'));
     }

@@ -1,18 +1,27 @@
 <x-app-layout>
-    <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">
-                    @lang('trad.Your Classes')
-                </h1>
-                <a href="{{ route('courses.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+
+                <div class="mb-8 inline-flex items-center">
+                    <a href="{{ route('dashboard') }}">
+                        <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        @lang('trad.Your Classes')
+                    </h1>
+                </div>
+                <a x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-course-creation')" class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
                     <x-heroicon-s-plus class="w-5 h-5 mr-2" />
                     @lang('trad.Create a class')
                 </a>
+
+                @include('partials.class_creation_modal')
+
             </div>
 
             @if($courses->count() > 0)
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                     @foreach ($courses as $course)
                         <a href="{{ route('courses.edit', $course->id) }}" class="block">
                             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition duration-300 ease-in-out">
@@ -31,6 +40,7 @@
                         </a>
                     @endforeach
                 </div>
+                {{ $courses->links() }}
             @else
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-center">
