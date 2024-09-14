@@ -116,6 +116,24 @@ return [
     'Subject Name' => 'Subject Name',
     'Create Subject' => 'Create Subject',
 
+
+    'Upcoming Quizzes' => 'Upcoming Quizzes',
+    'Great job!' => 'Great job!',
+    'No upcoming quizzes to take' => 'No upcoming quizzes to take',
+    'Next 5 quizzes' => 'Next 5 quizzes',
+    'Starts in' => 'Starts in',
+    'View Details' => 'View Details',
+    'Enjoy your free time!' => 'Enjoy your free time!',
+
+    'Ask your professor to add you to his classes!' => 'Ask your professor to add you to his classes!',
+
+    'Recent Grades' => 'Recent Grades',
+    'Last 5 quizzes' => 'Last 5 quizzes',
+    'No grades yet' => 'No grades yet',
+    'Complete some quizzes to see your grades here' => 'Complete some quizzes to see your grades here',
+    'Keep up the good work!' => 'Keep up the good work!',
+
+
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",
     "Showing" => "Showing",

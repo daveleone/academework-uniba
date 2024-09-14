@@ -47,6 +47,20 @@ return [
     "No exercises found" => "Nessun esercizio trovato",
     "There are no exercises for this quiz" => "Non ci sono esercizi per questo quiz",
 
+    'Upcoming Quizzes' => 'Quiz Imminenti',
+    'Great job!' => 'Ottimo lavoro!',
+    'No upcoming quizzes to take' => 'Non ci sono quiz imminenti da svolgere',
+    'Next 5 quizzes' => 'Prossimi 5 quiz',
+    'Starts in' => 'Inizia tra',
+    'View Details' => 'Visualizza Dettagli',
+    'Enjoy your free time!' => 'Goditi il tuo tempo libero!',
+
+    'Recent Grades' => 'Voti Recenti',
+    'Last 5 quizzes' => 'Ultimi 5 quiz',
+    'No grades yet' => 'Nessun voto ancora',
+    'Complete some quizzes to see your grades here' => 'Completa alcuni quiz per vedere i tuoi voti qui',
+    'Keep up the good work!' => 'Continua così!',
+
 
     'Question' => 'Domanda',
     'Answer' => 'Risposta',

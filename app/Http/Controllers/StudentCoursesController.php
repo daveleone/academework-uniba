@@ -37,8 +37,9 @@ class StudentCoursesController extends Controller
         return view('student.courses', compact('courses'));
     }
 
-    public function retrieve_quiz($id)
+    public function retrieve_quiz(Request $request, $id)
     {
+
         $course = Course::find($id);
         $course_id = Course::find($id)->id;
         $user_id = Auth::id();

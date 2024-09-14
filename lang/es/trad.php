@@ -100,6 +100,23 @@ return [
     '- topics' => '- Tema',
     'View Exercises' => 'Ver ejercicios',
 
+    'Upcoming Quizzes' => 'Próximos Cuestionarios',
+    'Great job!' => '¡Buen trabajo!',
+    'No upcoming quizzes to take' => 'No hay cuestionarios próximos para realizar',
+    'Next 5 quizzes' => 'Próximos 5 cuestionarios',
+    'Starts in' => 'Comienza en',
+    'View Details' => 'Ver Detalles',
+    'Enjoy your free time!' => '¡Disfruta tu tiempo libre!',
+
+    'Ask your professor to add you to his classes!' => 'Pide a tu profesor que te añada a sus clases!',
+
+    'Recent Grades' => 'Calificaciones Recientes',
+    'Last 5 quizzes' => 'Últimos 5 cuestionarios',
+    'No grades yet' => 'Aún no hay calificaciones',
+    'Complete some quizzes to see your grades here' => 'Completa algunos cuestionarios para ver tus calificaciones aquí',
+    'Keep up the good work!' => '¡Sigue con el buen trabajo!',
+
+
     'Guest' => 'Visitante',
     'Password' => 'Contraseña',
     'Confirm Password' => 'Confirmar Contraseña',

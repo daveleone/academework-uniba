@@ -114,7 +114,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <x-heroicon-o-identification class="h-5 w-5 text-gray-400" />
                                 </div>
-                                <x-text-input id="student_number" class="block w-full pl-10" type="text" name="student_number" :value="old('student_number')" />
+                                <x-text-input id="student_number" class="block w-full pl-10" type="text" name="student_number" :value="old('student_number')"/>
                             </div>
                             <x-input-error :messages="$errors->get('student_number')" class="mt-2" />
                         </div>

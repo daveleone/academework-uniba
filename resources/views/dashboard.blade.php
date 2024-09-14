@@ -13,4 +13,14 @@
             </div>
         </div>
     </div>
+    @if(auth()->user()->isStudent())
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                @include('student.partials.upcoming_quizzes')
+            </div>
+            <div>
+                @include('student.partials.latest_highest_grades')
+            </div>
+        </div>
+    @endif
 </x-app-layout>

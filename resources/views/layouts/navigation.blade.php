@@ -1,10 +1,8 @@
 <header class="bg-white shadow-sm">
     <nav x-data="{ open: false, openLanguage: false }" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <!-- Left side (Logo) -->
         <div class="flex items-center space-x-2">
-            <!-- Logo placeholder -->
             <div class="h-12 w-12 text-indigo-600">
-
+                <!-- Empty for a reason-->
             </div>
             <a href="{{ route('welcome') }} " class="text-2xl font-bold text-gray-900">Academe Work</a>
         </div>
@@ -26,11 +24,17 @@
                     @lang('trad.My classes')
                 </a>
             @elseif(auth()->user()->isStudent())
-                <a href="{{ route('subject.show') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                <a href="{{ route('student.show') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
                     <x-heroicon-o-user-group class="w-6 h-6 mr-2" />
                     @lang('trad.My classes')
                 </a>
             @endif
+
+                <a href="{{ route('dashboard') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                    <x-heroicon-o-chart-pie class="w-6 h-6 mr-2" />
+                    @lang('trad.Dashboard')
+                </a>
+
 
         <!-- Right side (User dropdown) -->
         <div class="flex items-center">

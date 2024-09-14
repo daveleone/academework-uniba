@@ -40,6 +40,11 @@ class Quiz extends Model
         return $this->belongsToMany(Course::class, 'course_quiz');
     }
 
+    public function course_quiz()
+    {
+        return $this->belongsTo(course_quiz::class, 'id', 'quiz_id');
+    }
+
     public function attributi($courseId)
     {
         return DB::table('course_quiz')
