@@ -112,7 +112,9 @@ return [
     'Start Your Journey' => 'Start Your Journey',
     'Dashboard' => 'Dashboard',
 
-
+    'Subject Description' => 'Subject Description',
+    'Subject Name' => 'Subject Name',
+    'Create Subject' => 'Create Subject',
 
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",
