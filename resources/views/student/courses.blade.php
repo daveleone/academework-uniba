@@ -39,13 +39,7 @@
                     <div class="p-6 text-center">
                         <x-heroicon-o-academic-cap class="mx-auto h-12 w-12 text-gray-400" />
                         <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No classes')</h3>
-                        <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by creating a new class')</p>
-                        <div class="mt-6">
-                            <a href="{{ route('courses.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                                <x-heroicon-s-plus class="w-5 h-5 mr-2" />
-                                @lang('trad.New Class')
-                            </a>
-                        </div>
+                        <p class="mt-1 text-sm text-gray-500">@lang('trad.Ask your professor to add you to his classes!')</p>
                     </div>
                 </div>
             @endif

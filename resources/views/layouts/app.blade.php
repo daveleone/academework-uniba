@@ -15,11 +15,16 @@
         <!-- Scripts -->
         @vite(["resources/css/app.css", "resources/js/app.js"])
         <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </head>
 
     <body>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include("layouts.navigation")
+            @if(!Auth::check())
+                @include("components.nav-guest")
+            @else
+                @include("layouts.navigation")
+            @endif
 
             <!-- Page Heading -->
             @if (isset($header))

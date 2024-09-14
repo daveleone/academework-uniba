@@ -63,6 +63,13 @@ return [
 
     'View Topics' => 'Mostra argomenti',
 
+    'Guest' => 'Ospite',
+    'Password' => 'Password',
+    'Confirm Password' => 'Conferma password',
+    'Matriculation Number' => 'Matricola',
+
+    'Ask your professor to add you to his classes!' => 'Chiedi al tuo professore di aggiungerti alle sue classi!',
+
     'Add Selected Students' => 'Aggiungi studente/i selezionato',
 
 

@@ -94,6 +94,13 @@ return [
     '- topics' => '- Topics',
 
 
+
+    'Guest' => 'Visitante',
+    'Password' => 'Contraseña',
+    'Confirm Password' => 'Confirmar Contraseña',
+    'Matriculation Number' => 'Número de matrícula',
+
+
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",
     "Showing" => "Showing",
