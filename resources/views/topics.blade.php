@@ -21,8 +21,8 @@
                         <x-cardNDE
                             id="{{ $topic->id }}"
                             icon="pencil"
-                            editModal="EditTop-modal-{{ $topic->id }}"
-                            deleteModal="DeleteTop-modal-{{ $topic->id }}"
+                            editModal="edit-topic-{{ $topic->id }}"
+                            deleteModal="delete-topic-{{ $topic->id }}"
                             href="{{ route('topic.exercises', ['id' => $topic->id]) }}"
                             hrefName="View Exercises"
                         >
