@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\course_quiz;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Teacher;
 
 class QuizzesController extends Controller
 {
@@ -125,13 +126,15 @@ class QuizzesController extends Controller
 
     public function show($id) : View
     {
+        $user_id = Auth::user()->id;
+        $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
         $quiz = Quiz::find($id);
         $courses = Course::whereNotIn('id', function($query) use ($id) {
             $query->select('course_id')
                   ->from('course_quiz')
                   ->where('quiz_id', $id);
         })
-            ->where('teacher_id', Auth::user()->id)
+            ->where('teacher_id', $teacher_id)
             ->get();
         return view('quizzes.show', ['quiz' => $quiz, 'courses' => $courses]);
     }
