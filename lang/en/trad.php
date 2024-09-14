@@ -101,6 +101,7 @@ return [
     'Matriculation Number' => 'Matriculation number',
 
     'Welcome to' => 'Welcome to',
+    'Welcome' => 'Welcome',
     'Master the Knowledge' => 'Master the Knowledge',
     'For Professors' => 'For Professors',
     'For Students' => 'For Students',
