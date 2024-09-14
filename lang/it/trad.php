@@ -70,6 +70,19 @@ return [
 
     'Ask your professor to add you to his classes!' => 'Chiedi al tuo professore di aggiungerti alle sue classi!',
 
+    'Welcome to' => 'Benvenuto su',
+    'Master the Knowledge' => 'Master the knowledge',
+    'For Professors' => 'Per Professori',
+    'For Students' => 'Per Studenti',
+    'Secure & Reliable' => 'Sicuro & Affidabile',
+    'Create engaging exercises, evaluate performance, and track progress with our intuitive tools.' => 'Crea esercizi coinvolgenti, valuta le prestazioni e tieni traccia dei progressi con i nostri strumenti intuitivi.',
+    'Access a wealth of exercises, practice effectively, and watch your progress soar across various subjects.' => 'Accedi a un\'ampia gamma di esercizi, esercitati in modo efficace e osserva i tuoi progressi nelle varie materie.',
+    'Experience peace of mind with our robust platform, ensuring data privacy and a stable learning environment.' => 'Prova la tranquillità della nostra solida piattaforma, che garantisce la privacy dei dati e un ambiente di apprendimento stabile.',
+    '© 2024 Academe Work. All rights reserved.' => '© 2024 Academe Work. Tutti i diritti riservati.',
+    'Start Your Journey' => 'Inizia il tuo Viaggio',
+    'Dashboard' => 'Dashboard',
+
+
     'Add Selected Students' => 'Aggiungi studente/i selezionato',
 
 

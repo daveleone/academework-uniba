@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="">
         <div class="max-w-7xl mx-auto">
             <div class="mb-8 inline-flex items-center">
                 <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Exam') - {{ $course->course_name ?? '' }} - {{ $quiz->name ?? '' }}</h1>

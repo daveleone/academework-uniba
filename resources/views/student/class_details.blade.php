@@ -15,7 +15,7 @@
 {{--</x-app-layout>--}}
 
 <x-app-layout>
-    <div class="bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="">
         <div class="max-w-7xl mx-auto">
             <div class="mb-8 inline-flex items-center">
                 <a href="{{ route('student.exercises', $course->id) }}">

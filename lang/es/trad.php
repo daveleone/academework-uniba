@@ -100,6 +100,24 @@ return [
     '- topics' => '- Tema',
     'View Exercises' => 'Ver ejercicios',
 
+    'Guest' => 'Visitante',
+    'Password' => 'Contraseña',
+    'Confirm Password' => 'Confirmar Contraseña',
+    'Matriculation Number' => 'Número de matrícula',
+
+    'Welcome to Academe Work' => '',
+    'Master the Knowledge' => '',
+    'For Professors' => '',
+    'For Students' => '',
+    'Secure & Reliable' => '',
+    'Create engaging exercises, evaluate performance, and track progress with our intuitive tools.' => '',
+    'Access a wealth of exercises, practice effectively, and watch your progress soar across various subjects.' => '',
+    'Experience peace of mind with our robust platform, ensuring data privacy and a stable learning environment.' => '',
+    '© 2024 Academe Work. All rights reserved.' => '',
+    'Start Your Journey' => '',
+    'Dashboard' => '',
+
+
     'Remember me' => 'Recuérdame',
     'Register' => 'Registrarse',
     'Forgot your password?' => '¿Olvidaste tu contraseña?',

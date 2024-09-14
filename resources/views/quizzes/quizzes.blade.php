@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
 
@@ -15,19 +15,29 @@
                     @include("forms.quiz.create")
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            @foreach ($quizzes as $quiz)
-                    <x-cardNDE id="{{ $quiz->id }}" editModal="EditQuiz-modal-{{ $quiz->id }}" deleteModal="DeleteQuiz-modal-{{ $quiz->id }}" href="{{ route('quiz.show', ['id' => $quiz->id]) }}" hrefName="View Quiz">
-                        <x-slot name="name">{{ $quiz->name }}</x-slot>
-                        <x-slot name="description">{{ $quiz->description }}</x-slot>
-                        <x-slot name=icon>
-                            <x-heroicon-o-clipboard class="w-7 h-7 mr-1" />
-                        </x-slot>
-                    </x-cardNDE>
-                    @include('forms.quiz.edit')
-                    @include('forms.quiz.delete')
-                @endforeach
-            </div>
+            @if($quizzes->count() > 0)
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    @foreach ($quizzes as $quiz)
+                            <x-cardNDE id="{{ $quiz->id }}" editModal="EditQuiz-modal-{{ $quiz->id }}" deleteModal="DeleteQuiz-modal-{{ $quiz->id }}" href="{{ route('quiz.show', ['id' => $quiz->id]) }}" hrefName="View Quiz">
+                                <x-slot name="name">{{ $quiz->name }}</x-slot>
+                                <x-slot name="description">{{ $quiz->description }}</x-slot>
+                                <x-slot name=icon>
+                                    <x-heroicon-o-clipboard class="w-7 h-7 mr-1" />
+                                </x-slot>
+                            </x-cardNDE>
+                            @include('forms.quiz.edit')
+                            @include('forms.quiz.delete')
+                    @endforeach
+                </div>
+            @else
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-center">
+                        <x-heroicon-o-academic-cap class="mx-auto h-12 w-12 text-gray-400" />
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No quizzes')</h3>
+                        <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by creating a new quiz')</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

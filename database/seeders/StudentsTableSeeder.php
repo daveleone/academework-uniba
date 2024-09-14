@@ -18,7 +18,7 @@ class StudentsTableSeeder extends Seeder
         User::factory()->count(10)->create()->each(function ($user) {
             Student::create([
                 'user_id' => $user->id,
-                'student_number' => Str::random(10),
+                'student_number' => Str::random(6),
             ]);
         });
     }

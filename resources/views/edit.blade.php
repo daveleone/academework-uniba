@@ -21,7 +21,7 @@
                             </div>
                             <div>
                                 <label for="course_description" />{{ __('trad.Course Description') }}</label>
-                                <input type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
+                                <input type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
                         <div class="mt-6 flex justify-between">

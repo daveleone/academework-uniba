@@ -28,16 +28,20 @@
             </div>
             </div>
 
+            <div class="mt-8 inline-flex items-center">
+                <x-heroicon-o-clipboard-document-list class="w-6 h-6 mr-2 ml-1 text-indigo-600" />
+                <h1 class="text-3xl font-bold text-gray-900">
+                    @lang('trad.Quiz History')
+                </h1>
+            </div>
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Centrato il contenuto dei dettagli dello studente -->
 
 
                     <!-- Centrato il titolo e la tabella -->
-                    <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-900 flex">
-                        <x-heroicon-o-clipboard-document-list class="w-6 h-6 mr-2 text-indigo-600" />
-                        @lang('trad.Quiz History')
-                    </h3>
+
                     <div class="overflow-x-auto mx-auto"> <!-- Aggiunto mx-auto per centrare -->
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">

@@ -56,7 +56,7 @@ class CourseController extends Controller
     public function update(Course $course, Request $request)
     {
         $request->validate([
-            'course_name' => 'min:2|max:5',
+            'course_name' => 'min:2|max:7',
             'course_description' => 'max:255',
         ]);
 

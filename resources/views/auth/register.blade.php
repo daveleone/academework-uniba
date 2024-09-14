@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="">
         <div class="max-w-3xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <div class="inline-flex items-center">
@@ -127,7 +127,9 @@
 
                             <x-primary-button class="ml-4 bg-indigo-600 hover:bg-indigo-400 focus:ring-indigo-500 transition ease-in-out duration-300 hover:-translate-y-1">
 
-                                <x-heroicon-o-pencil-square class="h-5 w-5 text-white mr-1" />
+                                <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
                                 @lang('trad.Register')
                             </x-primary-button>
 

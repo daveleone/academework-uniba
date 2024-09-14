@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-gray-100 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="">
         <div class="mx-auto max-w-7xl">
             <div class="mb-8 flex items-center justify-between">
                 <div class="mb-8 inline-flex items-center">
@@ -21,10 +21,8 @@
                     </a>
                 </div>
             </div>
-
-                <div
-                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-                >
+            @if($subjects->count() > 0)
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach ($subjects as $subject)
                         <x-cardNDE
                             editModal="edit-subject-{{ $subject->id }}"
@@ -46,6 +44,15 @@
                         @include("forms.subject.delete", ["subject" => $subject])
                     @endforeach
                 </div>
+            @else
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-center">
+                        <x-heroicon-o-academic-cap class="mx-auto h-12 w-12 text-gray-400" />
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No subjects')</h3>
+                        <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by creating a new subject')</p>
+                    </div>
+                </div>
+            @endif
             </div>
         </div>
     @include("forms.subject.create")
