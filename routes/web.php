@@ -109,7 +109,6 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
     Route::controller(StudentController::class)->group(function () {
         Route::get('/student/{course}', 'show')->name('student');
         Route::put('/student/{course}', 'store')->name('student.store');
-        Route::get('/student/{course}/search', 'search')->name('student.search');
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
         Route::get('/courses/{course}/student/{student}', 'details')->name('student.details');
         Route::get('/courses/{course}/student/{student}/{quiz}/review', 'changeVote')->name('student.changeVote');

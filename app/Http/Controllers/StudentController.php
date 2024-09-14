@@ -48,30 +48,9 @@ class StudentController extends Controller
     {
         $students = Student::whereDoesntHave('courses', function ($query) use ($course) {
             $query->where('course_id', $course->id);
-        })->paginate(3);
+        })->get();
 
         return view('students', compact('course', 'students'));
-    }
-
-    public function search(Request $request, Course $course)
-    {
-        $search = $request->get('query');
-
-        if ($request->ajax()) {
-            $students = Student::whereNotIn('id', function ($query) use ($course) {
-                $query->select('student_id')->from('course_student')->where('course_id', $course->id);
-            })->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%'.$search.'%')->orWhere('email', 'LIKE', '%'.$search.'%');
-            })->paginate(3);
-
-            if (count($students) > 0) {
-                $output = view('auth.partials.student_table', compact('students'));
-            }
-
-            return $output;
-        }
-
-        return view('student', compact('course', 'students'));
     }
 
     public function details(Course $course, Student $student)

@@ -24,7 +24,7 @@ class QuizzesController extends Controller
     public function create(): RedirectResponse
     {
         try {
-           
+
              $data = request()->validate([
                 'QuizName' => 'required',
                 'QuizDescription' => 'required',
@@ -81,7 +81,7 @@ class QuizzesController extends Controller
     }
 
 
-    public function addExercise() : RedirectResponse 
+    public function addExercise() : RedirectResponse
     {
         $data = Request()->all();
         $quizzesId = [];
@@ -91,13 +91,13 @@ class QuizzesController extends Controller
         }
 
         $exId = $data['exId'];
-        
+
         if($quizzesId and is_numeric($exId)){
             try {
                 foreach($quizzesId as $quizId){
                     exercise_quiz::create([
                        'quiz_id' => $quizId,
-                       'exercise_id' => $exId     
+                       'exercise_id' => $exId
                     ]);
                 }
                 session()->flash('success', 'Exercise added to quiz');
@@ -145,7 +145,7 @@ class QuizzesController extends Controller
             if(strpos($key, "checkbox-course-") === 0 and is_numeric($val))
                 array_push($coursesId, $val);
         }
-       
+
         $quizId = $data['quizId'];
 
         if(!$quizId or !is_numeric($quizId))
@@ -154,10 +154,10 @@ class QuizzesController extends Controller
         $time = $data["time"];
         $date = $data["date"];
         $offset = $data["offset"];
-        $repeatable = array_key_exists("repeatable", $data) ? true : false; 
+        $repeatable = array_key_exists("repeatable", $data) ? true : false;
         $datetimeString = null;
         $datetime = null;
-        
+
         if($time and $date and $offset) //TODO controllare offset
         {
             // Creazione della stringa di data e ora
@@ -171,13 +171,13 @@ class QuizzesController extends Controller
             // Creazione dell'oggetto Carbon
             $datetime = Carbon::createFromFormat('m/d/Y H:i P', $datetimeString . ' ' . $offsetString);
         }
-        
+
         if($coursesId){
             try {
                 foreach($coursesId as $courseId){
                     course_quiz::create([
                         'quiz_id' => $quizId,
-                        'course_id' => $courseId,     
+                        'course_id' => $courseId,
                         'repeatable' => $repeatable,
                         'duration_minutes' => $data['time_limit'],
                         'start_time' => $datetime
@@ -190,6 +190,7 @@ class QuizzesController extends Controller
         } else {
             session()->flash('error', 'Addition to quiz failed');
         }
+
         return to_route('quiz.show', ['id' => $quizId]);
     }
 
@@ -202,4 +203,4 @@ class QuizzesController extends Controller
     }
 
 }
-    
+

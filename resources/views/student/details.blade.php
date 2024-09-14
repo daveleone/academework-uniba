@@ -8,10 +8,14 @@
                 <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Student Details')</h1>
             </div>
             <div class="bg-indigo-600 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pb-6 text-center"> <!-- Aggiunto text-center -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 pb-6 text-center"> <!-- Aggiunto text-center -->
                 <div>
                     <p class="text-sm font-medium text-white">@lang('trad.Name')</p>
                     <p class="mt-1 text-lg text-white">{{ $student->user->name }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-white">@lang('trad.Surname')</p>
+                    <p class="mt-1 text-lg text-white">{{ $student->user->surname }}</p>
                 </div>
                 <div>
                     <p class="text-sm font-medium text-white">@lang('trad.Email')</p>
