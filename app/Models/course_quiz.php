@@ -18,4 +18,15 @@ class course_quiz extends Pivot
     ];
 
     protected $table = "course_quiz";
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
 }

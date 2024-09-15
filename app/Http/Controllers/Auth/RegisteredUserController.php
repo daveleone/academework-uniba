@@ -35,14 +35,16 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'form_id' => ['required', 'in:student-form,teacher-form'],
+            'student_number' => ['nullable', 'string', 'max:20', 'unique:students,student_number'],
         ]);
-
 
         $user = User::create([
             'name' => $request->name,
+            'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -50,17 +52,15 @@ class RegisteredUserController extends Controller
         if ($request->form_id === 'student-form') {
             Student::create([
                 'user_id' => $user->id,
-                // Add other student-specific fields if needed
+                'student_number' => $request->student_number,
             ]);
         } elseif ($request->form_id === 'teacher-form') {
             Teacher::create([
                 'user_id' => $user->id,
-                // Add other teacher-specific fields if needed
             ]);
         }
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

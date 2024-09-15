@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizAttemptController;
@@ -26,16 +27,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
 });
 
 Route::middleware('auth', 'role:student')->group(function () {
@@ -46,13 +51,13 @@ Route::middleware('auth', 'role:student')->group(function () {
         Route::post('/student/classes/{courses}/exercises/{quiz}/submit', 'submitExam')->name('student.submitExam');
         Route::get('/student/course/{course}/details', 'studentClassDetails')->name('student.class_details');
     });
+
+    Route::controller(StudentController::class)->group(function () {
+        Route::get('/student/course/{course}/details/{student}/{quiz}/review', 'changeVote')->name('student.reviewVote');
+    });
 });
 
 Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: implementare redirect per insegnanti/studenti
-    Route::get('/teacher-dashboard', function () {
-        return view('dashboard-teacher');
-    })->name('td');
-
     Route::controller(SubjectsController::class)->group(function () {
         Route::get('/subjects', 'show')->name('subject.show');
         Route::post('/subjects', 'create')->name('subject.create');
@@ -96,23 +101,23 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
     Route::controller(CourseController::class)->group(function () {
         Route::get('/create-course', 'index')->name('courses.index');
         Route::post('/create-course', 'store')->name('courses.store');
-        Route::get('/my-courses', 'show')->name('courses.show');
-        Route::get('/my-courses/{course}', 'edit')->name('courses.edit');
-        Route::put('/my-courses/{course}', 'update')->name('courses.update');
-        Route::delete('/my-courses/{course}', 'destroy')->name('courses.destroy');
+        Route::get('/classes', 'show')->name('courses.show');
+        Route::get('/classes/{course}', 'edit')->name('courses.edit');
+        Route::put('/classes/{course}', 'update')->name('courses.update');
+        Route::delete('/classes/{course}', 'destroy')->name('courses.destroy');
+        Route::get('/classes/{course}/quizzes', 'showQuizzes')->name('courses.quizzes');
     });
 
     Route::controller(StudentController::class)->group(function () {
         Route::get('/student/{course}', 'show')->name('student');
         Route::put('/student/{course}', 'store')->name('student.store');
-        Route::get('/student/{course}/search', 'search')->name('student.search');
         Route::delete('/courses/{course}/student/{student}', 'delete')->name('student.delete');
         Route::get('/courses/{course}/student/{student}', 'details')->name('student.details');
         Route::get('/courses/{course}/student/{student}/{quiz}/review', 'changeVote')->name('student.changeVote');
         Route::put('/courses/{course}/student/{student}/{quiz}/review', 'updateVote')->name('student.updateVote');
     });
-
-    Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 });
+
+Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
 
 require __DIR__ . '/auth.php';

@@ -1,9 +1,7 @@
 <!-- Modal toggle -->
-<button data-modal-target="CreateQuiz-modal" data-modal-toggle="CreateQuiz-modal" class="px-3 py-2 text-s font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-    @lang('trad.Add quiz') <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 pl-1">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-
+<button data-modal-target="CreateQuiz-modal" data-modal-toggle="CreateQuiz-modal" class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+    <x-heroicon-s-plus class="w-5 h-5 mr-2" />
+    @lang('trad.Add quiz')
 </button>
 
 <!-- Main modal -->

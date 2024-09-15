@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -24,8 +26,11 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::user()->id;
+        $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
+
         $course = new Course();
-        $course->teacher_id = $request->user()->id;
+        $course->teacher_id = $teacher_id;
         $course->course_name = $request->name;
         $course->course_description = $request->description;
         $course->save();
@@ -35,9 +40,12 @@ class CourseController extends Controller
 
     public function show(Request $request)
     {
-        $teacher_id = $request->user()->id;
+        $user_id = $request->user()->id;
+        $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
 
-        $courses = Course::where('teacher_id', $teacher_id)->get();
+        $courses = Course::where('teacher_id', $teacher_id)
+            ->withCount('students')
+            ->paginate(9);
 
         return view('my-courses', compact('courses'));
     }
@@ -50,7 +58,7 @@ class CourseController extends Controller
     public function update(Course $course, Request $request)
     {
         $request->validate([
-            'course_name' => 'min:2|max:5',
+            'course_name' => 'min:2|max:7',
             'course_description' => 'max:255',
         ]);
 
@@ -59,6 +67,13 @@ class CourseController extends Controller
         $course->save();
 
         return redirect()->route('courses.update', $course->id)->with('success', "Course updated successfuly!");
+    }
+
+    public function showQuizzes(Course $course)
+    {
+        $quizzes = $course->quizzes()->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('teacher.quizzes', compact('course', 'quizzes'));
     }
 
     public function destroy(Course $course)

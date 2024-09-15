@@ -19,58 +19,38 @@ use App\Models\TfAnsElement;
 use App\Models\tfExElement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
     public function store(Request $request, Course $course)
     {
         $request->validate([
-            'selected_students' => 'array|required',
-            'selected_students.*' => 'exists:students,id',
+            'students' => 'array|required',
+            'students.*' => 'exists:students,id',
         ]);
 
         // Get the array of selected student IDs
-        $selectedStudentIds = $request->input('selected_students');
+        $selectedStudentIds = $request->input('students');
 
-        // Loop through the selected student
+        // Loop through the selected students
         foreach ($selectedStudentIds as $studentId) {
-            $courseStudent = new CourseStudent();
-            $courseStudent->course_id = $course->id;
-            $courseStudent->student_id = $studentId;
-            $courseStudent->save();
+            // Check if the relationship doesn't already exist
+            if (!$course->students()->where('student_id', $studentId)->exists()) {
+                $course->students()->attach($studentId);
+            }
         }
 
-        return redirect()->route('student', $course->id);
+        return redirect()->route('courses.edit', $course->id)->with('success', __('trad.Students added successfully'));
     }
 
     public function show(Course $course)
     {
         $students = Student::whereDoesntHave('courses', function ($query) use ($course) {
             $query->where('course_id', $course->id);
-        })->paginate(3);
+        })->get();
 
         return view('students', compact('course', 'students'));
-    }
-
-    public function search(Request $request, Course $course)
-    {
-        $search = $request->get('query');
-
-        if ($request->ajax()) {
-            $students = Student::whereNotIn('id', function ($query) use ($course) {
-                $query->select('student_id')->from('course_student')->where('course_id', $course->id);
-            })->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%'.$search.'%')->orWhere('email', 'LIKE', '%'.$search.'%');
-            })->paginate(3);
-
-            if (count($students) > 0) {
-                $output = view('auth.partials.student_table', compact('students'));
-            }
-
-            return $output;
-        }
-
-        return view('student', compact('course', 'students'));
     }
 
     public function details(Course $course, Student $student)
@@ -94,6 +74,8 @@ class StudentController extends Controller
         $tfAnswer = null;
         $openAnswer = null;
         $closeAnswer = null;
+
+        $user = Auth::user();
 
         $mark = Mark::where('student_id', $student->id)
             ->where('quiz_id', $quiz->id)
@@ -123,7 +105,11 @@ class StudentController extends Controller
             }
         }
 
-        return view('student.change-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        if($user->isTeacher()){
+            return view('student.change-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        }elseif ($user->isStudent()) {
+            return view('student.review-vote', compact('exercises', 'student', 'quiz', 'fillAnswer', 'tfAnswer', 'openAnswer', 'closeAnswer', 'mark', 'course'));
+        }
     }
 
     private function retrieveFillAnswer($matchAnswer)
