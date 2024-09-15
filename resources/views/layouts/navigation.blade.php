@@ -53,7 +53,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')" class="flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100">
-                            <x-heroicon-o-user class="w-6 h-6 mr-1"/>
+                            <x-heroicon-o-user class="w-6 h-6 mr-2"/>
                             @lang('trad.Profile')
                         </x-dropdown-link>
 

@@ -12,25 +12,25 @@
 
         @if($nonRepeatableQuizzes->count() > 0)
             <ul class="space-y-6">
-                @foreach($nonRepeatableQuizzes as $mark)
+{{--                @foreach($nonRepeatableQuizzes as $mark)--}}
 
-                    @php
-                        $maxPoints = 0;
+{{--                    @php--}}
+{{--                        $maxPoints = 0;--}}
 
-                        $exercises_quiz = \App\Models\exercise_quiz::where('quiz_id', $mark->quiz->id)->get();
-                        foreach ($exercises_quiz as $eq)
-                        {
-                            $exercises = \App\Models\Exercise::whereIn('id', $eq)->get();
-                        }
+{{--                        $exercises_quiz = \App\Models\exercise_quiz::where('quiz_id', $mark->quiz->id)->get();--}}
+{{--                        foreach ($exercises_quiz as $eq)--}}
+{{--                        {--}}
+{{--                            $exercises = \App\Models\Exercise::whereIn('id', $eq)->get();--}}
+{{--                        }--}}
 
-                        foreach ($exercises as $ex)
-                        {
-                            $maxPoints += $ex->points;
-                        }
-                    @endphp
+{{--                        foreach ($exercises as $ex)--}}
+{{--                        {--}}
+{{--                            $maxPoints += $ex->points;--}}
+{{--                        }--}}
+{{--                    @endphp--}}
 
 
-                    <li class="bg-gradient-to-r from-indigo-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <li class="bg-gradient-to-r from-indigo-50 to-indigo-60 p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-start">
                             <div class="flex-grow">
                                 <div class="flex items-center mb-3">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="inline-block bg-green-100 text-green-800 text-lg font-semibold px-3 py-1 rounded-full">
-                                    {{ $mark->mark }} / {{ $maxPoints }}
+                                    {{ $mark->mark }} / {{ $mark->maxPoints }}
                                 </span>
                             </div>
                         </div>

@@ -30,6 +30,11 @@ class Quiz extends Model
         return $this->belongsToMany(Exercise::class, 'exercise_quiz');
     }
 
+    public function calculateMaxPoints()
+    {
+        return $this->exercises()->sum('points');
+    }
+
     public function marks()
     {
         return $this->hasMany(Mark::class);

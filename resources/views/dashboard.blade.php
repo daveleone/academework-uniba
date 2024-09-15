@@ -16,10 +16,19 @@
     @if(auth()->user()->isStudent())
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                @include('student.partials.upcoming_quizzes')
+                @include('partials.upcoming_quizzes')
             </div>
             <div>
                 @include('student.partials.latest_highest_grades')
+            </div>
+        </div>
+    @elseif(auth()->user()->isTeacher())
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                @include('partials.upcoming_quizzes')
+            </div>
+            <div>
+                @include('teacher.partials.recent_submssions')
             </div>
         </div>
     @endif

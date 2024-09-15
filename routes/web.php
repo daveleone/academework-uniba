@@ -101,10 +101,11 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
     Route::controller(CourseController::class)->group(function () {
         Route::get('/create-course', 'index')->name('courses.index');
         Route::post('/create-course', 'store')->name('courses.store');
-        Route::get('/my-courses', 'show')->name('courses.show');
-        Route::get('/my-courses/{course}', 'edit')->name('courses.edit');
-        Route::put('/my-courses/{course}', 'update')->name('courses.update');
-        Route::delete('/my-courses/{course}', 'destroy')->name('courses.destroy');
+        Route::get('/classes', 'show')->name('courses.show');
+        Route::get('/classes/{course}', 'edit')->name('courses.edit');
+        Route::put('/classes/{course}', 'update')->name('courses.update');
+        Route::delete('/classes/{course}', 'destroy')->name('courses.destroy');
+        Route::get('/classes/{course}/quizzes', 'showQuizzes')->name('courses.quizzes');
     });
 
     Route::controller(StudentController::class)->group(function () {

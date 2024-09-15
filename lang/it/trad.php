@@ -13,10 +13,26 @@ return [
     "Get started by creating a new class" => "Inizia creando una nuova classe",
     "New Class" => "Nuova Classe",
 
+    'Course Quizzes' => 'Quiz della Classe',
+    'Total Quizzes' => 'Totale Quiz',
+    'Latest Quiz' => 'Ultimo Quiz',
+    'Quiz List' => 'Lista dei Quiz',
+    'Questions' => 'Domande',
+    'Created At' => 'Creato il',
+    'Edit' => 'Modifica',
+    'No quizzes found for this course.' => 'Nessun quiz trovato per questo corso.',
+    'View Quizzes' => 'Visualizza Quiz',
+
+    'Show Quizzes' => 'Mostra Quiz',
+
+    'student' => 'studente',
+    'students' => 'studenti',
+    'quiz' => 'quiz',
+    'quizzes' => 'quiz',
 
     'Edit Course' => 'Modifica classe',
-    'Course Name' => 'Nome del classe',
-    'Course Description' => 'Descrizione del classe',
+    'Course Name' => 'Nome della classe',
+    'Course Description' => 'Descrizione della classe',
     'Update Course' => 'Aggiorna classe',
     'Enrolled Students' => 'Studenti Iscritti',
     'Surname' => 'Cognome',
@@ -33,6 +49,13 @@ return [
     'Once this student is removed all of their data related to this course will be permanently deleted' => 'Una volta rimosso lo studente, tutti i suoi dati relativi a questo classe saranno eliminati permanentemente',
     'Remove Student' => 'Rimuovi Studente',
 
+
+    'Recent Submissions' => 'Sottomissioni Recenti',
+    'Last 10 submissions' => 'Ultime 10 sottomissioni',
+    'View Details' => 'Visualizza Dettagli',
+    'No recent submissions' => 'Nessuna sottomissione recente',
+    'There are no recent quiz submissions from students' => 'Non ci sono sottomissioni recenti di quiz da parte degli studenti',
+    'Check back later for new submissions!' => 'Torna più tardi per nuove sottomissioni!',
 
 
     "Email" => "Email",

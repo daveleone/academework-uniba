@@ -12,7 +12,7 @@
                         <x-heroicon-o-chevron-left class="w-6 h-6 mr-2" />
                     </a>
                     <h1 class="text-3xl font-bold text-gray-900">
-                        @lang('trad.Quiz review')
+                        @lang('trad.Quiz review') - {{$student->user->name}} {{ $student->user->surname }}
                     </h1>
                 </div>
             </div>

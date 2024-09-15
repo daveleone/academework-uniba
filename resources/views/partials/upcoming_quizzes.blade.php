@@ -8,16 +8,16 @@
             <span class="text-sm text-gray-500">@lang('trad.Next 5 quizzes')</span>
         </div>
 
-        @if($quizzes->count() > 0)
+        @if($upcomingQuizzes->count() > 0)
             <ul class="space-y-6">
-                @foreach($quizzes as $quiz)
+                @foreach($upcomingQuizzes as $quiz)
                     @php
                         $quiz_name = \App\Models\Quiz::where('id', $quiz->quiz_id)->value('name');
                         $course_name = \App\Models\Course::where('id', $quiz->course_id)->value('course_name');
                         $start_time = \Carbon\Carbon::parse($quiz->start_time);
                         $time_left = $start_time->diffForHumans(null, true, false, 2);
                     @endphp
-                    <li class="bg-gradient-to-r from-indigo-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <li class="bg-gradient-to-r from-indigo-50 to-indigo-60 p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-start">
                             <div class="flex-grow">
                                 <div class="flex items-center mb-3">
@@ -56,24 +56,41 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end">
-                            <a href="{{ route('student.exercises', $quiz->course_id) }}" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
-                                @lang('trad.View Details')
-                                <x-heroicon-s-arrow-right class="ml-1 w-4 h-4" />
-                            </a>
+                            @if(auth()->user()->isStudent())
+                                <a href="{{ route('student.exercises', $quiz->course_id) }}" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
+                                    @lang('trad.View Details')
+                                    <x-heroicon-s-arrow-right class="ml-1 w-4 h-4" />
+                                </a>
+                            @elseif(auth()->user()->isTeacher())
+                                <a href="{{ route('courses.quizzes', $quiz->course_id) }}" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
+                                    @lang('trad.View Details')
+                                    <x-heroicon-s-arrow-right class="ml-1 w-4 h-4" />
+                                </a>
+                            @endif
                         </div>
                     </li>
                 @endforeach
             </ul>
             <div class="mt-6">
-                {{ $quizzes->appends(['upcoming_page' => request()->upcoming_page])->links() }}
+                {{ $upcomingQuizzes->appends(['upcoming_page' => request()->upcoming_page])->links() }}
             </div>
         @else
-            <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
-                <x-heroicon-o-check-circle class="mx-auto h-16 w-16 text-indigo-600" />
-                <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.Great job!')</h3>
-                <p class="mt-2 text-base text-gray-600">@lang('trad.No upcoming quizzes to take')</p>
-                <p class="mt-4 text-sm text-indigo-600">@lang('trad.Enjoy your free time!')</p>
-            </div>
+            @if(auth()->user()->isStudent())
+                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
+                    <x-heroicon-o-check-circle class="mx-auto h-16 w-16 text-indigo-600" />
+                    <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.Great job!')</h3>
+                    <p class="mt-2 text-base text-gray-600">@lang('trad.No upcoming quizzes to take')</p>
+                    <p class="mt-4 text-sm text-indigo-600">@lang('trad.Enjoy your free time!')</p>
+                </div>
+            @elseif(auth()->user()->isTeacher())
+                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
+                    <x-heroicon-o-calendar class="mx-auto h-16 w-16 text-indigo-400" />
+                    <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.No upcoming quizzes')</h3>
+                    <p class="mt-2 text-base text-gray-600">@lang('trad.You have no quizzes scheduled in the near future')</p>
+                    <p class="mt-4 text-sm text-indigo-600">@lang('trad.Create a new quiz to get started!')</p>
+                </div>
+            @endif
+
         @endif
     </div>
 </div>

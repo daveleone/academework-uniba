@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-12 px-4 sm:px-6 lg:px-8">
+    <div>
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <div class="mb-8 inline-flex items-center">
@@ -26,7 +26,7 @@
                             <span class="sr-only">@lang('trad.Edit')</span>
                         </button>
 
-                        <button 
+                        <button
                             type="submit"
                             data-modal-target="DeleteEx-modal-{{ $exercise->id }}"
                             data-modal-toggle="DeleteEx-modal-{{ $exercise->id }}"
@@ -36,14 +36,14 @@
                             <span class="sr-only">@lang('trad.Remove')</span>
                         </button>
                         @include("forms.exercise.delete", ["exercise" => $exercise])
-                        
-                    </div>                    
+
+                    </div>
                 </div>
 
                 @include('exercises.cards.fill')
             </div>
         </div>
-        
+
         <div
             id="editDiv"
             class="m-2.5 flex hidden w-[30rem] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"

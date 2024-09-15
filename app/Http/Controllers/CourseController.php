@@ -43,7 +43,9 @@ class CourseController extends Controller
         $user_id = $request->user()->id;
         $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
 
-        $courses = Course::where('teacher_id', $teacher_id)->paginate(9);
+        $courses = Course::where('teacher_id', $teacher_id)
+            ->withCount('students')
+            ->paginate(9);
 
         return view('my-courses', compact('courses'));
     }
@@ -65,6 +67,13 @@ class CourseController extends Controller
         $course->save();
 
         return redirect()->route('courses.update', $course->id)->with('success', "Course updated successfuly!");
+    }
+
+    public function showQuizzes(Course $course)
+    {
+        $quizzes = $course->quizzes()->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('teacher.quizzes', compact('course', 'quizzes'));
     }
 
     public function destroy(Course $course)

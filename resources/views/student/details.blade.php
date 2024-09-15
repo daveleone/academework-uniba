@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto"> <!-- Modificato per centrare e limitare la larghezza -->
+    <div>
+        <div class="max-w-7xl mx-auto">
             <div class="mb-8 inline-flex items-center">
                 <a href="{{ route('courses.edit', $course->id) }}">
                     <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
@@ -8,7 +8,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Student Details')</h1>
             </div>
             <div class="bg-indigo-600 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 pb-6 text-center"> <!-- Aggiunto text-center -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 pb-6 text-center">
                 <div>
                     <p class="text-sm font-medium text-white">@lang('trad.Name')</p>
                     <p class="mt-1 text-lg text-white">{{ $student->user->name }}</p>
@@ -37,12 +37,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <!-- Centrato il contenuto dei dettagli dello studente -->
-
-
-                    <!-- Centrato il titolo e la tabella -->
-
-                    <div class="overflow-x-auto mx-auto"> <!-- Aggiunto mx-auto per centrare -->
+                    <div class="overflow-x-auto mx-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                             <tr>

@@ -93,7 +93,28 @@ return [
 
     '- topics' => '- Topics',
 
+    'Course Quizzes' => 'Class Quizzes',
+    'Total Quizzes' => 'Total Quizzes',
+    'Latest Quiz' => 'Latest Quiz',
+    'Quiz List' => 'Quiz List',
+    'Questions' => 'Questions',
+    'Created At' => 'Created At',
+    'No quizzes found for this course.' => 'No quizzes found for this course.',
+    'View Quizzes' => 'View Quizzes',
 
+    'Show Quizzes' => 'Show Quizzes',
+
+    'student' => 'student',
+    'students' => 'students',
+    'quiz' => 'quiz',
+    'quizzes' => 'quizzes',
+
+
+    'Recent Submissions' => 'Recent Submissions',
+    'Last 10 submissions' => 'Last 10 submissions',
+    'No recent submissions' => 'No recent submissions',
+    'There are no recent quiz submissions from students' => 'There are no recent quiz submissions from students',
+    'Check back later for new submissions!' => 'Check back later for new submissions!',
 
     'Guest' => 'Guest',
     'Password' => 'Password',

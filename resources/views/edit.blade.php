@@ -1,12 +1,17 @@
 <x-app-layout>
     <div class="">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-8 inline-flex items-center">
-                <a href="{{ route('courses.show') }}">
-                    <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+            <div class="mb-8 flex justify-between items-center">
+                <div class="inline-flex items-center">
+                    <a href="{{ route('courses.show') }}">
+                        <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
+                    </a>
+                    <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Edit Course')</h1>
+                </div>
+                <a href="{{ route('courses.quizzes', $course->id) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150">
+                    <x-heroicon-s-clipboard class="w-5 h-5 mr-2" />
+                    @lang('trad.Show Quizzes')
                 </a>
-
-                <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Edit Course')</h1>
             </div>
 
             <div class="bg-white shadow-md rounded-lg overflow-hidden mb-8 transition duration-300 ease-in-out transform">

@@ -92,6 +92,13 @@ return [
     'View class' => 'Ver clase',
     'Fill in...' => 'Rellenar ...',
 
+    'Recent Submissions' => 'Envíos Recientes',
+    'Last 10 submissions' => 'Últimos 10 envíos',
+    'No recent submissions' => 'No hay envíos recientes',
+    'There are no recent quiz submissions from students' => 'No hay envíos recientes de cuestionarios por parte de los estudiantes',
+    'Check back later for new submissions!' => '¡Vuelve más tarde para ver nuevos envíos!',
+
+
     'Correct' => 'Correcto',
     'Correct answer' => 'Respuesta correcta',
     'Your answer' => 'Tu respuesta',
@@ -110,11 +117,27 @@ return [
 
     'Ask your professor to add you to his classes!' => 'Pide a tu profesor que te añada a sus clases!',
 
+    'Course Quizzes' => 'Cuestionarios de la clase',
+    'Total Quizzes' => 'Total de Cuestionarios',
+    'Latest Quiz' => 'Último Cuestionario',
+    'Quiz List' => 'Lista de Cuestionarios',
+    'Questions' => 'Preguntas',
+    'Created At' => 'Creado el',
+    'No quizzes found for this course.' => 'No se encontraron cuestionarios para este curso.',
+    'View Quizzes' => 'Ver Cuestionarios',
+
+    'Show Quizzes' => 'Mostrar Cuestionarios',
+
     'Recent Grades' => 'Calificaciones Recientes',
     'Last 5 quizzes' => 'Últimos 5 cuestionarios',
     'No grades yet' => 'Aún no hay calificaciones',
     'Complete some quizzes to see your grades here' => 'Completa algunos cuestionarios para ver tus calificaciones aquí',
     'Keep up the good work!' => '¡Sigue con el buen trabajo!',
+
+    'student' => 'estudiante',
+    'students' => 'estudiantes',
+    'quiz' => 'cuestionario',
+    'quizzes' => 'cuestionarios',
 
 
     'Guest' => 'Visitante',
