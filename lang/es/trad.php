@@ -139,6 +139,10 @@ return [
     'quiz' => 'cuestionario',
     'quizzes' => 'cuestionarios',
 
+    'No upcoming quizzes' => 'No hay cuestionarios programadas',
+    'You have no quizzes scheduled in the near future' => 'No tienes ningún cuestionario programado para un futuro próximo',
+    'Create a new quiz to get started!' => 'Crea un nuevo cuestionario para empezar',
+
 
     'Guest' => 'Visitante',
     'Password' => 'Contraseña',

@@ -76,14 +76,14 @@
             </div>
         @else
             @if(auth()->user()->isStudent())
-                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
+                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-indigo-60 rounded-xl">
                     <x-heroicon-o-check-circle class="mx-auto h-16 w-16 text-indigo-600" />
                     <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.Great job!')</h3>
                     <p class="mt-2 text-base text-gray-600">@lang('trad.No upcoming quizzes to take')</p>
                     <p class="mt-4 text-sm text-indigo-600">@lang('trad.Enjoy your free time!')</p>
                 </div>
             @elseif(auth()->user()->isTeacher())
-                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
+                <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-indigo-60 rounded-xl">
                     <x-heroicon-o-calendar class="mx-auto h-16 w-16 text-indigo-400" />
                     <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.No upcoming quizzes')</h3>
                     <p class="mt-2 text-base text-gray-600">@lang('trad.You have no quizzes scheduled in the near future')</p>

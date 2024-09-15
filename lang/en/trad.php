@@ -109,6 +109,10 @@ return [
     'quiz' => 'quiz',
     'quizzes' => 'quizzes',
 
+    'No upcoming quizzes' => 'No upcoming quizzes',
+    'You have no quizzes scheduled in the near future' => 'You have no quizzes scheduled in the near future',
+    'Create a new quiz to get started!' => 'Create a new quiz to get started!',
+
 
     'Recent Submissions' => 'Recent Submissions',
     'Last 10 submissions' => 'Last 10 submissions',

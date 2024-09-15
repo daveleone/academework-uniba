@@ -52,7 +52,7 @@
                 {{ $recentSubmissions->appends(['submissions_page' => request()->submissions_page])->links() }}
             </div>
         @else
-            <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-white rounded-xl">
+            <div class="text-center py-12 bg-gradient-to-r from-indigo-50 to-indigo-60 rounded-xl">
                 <x-heroicon-o-clipboard-document-check class="mx-auto h-16 w-16 text-indigo-400" />
                 <h3 class="mt-4 text-xl font-semibold text-gray-900">@lang('trad.No recent submissions')</h3>
                 <p class="mt-2 text-base text-gray-600">@lang('trad.There are no recent quiz submissions from students')</p>

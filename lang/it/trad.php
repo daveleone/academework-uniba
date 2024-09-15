@@ -52,10 +52,13 @@ return [
 
     'Recent Submissions' => 'Sottomissioni Recenti',
     'Last 10 submissions' => 'Ultime 10 sottomissioni',
-    'View Details' => 'Visualizza Dettagli',
     'No recent submissions' => 'Nessuna sottomissione recente',
     'There are no recent quiz submissions from students' => 'Non ci sono sottomissioni recenti di quiz da parte degli studenti',
     'Check back later for new submissions!' => 'Torna più tardi per nuove sottomissioni!',
+
+    'No upcoming quizzes' => 'Nessun quiz imminente',
+    'You have no quizzes scheduled in the near future' => 'Non ci sono quiz in programma nel futuro prossimo',
+    'Create a new quiz to get started!' => 'Crea un quiz per inziare!',
 
 
     "Email" => "Email",
