@@ -36,9 +36,9 @@
                                     <span class="mx-2">•</span>
                                     <x-heroicon-o-clock class="w-4 h-4 mr-1" />
                                     <span>
-                                        @if($quiz->duration)
-                                            {{ $quiz->duration }}
-                                            @if($quiz->duration < 2)
+                                        @if($quiz->duration_minutes)
+                                            {{ $quiz->duration_minutes }}
+                                            @if($quiz->duration_minutes < 2)
                                                 @lang('trad.minute')
                                             @else
                                                 @lang('trad.minutes')

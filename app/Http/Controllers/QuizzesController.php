@@ -198,11 +198,19 @@ class QuizzesController extends Controller
     }
 
 
+    public function removeFromCourse(Course $course, Quiz $quiz)
+    {
+
+        $course->quizzes()->detach($quiz->id);
+
+        return redirect()->back()->with('success', 'Quiz successfully removed.');
+    }
+
     public function downloadPdf($id)
     {
-    $quiz = Quiz::with(['exercises'])->findOrFail($id);
-    $pdf = PDF::loadView('quizzes.pdf', compact('quiz'));
-    return $pdf->download($quiz->name . '.pdf');
+        $quiz = Quiz::with(['exercises'])->findOrFail($id);
+        $pdf = PDF::loadView('quizzes.pdf', compact('quiz'));
+        return $pdf->download($quiz->name . '.pdf');
     }
 
 }

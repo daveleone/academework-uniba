@@ -143,6 +143,17 @@ return [
     'You have no quizzes scheduled in the near future' => 'No tienes ningún cuestionario programado para un futuro próximo',
     'Create a new quiz to get started!' => 'Crea un nuevo cuestionario para empezar',
 
+    'No subjects' => 'No hay materia',
+    'Get started by creating a new subject' => 'Empiece por crear una nueva materia',
+    'No quizzes' => 'No hay cuestionarios',
+    'Get started by creating a new quiz' => 'Empiece creando un nuevo cuestionario',
+
+    'Status' => 'Estado',
+    'Scheduled for' => 'Programado para',
+    'Are you sure you want to remove this quiz from the class?' => '¿Está seguro de que desea eliminar este cuestionario de la clase?',
+    'Once this quiz is removed all of their data related to this class will be permanently deleted' => 'Una vez que este cuestionario sea eliminado todos sus datos relacionados con esta clase serán borrados permanentemente.',
+    'Remove Quiz' => 'Eliminar cuestionario',
+    'Not scheduled' => 'No programado',
 
     'Guest' => 'Visitante',
     'Password' => 'Contraseña',

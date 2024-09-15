@@ -60,6 +60,17 @@ return [
     'You have no quizzes scheduled in the near future' => 'Non ci sono quiz in programma nel futuro prossimo',
     'Create a new quiz to get started!' => 'Crea un quiz per inziare!',
 
+    'No subjects' => 'Nessuna materia',
+    'Get started by creating a new subject' => 'Inizia creando una nuova materia',
+    'No quizzes' => 'Nessun quiz',
+    'Get started by creating a new quiz' => 'Inizia creando un nuovo quiz',
+
+    'Status' => 'Stato',
+    'Scheduled for' => 'Programmato per',
+    'Are you sure you want to remove this quiz from the class?' => 'Sei sicuro di voler rimuovere il quiz da questa classe?',
+    'Once this quiz is removed all of their data related to this class will be permanently deleted' => 'Una volta che il quiz verrà rimosso tutti i dati relativi alla classe verranno cancellati.',
+    'Remove Quiz' => 'Rimuovi Quiz',
+    'Not scheduled' => 'Non programmato',
 
     "Email" => "Email",
     "N/A" => "N/D",
