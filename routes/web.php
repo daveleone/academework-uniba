@@ -95,7 +95,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
         Route::post('/add-to-course', 'addToCourse')->name('quiz.addToCourse');
         Route::delete('/quiz/{id}', 'removeEx')->name('quiz.removeEx');
         Route::get('/quiz/{id}/download', 'downloadPdf')->name('quiz.download');
-
+        Route::delete('/classes/{course}/quizzes/{quiz}', 'removeFromCourse')->name('quiz.remove');
     });
 
     Route::controller(CourseController::class)->group(function () {

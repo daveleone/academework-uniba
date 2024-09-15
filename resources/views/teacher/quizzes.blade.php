@@ -39,6 +39,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Quiz Name')</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Created At')</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Status')</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">@lang('trad.Actions')</th>
                             </tr>
                             </thead>
@@ -46,18 +47,46 @@
                             @forelse ($quizzes as $quiz)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $quiz->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $quiz->created_at->format('Y-m-d H:i') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $quiz->created_at->format('d M Y H:i') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        @if($quiz->course_quiz->start_time)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                @lang('trad.Scheduled for') {{ \Carbon\Carbon::parse($quiz->course_quiz->start_time)->format('d/m/y H:i') }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                @lang('trad.Not scheduled')
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('quiz.show', $quiz->id) }}" class="text-indigo-600 hover:text-indigo-900 flex items-center">
-                                            <x-heroicon-o-pencil-square class="w-4 h-4 mr-1" />
-                                            @lang('trad.Edit')
-                                        </a>
+                                        <div class="mt-1 mb-1">
+                                            <a href="{{ route('quiz.show', $quiz->id) }}" class="text-indigo-600 hover:text-indigo-900 flex items-center">
+                                                <x-heroicon-o-pencil-square class="w-4 h-4 mr-1" />
+                                                @lang('trad.Edit')
+                                            </a>
+                                        </div>
+                                        <div class="mt-1 mb-1">
+                                            <form action="{{ route('quiz.remove', ['course' => $course->id, 'quiz' => $quiz->id]) }}" method="POST" onsubmit="return confirm('@lang('trad.Are you sure you want to remove this quiz from the course?')');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a
+                                                        x-data=""
+                                                        x-on:click.prevent="$dispatch('open-modal', 'confirm-quiz-deletion-{{ $course->id }}')"
+                                                        class="text-red-600 hover:text-red-900 flex items-center cursor-pointer">
+                                                    <x-heroicon-o-trash class="w-4 h-4 mr-1" />
+                                                    @lang('trad.Remove')
+                                                </a>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
+                                @include('partials.confirm_quiz_class_remove')
                             @empty
                                 <tr>
                                     <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">@lang('trad.No quizzes found for this course.')</td>
                                 </tr>
+
                             @endforelse
                             </tbody>
                         </table>
@@ -67,4 +96,6 @@
             {{ $quizzes->links() }}
         </div>
     </div>
+
+
 </x-app-layout>

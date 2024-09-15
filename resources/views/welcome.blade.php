@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,32 +49,92 @@
 
                 @if(Auth::check())
 
-                        <a href="{{ route('dashboard') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                        <a href="{{ route('dashboard') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center ease-in-out hover:-translate-y-1">
                             @lang('trad.Dashboard')
                         </a>
+
+                    <div class="flex items-center">
+                        <div class="hidden sm:flex sm:items-center">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <button class="text-gray-700 inline-flex items-center">
+                                        {{ Auth::user()->name }}
+                                        <div class="ml-1">
+                                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('profile.edit')" class="flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100">
+                                        <x-heroicon-o-user class="w-6 h-6 mr-2"/>
+                                        @lang('trad.Profile')
+                                    </x-dropdown-link>
+
+                                    <!-- Language Subdropdown -->
+                                    <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                                        <button @click.stop="open = !open" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                            <x-heroicon-o-language class="w-6 h-6 mr-2" />
+                                            @lang('trad.Language')
+                                            <x-heroicon-o-chevron-right class="w-6 h-6 ml-auto" />
+                                        </button>
+                                        <div x-show="open" class="absolute left-full top-0 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" style="display: none;">
+                                            <a href="{{ url('locale/en') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                @lang('trad.English')
+                                            </a>
+                                            <a href="{{ url('locale/it') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                @lang('trad.Italian')
+                                            </a>
+                                            <a href="{{ url('locale/es') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                @lang('trad.Spanish')
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Authentication -->
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100">
+                                            <x-heroicon-o-arrow-right-start-on-rectangle class="w-6 h-6 mr-2" />
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
+
+                        <!-- Hamburger -->
+                        <div class="-mr-2 flex items-center sm:hidden">
+                            <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path :class="{'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path :class="{'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 @else
-                        <a href="{{ route('login') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                        <a href="{{ route('login') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center ease-in-out hover:-translate-y-1">
                             <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                             </svg>
                             @lang('trad.Login')
                         </a>
-                        <a href="{{ route('register') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                        <a href="{{ route('register') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
                             <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
                             @lang('trad.Register')
                         </a>
-                @endif
-
-
                     <div class="relative" @click.away="openLanguage = false" @close.stop="openLanguage = false">
                         <button @click="openLanguage = !openLanguage" class="text-gray-700 inline-flex items-center">
                             <x-heroicon-o-language class="w-5 h-5 ml-2 mr-1"/>
                             @lang('trad.Language')
-                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
+                                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
                         </button>
 
                         <div x-show="openLanguage" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" x-cloak>
@@ -85,6 +145,7 @@
                             </div>
                         </div>
                     </div>
+                @endif
 
             </div>
         </nav>

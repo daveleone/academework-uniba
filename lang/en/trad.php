@@ -109,6 +109,21 @@ return [
     'quiz' => 'quiz',
     'quizzes' => 'quizzes',
 
+    'No upcoming quizzes' => 'No upcoming quizzes',
+    'You have no quizzes scheduled in the near future' => 'You have no quizzes scheduled in the near future',
+    'Create a new quiz to get started!' => 'Create a new quiz to get started!',
+
+    'No subjects' => 'No subjects',
+    'Get started by creating a new subject' => 'Get started by creating a new subject',
+    'No quizzes' => 'No quizzes',
+    'Get started by creating a new quiz' => 'Get started by creating a new quiz',
+
+    'Status' => 'Status',
+    'Scheduled for' => 'Scheduled for',
+    'Are you sure you want to remove this quiz from the class?' => 'Are you sure you want to remove this quiz from the class?',
+    'Once this quiz is removed all of their data related to this class will be permanently deleted' => 'Once this quiz is removed all of their data related to this class will be permanently deleted.',
+    'Remove Quiz' => 'Remove Quiz',
+    'Not scheduled' => 'Not scheduled',
 
     'Recent Submissions' => 'Recent Submissions',
     'Last 10 submissions' => 'Last 10 submissions',

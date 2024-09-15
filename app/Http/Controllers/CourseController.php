@@ -71,7 +71,7 @@ class CourseController extends Controller
 
     public function showQuizzes(Course $course)
     {
-        $quizzes = $course->quizzes()->orderBy('created_at', 'desc')->paginate(5);
+        $quizzes = $course->quizzes()->orderBy('created_at', 'asc')->paginate(5);
 
         return view('teacher.quizzes', compact('course', 'quizzes'));
     }

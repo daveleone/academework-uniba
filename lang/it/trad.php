@@ -52,11 +52,25 @@ return [
 
     'Recent Submissions' => 'Sottomissioni Recenti',
     'Last 10 submissions' => 'Ultime 10 sottomissioni',
-    'View Details' => 'Visualizza Dettagli',
     'No recent submissions' => 'Nessuna sottomissione recente',
     'There are no recent quiz submissions from students' => 'Non ci sono sottomissioni recenti di quiz da parte degli studenti',
     'Check back later for new submissions!' => 'Torna più tardi per nuove sottomissioni!',
 
+    'No upcoming quizzes' => 'Nessun quiz imminente',
+    'You have no quizzes scheduled in the near future' => 'Non ci sono quiz in programma nel futuro prossimo',
+    'Create a new quiz to get started!' => 'Crea un quiz per inziare!',
+
+    'No subjects' => 'Nessuna materia',
+    'Get started by creating a new subject' => 'Inizia creando una nuova materia',
+    'No quizzes' => 'Nessun quiz',
+    'Get started by creating a new quiz' => 'Inizia creando un nuovo quiz',
+
+    'Status' => 'Stato',
+    'Scheduled for' => 'Programmato per',
+    'Are you sure you want to remove this quiz from the class?' => 'Sei sicuro di voler rimuovere il quiz da questa classe?',
+    'Once this quiz is removed all of their data related to this class will be permanently deleted' => 'Una volta che il quiz verrà rimosso tutti i dati relativi alla classe verranno cancellati.',
+    'Remove Quiz' => 'Rimuovi Quiz',
+    'Not scheduled' => 'Non programmato',
 
     "Email" => "Email",
     "N/A" => "N/D",
