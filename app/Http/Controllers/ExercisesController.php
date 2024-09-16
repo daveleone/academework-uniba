@@ -21,7 +21,10 @@ class ExercisesController extends Controller
 {
     public function show($id): View | RedirectResponse
     {
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
         if (!$topic) {
             session()->flash('error', 'Topic not found');
             return to_route('subject.show');
@@ -55,7 +58,10 @@ class ExercisesController extends Controller
     public function create($id): View | RedirectResponse
     {
 
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
 
         if (!$topic) {
             session()->flash('error', 'Topic not found');
@@ -115,7 +121,10 @@ class ExercisesController extends Controller
 
     public function createTf($id): RedirectResponse
     {
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
 
         if (!$topic) {
             session()->flash('error', 'Topic not found');
@@ -150,7 +159,10 @@ class ExercisesController extends Controller
 
     public function createClosed($id): RedirectResponse
     {
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
 
         if (!$topic) {
             session()->flash('error', 'Topic not found');
@@ -186,7 +198,10 @@ class ExercisesController extends Controller
 
     public function createOpen($id): RedirectResponse
     {
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
 
         if (!$topic) {
             session()->flash('error', 'Topic not found');
@@ -216,7 +231,10 @@ class ExercisesController extends Controller
 
     public function createFill($id): RedirectResponse
     {
-        $topic = Topic::find($id);
+        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->where('topics.id', $id)
+            ->where('subjects.teacher_id', Auth::user()->id)
+            ->first();
 
         if (!$topic) {
             session()->flash('error', 'Topic not found');
@@ -252,8 +270,13 @@ class ExercisesController extends Controller
 
     public function showExercise($id): View
     {
-        $exercise = Exercise::find($id);
-
+        $exercise = Exercise::with(['topic.subject'])
+            ->where('id', $id)
+            ->whereHas('topic.subject', function ($query) {
+                $query->where('teacher_id', Auth::user()->id);
+            })
+            ->first();
+        
         if (!$exercise) {
             session()->flash('error', 'Exercise not found');
             return to_route('subject.show');
@@ -295,7 +318,13 @@ class ExercisesController extends Controller
 
     public function delete($id): RedirectResponse
     {
-        $exercise = Exercise::find($id);
+        $exercise = Exercise::with(['topic.subject'])
+            ->where('id', $id)
+            ->whereHas('topic.subject', function ($query) {
+                $query->where('teacher_id', Auth::user()->id);
+            })
+            ->first();
+
         if (!$exercise) {
             session()->flash('error', 'Exercise not found');
             return to_route('subject.show');
@@ -314,7 +343,13 @@ class ExercisesController extends Controller
 
     public function edit($id): RedirectResponse
     {
-        $exercise = Exercise::find(Request()->input('exId'));
+        $exercise = Exercise::with(['topic.subject'])
+            ->where('id', $id)
+            ->whereHas('topic.subject', function ($query) {
+                $query->where('teacher_id', Auth::user()->id);
+            })
+            ->first();
+
         if (!$exercise) {
             session()->flash('error', 'Exercise not found');
             return to_route('subject.show');

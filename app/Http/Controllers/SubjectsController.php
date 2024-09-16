@@ -33,7 +33,11 @@ class SubjectsController extends Controller
     public function delete(): RedirectResponse
     {
         try {
-            Subject::destroy(Request()->input('subId'));
+            Subject::where('teacher_id', Auth::user()->id)
+                ->where('id', Request()
+                ->input('subId'))
+                ->first()
+                ->delete();
             session()->flash('success', 'Subject deleted');
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
@@ -43,7 +47,11 @@ class SubjectsController extends Controller
 
     public function edit(): RedirectResponse
     {
-        $subject = Subject::find(Request()->input('subId'));
+        $subject = Subject::where('teacher_id', Auth::user()->id)
+                    ->where('id', Request()
+                    ->input('subId'))
+                    ->first();
+
         if (!$subject) {
             session()->flash('error', 'Subject not found');
             return to_route('subject.show');
