@@ -39,7 +39,7 @@
                 <div class="h-12 w-12 text-indigo-600">
 
                 </div>
-                <span class="text-2xl font-bold text-gray-900">Academe Work</span>
+                <a href="{{ route('welcome') }}" class="text-2xl font-bold text-gray-900">Academe Work</a>
             </div>
 
             <div class="flex items-center space-x-4">
