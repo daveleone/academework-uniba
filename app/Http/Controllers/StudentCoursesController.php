@@ -29,10 +29,13 @@ class StudentCoursesController extends Controller
 {
     public function show(Request $request)
     {
-        $user_id = $request->user()->id;
-        $student_id = Student::where('user_id', $user_id)->value('id');
-        $courses_id = CourseStudent::where('student_id', $student_id)->pluck('course_id');
-        $courses = Course::whereIn('id', $courses_id)->paginate(9);
+        $student = Auth::user()->student;
+
+        $courses = $student->courses()
+            ->with(['teacher.user']) // Eager load teacher and user data
+            ->withCount('students')
+            ->withCount('quizzes')
+            ->paginate(9);
 
         return view('student.courses', compact('courses'));
     }
