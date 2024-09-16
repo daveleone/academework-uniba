@@ -7,12 +7,15 @@ use Illuminate\View\View;
 use App\Models\Subject;
 use App\Models\Topic;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 
 class TopicsController extends Controller
 {
     public function show($id): View | RedirectResponse{
-        $subject = Subject::find($id); //TODO: autorizzare l'utente ?
+        $subject = Subject::where('teacher_id', Auth::user()->id)
+                    ->where('id', $id)
+                    ->first();
         if (!$subject) {
             session()->flash('error', 'Subject not found');
             return to_route('subject.show');
@@ -23,7 +26,9 @@ class TopicsController extends Controller
     }
 
     public function create($id): RedirectResponse{
-        $subject = Subject::find($id);
+        $subject = Subject::where('teacher_id', Auth::user()->id)
+                    ->where('id', $id)
+                    ->first();
         if($subject){
             try{
                 Topic::create([
@@ -43,6 +48,14 @@ class TopicsController extends Controller
     }
 
     public function delete($id): RedirectResponse{
+        $subject = Subject::where('teacher_id', Auth::user()->id)
+                    ->where('id', $id)
+                    ->first();
+        if(!$subject){
+            session()->flash('error', "Topic deletion failed");
+            return to_route('subject.show');
+        }
+
         try {
             Topic::destroy(Request()->input('topId'));
             session()->flash('success', 'Topic deleted');
@@ -54,6 +67,14 @@ class TopicsController extends Controller
     }
 
     public function edit($id): RedirectResponse{
+        $subject = Subject::where('teacher_id', Auth::user()->id)
+                    ->where('id', $id)
+                    ->first();
+        if(!$subject){
+            session()->flash('error', "Topic edit failed");
+            return to_route('subject.show');
+        }
+
         $topic = Topic::find(Request()->input('topId'));
 
         if (!$topic) {

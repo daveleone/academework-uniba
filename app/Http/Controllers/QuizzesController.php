@@ -10,6 +10,7 @@ use App\Models\exercise_quiz;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\course_quiz;
+use App\Models\Exercise;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Teacher;
@@ -25,7 +26,6 @@ class QuizzesController extends Controller
     public function create(): RedirectResponse
     {
         try {
-
              $data = request()->validate([
                 'QuizName' => 'required',
                 'QuizDescription' => 'required',
@@ -46,7 +46,14 @@ class QuizzesController extends Controller
     public function delete(): RedirectResponse
     {
         try {
-            Quiz::destroy(Request()->input('quizId'));
+            // Quiz::destroy(Request()->input('quizId'));
+
+            Quiz::where('creator_id', Auth::user()->id)
+                ->where('id', Request()
+                ->input('quizId'))
+                ->first()
+                ->delete();
+            
             session()->flash('success', 'Quiz deleted');
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
@@ -56,7 +63,11 @@ class QuizzesController extends Controller
 
     public function edit() : RedirectResponse
     {
-        $quiz = Quiz::find(Request()->input('quizId'));
+        $quiz = Quiz::where('creator_id', Auth::user()->id)
+            ->where('id', Request()
+            ->input('quizId'))
+            ->first();
+        
         if (!$quiz) {
             session()->flash('error', 'quiz not found');
             return to_route('quiz.index');
@@ -91,15 +102,29 @@ class QuizzesController extends Controller
                 array_push($quizzesId, $val);
         }
 
-        $exId = $data['exId'];
+        $exId = array_key_exists("exId", $data) ? intval($data["exId"]) : null;
 
-        if($quizzesId and is_numeric($exId)){
+        $exercise = Exercise::with(['topic.subject'])
+            ->where('id', $exId)
+            ->whereHas('topic.subject', function ($query) {
+                $query->where('teacher_id', Auth::user()->id);
+            })
+            ->first();
+
+        if($quizzesId and $exercise){
             try {
                 foreach($quizzesId as $quizId){
-                    exercise_quiz::create([
-                       'quiz_id' => $quizId,
-                       'exercise_id' => $exId
-                    ]);
+                    
+                    $quiz = Quiz::where('creator_id', Auth::user()->id)
+                        ->where('id', $quizId)
+                        ->first();                    
+
+                    if($quiz){
+                        exercise_quiz::create([
+                           'quiz_id' => $quizId,
+                           'exercise_id' => $exId
+                        ]);
+                    } 
                 }
                 session()->flash('success', 'Exercise added to quiz');
             } catch(\Exception $e){
@@ -108,16 +133,22 @@ class QuizzesController extends Controller
         } else {
             session()->flash('error', 'Addition to quiz failed');
         }
-        return to_route('quiz.index');
+        return to_route('exercise.show', ['id' => $exId]);
     }
 
     public function removeEx($id) : RedirectResponse
     {
         try {
-            exercise_quiz::where('quiz_id', $id)
-                ->where('exercise_id', Request()->input('exId'))
-                ->delete();
-            session()->flash('success', 'Exercise removed');
+            $quiz = Quiz::where('creator_id', Auth::user()->id)
+                ->where('id', $id)
+                ->first();                    
+
+            if($quiz){
+                exercise_quiz::where('quiz_id', $id)
+                    ->where('exercise_id', Request()->input('exId'))
+                    ->delete();
+                session()->flash('success', 'Exercise removed');
+            }
         } catch (\Exception $e){
             session()->flash('error', $e->getMessage());
         }
@@ -128,7 +159,10 @@ class QuizzesController extends Controller
     {
         $user_id = Auth::user()->id;
         $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
-        $quiz = Quiz::find($id);
+        $quiz = Quiz::where('creator_id', Auth::user()->id)
+            ->where('id', $id)
+            ->first();                    
+
         $courses = Course::whereNotIn('id', function($query) use ($id) {
             $query->select('course_id')
                   ->from('course_quiz')
@@ -136,6 +170,7 @@ class QuizzesController extends Controller
         })
             ->where('teacher_id', $teacher_id)
             ->get();
+
         return view('quizzes.show', ['quiz' => $quiz, 'courses' => $courses]);
     }
 
@@ -143,20 +178,26 @@ class QuizzesController extends Controller
     public function addToCourse() : RedirectResponse
     {
         $data = Request()->all();
+        $user_id = Auth::user()->id;
         $coursesId = [];
         foreach($data as $key => $val){
             if(strpos($key, "checkbox-course-") === 0 and is_numeric($val))
                 array_push($coursesId, $val);
         }
+        
+        $quizId = array_key_exists("quizId", $data) ? $data["quizId"] : null;
 
-        $quizId = $data['quizId'];
+        $quiz = Quiz::where('creator_id', $user_id)
+            ->where('id', $quizId)
+            ->first();                    
 
-        if(!$quizId or !is_numeric($quizId))
+        if(!$quiz)
             return to_route('quiz.index');
 
-        $time = $data["time"];
-        $date = $data["date"];
-        $offset = $data["offset"];
+        $time = array_key_exists("time", $data) ? $data["time"] : null;
+        $date = array_key_exists("date", $data) ? $data["date"] : null;
+        $offset = array_key_exists("offset", $data) ? $data["offset"] : null;
+
         $repeatable = array_key_exists("repeatable", $data) ? true : false;
         $datetimeString = null;
         $datetime = null;
@@ -177,14 +218,18 @@ class QuizzesController extends Controller
 
         if($coursesId){
             try {
+                $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
+                $userCourses = Course::where('teacher_id', $teacher_id)->pluck('id')->toArray();
                 foreach($coursesId as $courseId){
-                    course_quiz::create([
-                        'quiz_id' => $quizId,
-                        'course_id' => $courseId,
-                        'repeatable' => $repeatable,
-                        'duration_minutes' => $data['time_limit'],
-                        'start_time' => $datetime
-                    ]);
+                    if(in_array($courseId, $userCourses)){
+                        course_quiz::create([
+                            'quiz_id' => $quizId,
+                            'course_id' => $courseId,
+                            'repeatable' => $repeatable,
+                            'duration_minutes' => $data['time_limit'],
+                            'start_time' => $datetime
+                        ]);
+                    }
                 }
                 session()->flash('success', 'Exercise added to quiz');
             } catch(\Exception $e){
@@ -200,15 +245,17 @@ class QuizzesController extends Controller
 
     public function removeFromCourse(Course $course, Quiz $quiz)
     {
-
-        $course->quizzes()->detach($quiz->id);
-
+        $courseTeacher = $course->teacher;
+        if($courseTeacher->user_id == Auth::user()->id)
+            $course->quizzes()->detach($quiz->id);
+        else
+            return redirect()->back()->with('error', 'Teacher permission required.');
         return redirect()->back()->with('success', 'Quiz successfully removed.');
     }
 
     public function downloadPdf($id)
     {
-        $quiz = Quiz::with(['exercises'])->findOrFail($id);
+        $quiz = Quiz::with(['exercises'])->where('creator_id', Auth::user()->id)->findOrFail($id);
         $pdf = PDF::loadView('quizzes.pdf', compact('quiz'));
         return $pdf->download($quiz->name . '.pdf');
     }
