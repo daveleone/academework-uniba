@@ -21,7 +21,7 @@
                 <div class="absolute right-0">
                     <div class="flex flex-col grow-0">
 
-                        <button type="button" onclick="enableEdit()" class="flex m-1 mr-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="button" onclick="enableEdit()" class="flex m-1 mr-0 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <x-heroicon-o-pencil-square class="w-4 h-4"/>
                             <span class="sr-only">@lang('trad.Edit')</span>
                         </button>
@@ -153,36 +153,21 @@
                     @endforeach
                 </div>
             </form>
-            <div class="mt-[2rem] flex flex-row">
-                <button
-                    type="submit"
-                    form="fill-Form"
-                    id="subEditBtn"
-                    class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                    Edit
-                </button>
-                <button
-                    type="button"
-                    onclick="addTextElem()"
-                    class="mb-2 me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
-                    Add text
-                </button>
-                <button
-                    type="button"
-                    onclick="addInputElem()"
-                    class="mb-2 me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
-                    Add input
-                </button>
-                <button
-                    type="button"
-                    onclick="disableEdit()"
-                    class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-                >
-                    @lang('trad.Abort')
-                </button>
+            <div class="mt-[2rem]">
+                <div class="flex items-center justify-between space-x-4">
+                    <button type="submit" form="fill-Form" class="group w-1/2 inline-flex justify-center py-3.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        @lang('trad.Edit')
+                    </button>
+                    <button type="submit" onclick="addTextElem()" class="group w-1/2 inline-flex justify-center py-1 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-950 hover:bg-pink-1100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        @lang('trad.Add text')
+                    </button>
+                    <button type="submit" onclick="addInputElem()" class="group w-1/2 inline-flex justify-center py-1 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-950 hover:bg-pink-1100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        @lang('trad.Add input')
+                    </button>
+                    <button type="submit" onclick="disableEdit()" class="group w-1/2 inline-flex justify-center py-3.5 px-4 border border-gray-400 text-sm font-medium rounded-md text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        @lang('trad.Abort')
+                    </button>
+                </div>
             </div>
         </div>
     </div>
