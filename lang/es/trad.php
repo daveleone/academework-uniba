@@ -194,6 +194,7 @@ return [
     'Repeatable' => 'Repetible',
     'Time limit (minutes):' => 'Límite de tiempo (minutos):',
     'Create New Quiz' => 'Crear nuevo cuestionario',
+    'Create Quiz' => 'Crear cuestionario',
     'Are you sure you want to delete' => '¿Estás seguro de que quieres eliminar',
     'Yes, I\'m sure' => 'Sí, estoy seguro',
     'Search course' => 'Buscar clase',
