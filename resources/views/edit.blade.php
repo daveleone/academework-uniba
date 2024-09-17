@@ -57,7 +57,7 @@
                     <div class="flex justify-between items-center mb-8">
                         <h2 class="text-2xl font-semibold text-gray-900 mb-4">@lang('trad.Enrolled Students')</h2>
                         @if($course->students->isNotEmpty())
-                            <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+                            <a dusk="add-student" href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
                                 <x-heroicon-s-user-plus class="w-5 h-5 mr-2" />
                                 @lang('trad.Add Students')
                             </a>
@@ -82,7 +82,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('student.details', ['course' => $course->id, 'student' => $student->id]) }}" class="text-indigo-600 hover:text-indigo-900">{{ $student->user->name }}</a>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $student->user->surname }}</td>
+                                        <td dusk="add-student-table" class="px-6 py-4 whitespace-nowrap">{{ $student->user->surname }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $student->lastGradeForCourse($course->id)?->mark ?? __('trad.N A') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ round($student->averageGradeForCourse($course->id), 2) ?? __('trad.N A') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -105,7 +105,7 @@
                             <h3 class="mt-2 text-sm font-medium text-gray-900">@lang('trad.No students enrolled')</h3>
                             <p class="mt-1 text-sm text-gray-500">@lang('trad.Get started by adding a new student to this course')</p>
                             <div class="mt-6">
-                                <a href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <a dusk="add-student" href="{{ route('student', $course->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     <x-heroicon-s-user-plus class="-ml-1 mr-2 h-5 w-5" />
                                     @lang('trad.Add Student')
                                 </a>
