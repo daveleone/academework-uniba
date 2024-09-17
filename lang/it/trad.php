@@ -65,6 +65,10 @@ return [
     'No quizzes' => 'Nessun quiz',
     'Get started by creating a new quiz' => 'Inizia creando un nuovo quiz',
 
+    'No exercises' => 'Nessun esercizio',
+    'Get started by creating a new exercise' => 'Inizia creando un nuovo esercizio',
+    
+
     'Status' => 'Stato',
     'Scheduled for' => 'Programmato per',
     'Are you sure you want to remove this quiz from the class?' => 'Sei sicuro di voler rimuovere il quiz da questa classe?',
