@@ -27,7 +27,7 @@
                         required
                         class="mb-2 flex text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        Question 1:
+                        @lang('trad.Question') 1:
                     </label>
                     <div class="flex flex-row items-center justify-start">
                         <input
@@ -53,7 +53,7 @@
                                 id="isTrueLab0"
                                 class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
-                                True?
+                                @lang('trad.True?')
                             </label>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
 
             newQuestion.id = 'questDiv' + n;
             newQuestion.querySelector('#questLab0').innerText =
-                'Question ' + (n + 1) + ':';
+                '@lang('trad.Question') ' + (n + 1) + ':';
             newQuestion.querySelector('#questLab0').for = 'question' + n;
             newQuestion.querySelector('#questLab0').id = 'questLab' + n;
             newQuestion.querySelector('#question0').name = 'question' + n;
