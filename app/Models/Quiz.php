@@ -30,6 +30,11 @@ class Quiz extends Model
         return $this->belongsToMany(Exercise::class, 'exercise_quiz');
     }
 
+    public function calculateMaxPoints()
+    {
+        return $this->exercises()->sum('points');
+    }
+
     public function marks()
     {
         return $this->hasMany(Mark::class);
@@ -38,6 +43,11 @@ class Quiz extends Model
     public function courses() : BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'course_quiz');
+    }
+
+    public function course_quiz()
+    {
+        return $this->belongsTo(course_quiz::class, 'id', 'quiz_id');
     }
 
     public function attributi($courseId)

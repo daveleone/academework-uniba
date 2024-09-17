@@ -1,4 +1,4 @@
-<div class="m-2.5 rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
+<div class="w-[35rem] m-2.5 rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
     <p class="mb-3 text-gray-500 dark:text-gray-400">
         <strong class="font-semibold text-gray-900 dark:text-white">
             @lang('trad.Description')

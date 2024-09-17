@@ -2,26 +2,15 @@
     id="dropdownSearchButton"
     data-dropdown-toggle="dropdownSearch"
     data-dropdown-placement="bottom"
-    class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1"
     type="button"
 >
+    <x-heroicon-s-plus class="w-5 h-5 mr-2" />
     @lang('trad.Add to quiz')
-    <svg
-        class="ms-3 h-2.5 w-2.5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 6"
-    >
-        <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 1 4 4 4-4"
-        />
-    </svg>
 </button>
+
+
+
 
 <!-- Dropdown menu -->
 <div

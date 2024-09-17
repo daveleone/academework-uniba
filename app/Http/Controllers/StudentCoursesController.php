@@ -29,16 +29,20 @@ class StudentCoursesController extends Controller
 {
     public function show(Request $request)
     {
-        $user_id = $request->user()->id;
-        $student_id = Student::where('user_id', $user_id)->value('id');
-        $courses_id = CourseStudent::where('student_id', $student_id)->pluck('course_id');
-        $courses = Course::whereIn('id', $courses_id)->get();
+        $student = Auth::user()->student;
+
+        $courses = $student->courses()
+            ->with(['teacher.user']) // Eager load teacher and user data
+            ->withCount('students')
+            ->withCount('quizzes')
+            ->paginate(9);
 
         return view('student.courses', compact('courses'));
     }
 
-    public function retrieve_quiz($id)
+    public function retrieve_quiz(Request $request, $id)
     {
+
         $course = Course::find($id);
         $course_id = Course::find($id)->id;
         $user_id = Auth::id();
@@ -54,7 +58,7 @@ class StudentCoursesController extends Controller
         $marks = Mark::where('student_id', $student_id)
             ->whereIn('quiz_id', $course->quizzes->pluck('id'))
             ->pluck('mark', 'quiz_id');
-        $quizzes = $course->quizzes;
+        $quizzes = $course->quizzes()->paginate(6);
 
         foreach ($quizzes as $quiz)
         {

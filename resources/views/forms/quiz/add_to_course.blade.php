@@ -2,24 +2,11 @@
 <button
     data-modal-target="AddToCourse-modal"
     data-modal-toggle="AddToCourse-modal"
-    class="text-s inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    class="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white ring-indigo-300 transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-indigo-700 focus:border-indigo-900 focus:outline-none focus:ring active:bg-indigo-900 disabled:opacity-25"
     type="button"
 >
-    @lang('trad.Add to course')
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-7 pl-1"
-    >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-    </svg>
+    <x-heroicon-s-plus class="mr-2 h-5 w-5" />
+    @lang("trad.Add to course")
 </button>
 
 <!-- Main modal -->
@@ -37,7 +24,7 @@
                 class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5"
             >
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    @lang('trad.Add to course')
+                    @lang("trad.Add to course")
                 </h3>
                 <button
                     type="button"
@@ -59,7 +46,7 @@
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                         />
                     </svg>
-                    <span class="sr-only">@lang('trad.Close modal')</span>
+                    <span class="sr-only">@lang("trad.Close modal")</span>
                 </button>
             </div>
             <!-- Modal body -->
@@ -112,7 +99,7 @@
                             for="time"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                        @lang('trad.Select hour:')
+                            @lang("trad.Select hour:")
                         </label>
                         <div class="relative">
                             <div
@@ -136,6 +123,7 @@
                                 type="time"
                                 id="time"
                                 name="time"
+                                value=""
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-none text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             />
                         </div>
@@ -154,7 +142,7 @@
                             for="repeatable"
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            @lang('trad.Repeatable')
+                            @lang("trad.Repeatable")
                         </label>
                     </div>
 
@@ -163,7 +151,7 @@
                             for="time_limit"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            @lang('trad.Time limit (minutes):')
+                            @lang("trad.Time limit (minutes):")
                         </label>
                         <input
                             type="number"
@@ -180,11 +168,8 @@
                         id="offset"
                         value="getOffset()"
                     />
-                    <script>
-                        const offsetInput = document.getElementById('offset');
-                        offsetInput.value = new Date().getTimezoneOffset();
-                    </script>
                     <button
+                        id="addToCourse-Submit"
                         type="submit"
                         class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
@@ -200,8 +185,36 @@
                                 clip-rule="evenodd"
                             ></path>
                         </svg>
-                        @lang('trad.Add to course')
+                        @lang("trad.Add to course")
                     </button>
+
+                    <script>
+                        const submit =
+                            document.getElementById('addToCourse-Submit');
+                        const offsetInput = document.getElementById('offset');
+                        offsetInput.value = new Date().getTimezoneOffset();
+
+                        const dateInput = document.getElementById('datepicker');
+                        const timeInput = document.getElementById('time');
+
+                        function updateRequired() {
+                            const isDateFilled = dateInput.value !== '';
+                            const isTimeFilled = timeInput.value !== '';
+
+                            console.log('Date: ' + dateInput.value);
+                            console.log('Time: ' + timeInput.value);
+
+                            if (isDateFilled || isTimeFilled) {
+                                dateInput.required = true;
+                                timeInput.required = true;
+                            } else {
+                                dateInput.required = false;
+                                timeInput.required = false;
+                            }
+                        }
+
+                        submit.addEventListener('focus', updateRequired);
+                    </script>
                 </div>
             </form>
         </div>

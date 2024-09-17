@@ -38,7 +38,7 @@
         id="course-list"
     >
         <input type="hidden" name="quizId" value="{{ $quiz->id }}" />
-        @foreach ($courses as $i => $course)
+    @foreach ($courses as $i => $course)
             <li>
                 <div
                     class="flex items-center rounded ps-2 hover:bg-gray-100 dark:hover:bg-gray-600"
