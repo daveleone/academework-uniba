@@ -32,8 +32,10 @@
                 class="p-4 md:p-5">
                 @method("post")
                 @csrf
-                <input type="hidden" name="TopicId" value="{{$topic->id}}" />
                 <div class="mb-4 grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        @include('forms.exercise.search_topics')
+                    </div>
                     <div class="col-span-2">
                         <label
                             for="ExName"

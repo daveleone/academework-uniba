@@ -15,6 +15,10 @@
                     <x-heroicon-o-book-open class="w-6 h-6 mr-2" />
                     @lang('trad.My subjects')
                 </a>
+                <a href="{{ route('exercise.index') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
+                    <x-heroicon-o-bookmark class="w-6 h-6 mr-2" />
+                    @lang('trad.My exercises')
+                </a>
                 <a href="{{ route('quiz.index') }}" class="text-black hover:text-gray-500 transition duration-300 flex items-center transition ease-in-out duration-300 hover:-translate-y-1">
                     <x-heroicon-o-clipboard class="w-6 h-6 mr-2" />
                     @lang('trad.My quizzes')

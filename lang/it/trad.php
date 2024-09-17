@@ -167,6 +167,7 @@ return [
     'Login' => 'Accedi',
     'You\'re logged in!' => 'Hai effettuato il login!',
     'Create a class' => 'Crea una classe',
+    'My exercises' => 'I miei esercizi',
     'My subjects' => 'Le mie materie',
     'My classes' => 'Le mie classi',
     'My quizzes' => 'I miei quiz',

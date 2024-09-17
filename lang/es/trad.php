@@ -183,6 +183,7 @@ return [
     'You\'re logged in!' => '¡Has iniciado sesión!',
     'Create a class' => 'Crear una clase',
     'My subjects' => 'Mis materias',
+    'My exercises' => 'Mis ejercicios',
     'My classes' => 'Mis clases',
     'My quizzes' => 'Mis cuestionarios',
     'Profile' => 'Perfil',

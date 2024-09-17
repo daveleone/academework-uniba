@@ -21,10 +21,13 @@ class ExercisesController extends Controller
 {
     public function show($id): View | RedirectResponse
     {
-        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
-            ->where('topics.id', $id)
-            ->where('subjects.teacher_id', Auth::user()->id)
-            ->first();
+        $topic = Topic::with('subject')
+           ->whereHas('subject', function ($query) {
+               $query->where('teacher_id', Auth::user()->id);
+           })
+           ->where('id', $id)
+           ->first();
+
         if (!$topic) {
             session()->flash('error', 'Topic not found');
             return to_route('subject.show');
@@ -34,6 +37,25 @@ class ExercisesController extends Controller
             'exercises.exercises',
             ['topic' => $topic, 'exercises' => $exercises]
         );
+    }
+
+    public function index() : View | RedirectResponse
+    {
+        $topics = Topic::with('subject')
+           ->whereHas('subject', function ($query) {
+               $query->where('teacher_id', Auth::user()->id);
+           })
+           ->get();
+
+        $exercises = Exercise::join('topics', 'topics.id', '=', 'exercises.topic_id')
+             ->select('exercises.*', 'topics.name as topic_name')
+             ->get();
+
+        return view(
+            'exercises.index',
+            ['topics' => $topics, 'exercises' => $exercises]
+        );
+        
     }
 
     private function createExInit($topic): Exercise | RedirectResponse
@@ -55,16 +77,23 @@ class ExercisesController extends Controller
         }
     }
 
-    public function create($id): View | RedirectResponse
+    public function create(): View | RedirectResponse
     {
 
-        $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
-            ->where('topics.id', $id)
-            ->where('subjects.teacher_id', Auth::user()->id)
+        $id = Request()->input('TopicId');
+
+        if(!$id){
+            session()->flash('error', 'Topicdd not found');
+            return to_route('subject.show');
+        }
+                
+        $topic = Topic::
+            where('topics.id', intval($id))
             ->first();
+
       
         if (!$topic) {
-            session()->flash('error', 'Topic not found');
+            session()->flash('error', 'Topic not found' . $id);
             return to_route('subject.show');
         }
 
@@ -113,7 +142,7 @@ class ExercisesController extends Controller
                 session()->flash('error', 'Invalid type');
                 return to_route(
                     'topic.exercises',
-                    ['id' => $id]
+                    ['id' => $topic->id]
                 );
                 break;
         }
@@ -268,13 +297,14 @@ class ExercisesController extends Controller
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function showExercise($id): RedirectResponse | View
+    public function showExercise($id): View | RedirectResponse
     {
         $exercise = Exercise::with(['topic.subject'])
             ->where('id', $id)
             ->whereHas('topic.subject', function ($query) {
                 $query->where('teacher_id', Auth::user()->id);
-            })
+                }
+            )
             ->first();
 
         if (!$exercise) {
