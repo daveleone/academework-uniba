@@ -45,7 +45,7 @@
                         <!-- Success alert -->
                         <div
                             id="success-alert"
-                            class="mx-[20%] my-5 flex items-center rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800 dark:border-green-800 dark:bg-gray-800 dark:text-green-400"
+                            class="my-5 flex items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800 dark:border-green-800 dark:bg-gray-800 dark:text-green-400"
                             role="alert"
                             onclick="hideAlert(this)"
                         >
@@ -71,7 +71,7 @@
                     @if (session("error"))
                         <!-- Error alert -->
                         <div
-                            class="mx-[20%] my-5 flex items-center rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400"
+                            class="my-5 flex items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400"
                             role="alert"
                             onclick="hideAlert(this)"
                         >
@@ -103,7 +103,7 @@
                 alertDiv.animate(
                     [
                         { transform: 'translateY(0px)', opacity: 1 },
-                        { transform: 'translateY(-20px)', opacity: 0 },
+                        { transform: 'translateY(-0px)', opacity: 0 },
                     ],
                     {
                         duration: 500,
