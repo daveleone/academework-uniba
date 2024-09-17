@@ -31,6 +31,7 @@
                 @endforeach
             </div>
         </div>
+            {{ $exercises->links() }}
     </div>
     
 </x-app-layout>
