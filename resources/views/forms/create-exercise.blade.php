@@ -30,6 +30,7 @@
                 action="{{ route("exercise.createInit", ["id" => $topic->id]) }}"
                 method="post"
                 class="p-4 md:p-5">
+                @method("post")
                 @csrf
                 <div class="mb-4 grid grid-cols-2 gap-4">
                     <div class="col-span-2">
