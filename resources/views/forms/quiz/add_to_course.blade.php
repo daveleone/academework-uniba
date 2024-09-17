@@ -18,18 +18,18 @@
 >
     <div class="relative max-h-full w-full max-w-md p-4">
         <!-- Modal content -->
-        <div class="relative rounded-lg bg-white shadow dark:bg-gray-700 rounded-t-2xl rounded-b-2xl">
+        <div
+            class="relative rounded-lg rounded-b-2xl rounded-t-2xl bg-white shadow dark:bg-gray-700"
+        >
             <!-- Modal header -->
-            <div
-                class="px-8 py-6 bg-indigo-600 rounded-t-2xl"
-            >
-                <h2 class="text-2xl font-bold text-white text-center">
+            <div class="rounded-t-2xl bg-indigo-600 px-8 py-6">
+                <h2 class="text-center text-2xl font-bold text-white">
                     @lang("trad.Add to course")
                 </h2>
-                    
             </div>
             <!-- Modal body -->
             <form
+                id="courseForm"
                 action="{{ route("quiz.addToCourse") }}"
                 method="post"
                 class="p-4 md:p-5"
@@ -147,36 +147,85 @@
                         id="offset"
                         value="getOffset()"
                     />
-                    
-                        <button type="submit" class="group inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <x-heroicon-s-plus-circle class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" />
-                            </span>
-                            @lang('trad.Add to course')
-                        </button>
-                        <a class="group flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1"
-                        data-modal-toggle="AddToCourse-modal">
-                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <x-heroicon-s-x-circle class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" />
-                            </span>
-                            @lang('trad.Cancel')
-                        </a>
-        
-                    <script>
-                        const submit =
-                            document.getElementById('addToCourse-Submit');
-                        const offsetInput = document.getElementById('offset');
-                        offsetInput.value = new Date().getTimezoneOffset();
 
+                    <button
+                        @if ($courses->count() == 0)
+                            disabled
+                        @endif
+                        id="SubmitButton"
+                        type="submit"
+                        class="group inline-flex transform justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-medium text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                        <span
+                            class="absolute inset-y-0 left-0 flex items-center pl-3"
+                        >
+                            <x-heroicon-s-plus-circle
+                                class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                            />
+                        </span>
+                        @lang("trad.Add to course")
+                    </button>
+                    <a
+                        class="group flex transform justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-medium text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        data-modal-toggle="AddToCourse-modal"
+                    >
+                        <span
+                            class="absolute inset-y-0 left-0 flex items-center pl-3"
+                        >
+                            <x-heroicon-s-x-circle
+                                class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                            />
+                        </span>
+
+                        @lang("trad.Cancel")
+                    </a>
+
+                    <script>
+                        //makes sure that a course is selected
+                        document
+                            .getElementById('courseForm')
+                            .addEventListener('submit', function (event) {
+                                const checkboxes = document.querySelectorAll(
+                                    '#course-list input[type="checkbox"]',
+                                );
+                                const isChecked = Array.from(checkboxes).some(
+                                    (checkbox) => checkbox.checked,
+                                );
+
+                                if (!isChecked) {
+                                    event.preventDefault();
+                                    return;
+                                }
+
+                                const dateInput =
+                                    document.getElementById('datepicker');
+                                const timeInput =
+                                    document.getElementById('time');
+
+                                const isDateFilled = dateInput.value !== '';
+                                const isTimeFilled = timeInput.value !== '';
+
+                                if (
+                                    (isDateFilled && !isTimeFilled) ||
+                                    (!isDateFilled && isTimeFilled)
+                                ) {
+                                    event.preventDefault();
+                                    return;
+                                }
+
+                                const offsetInput =
+                                    document.getElementById('offset');
+                                offsetInput.value =
+                                    new Date().getTimezoneOffset();
+                            });
+
+                        //makes sure that both or none date and time pickers are filled
                         const dateInput = document.getElementById('datepicker');
                         const timeInput = document.getElementById('time');
 
                         function updateRequired() {
                             const isDateFilled = dateInput.value !== '';
                             const isTimeFilled = timeInput.value !== '';
-
-                            console.log('Date: ' + dateInput.value);
-                            console.log('Time: ' + timeInput.value);
 
                             if (isDateFilled || isTimeFilled) {
                                 dateInput.required = true;
@@ -187,7 +236,9 @@
                             }
                         }
 
-                        submit.addEventListener('focus', updateRequired);
+                        document
+                            .getElementById('SubmitButton')
+                            .addEventListener('focus', updateRequired);
                     </script>
                 </div>
             </form>

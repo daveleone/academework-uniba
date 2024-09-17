@@ -147,6 +147,8 @@ return [
     'Get started by creating a new subject' => 'Empiece por crear una nueva materia',
     'No quizzes' => 'No hay cuestionarios',
     'Get started by creating a new quiz' => 'Empiece creando un nuevo cuestionario',
+    'No exercises' => 'Sin ejercicios',
+    'Get started by creating a new exercise' => 'Comienza creando un nuevo ejercicio',    
 
     'Status' => 'Estado',
     'Scheduled for' => 'Programado para',
