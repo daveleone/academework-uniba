@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <div class="inline-flex items-center">
-                    <a href="{{ route('student.class_details', ['course' => $course]) }}" class="hover:text-indigo-800 transition duration-150 ease-in-out">
+                    <a href="{{ url()->previous() }}" class="hover:text-indigo-800 transition duration-150 ease-in-out">
                         <x-heroicon-o-chevron-left class="w-6 h-6 mr-2" />
                     </a>
                     <h1 class="text-3xl font-bold text-gray-900">
