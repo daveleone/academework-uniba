@@ -159,7 +159,8 @@ return [
     'Your answer' => 'La tua risposta',
     'Answer given by the professor' => 'Risposta data dal professore',
     '- topics' => '- Argomenti',
-    'View Exercise' => 'Mostra esercizi',
+    'View Exercise' => 'Mostra esercizio',
+    'View Exercises' => 'Mostra esercizi',
 
     'Remember me' => 'Ricordati di me',
     'Register' => 'Registrati',

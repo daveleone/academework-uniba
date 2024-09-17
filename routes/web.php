@@ -76,6 +76,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
     Route::controller(ExercisesController::class)->group(function () {
         Route::get('/topic/{id}', 'show')->name('topic.exercises');
         Route::post('/exercise-creator/', 'create')->name('exercise.createInit');
+        Route::get('/exercise-creator/', 'creatorRedirect');
         Route::post('/true-false-creator/{id}', 'createTf')->name('exercise.createTf');
         Route::post('/closed-creator/{id}', 'createClosed')->name('exercise.createClosed');
         Route::post('/open-creator/{id}', 'createOpen')->name('exercise.createOpen');
