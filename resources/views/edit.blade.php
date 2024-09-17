@@ -21,16 +21,16 @@
                         @method('PUT')
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="course_description" />{{ __('trad.Course Name') }}</label>
-                                <input type="text" name="course_name" id="course_name" value="{{ old('course_name', $course->course_name) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
+                                <label for="course_name" />{{ __('trad.Course Name') }}</label>
+                                <input dusk="class-name" type="text" name="course_name" id="course_name" value="{{ old('course_name', $course->course_name) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required>
                             </div>
                             <div>
                                 <label for="course_description" />{{ __('trad.Course Description') }}</label>
-                                <input type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                <input dusk="class-description" type="text" name="course_description" id="course_description" value="{{ old('course_description', $course->course_description) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
                         <div class="mt-6 flex justify-between">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+                            <button dusk="update-class" type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
                                 <x-heroicon-s-pencil class="w-5 h-5 mr-2" />
                                 @lang('trad.Update Course')
                             </button>
