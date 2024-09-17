@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <div class="inline-flex items-center">
-                    <a href="{{ route('quiz.index') }}">
+                    <a href="{{ url()->previous() }}">
                         <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
                     </a>
                     <h1 class="text-3xl font-bold text-gray-900">
@@ -35,7 +35,7 @@
                                 <x-heroicon-o-minus-circle class="w-4 h-4"/>
                                 <span class="sr-only">@lang('trad.Remove')</span>
                             </button>
-                        </div>                    
+                        </div>
                     </div>
                     @switch($exercise->type)
                         @case('true/false')
