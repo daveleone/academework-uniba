@@ -1,6 +1,6 @@
 <x-modal name="create-subject">
     <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div class="px-8 py-6 bg-indigo-600">
+        <div class="px-24 py-6 bg-indigo-600">
             <h2 class="text-2xl font-bold text-white text-center">
                 @lang('trad.Create New Subject')
             </h2>
