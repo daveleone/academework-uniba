@@ -62,7 +62,7 @@ class ExercisesController extends Controller
             ->where('topics.id', $id)
             ->where('subjects.teacher_id', Auth::user()->id)
             ->first();
-
+      
         if (!$topic) {
             session()->flash('error', 'Topic not found');
             return to_route('subject.show');
