@@ -12,8 +12,6 @@ use Tests\DuskTestCase;
 
 class StudentTest extends DuskTestCase
 {
-    use DatabaseTruncation;
-
     protected $student;
     protected $course;
     protected $quiz;
@@ -23,7 +21,6 @@ class StudentTest extends DuskTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
 
         $this->teacher = Teacher::factory()->create();
 
@@ -66,21 +63,76 @@ class StudentTest extends DuskTestCase
                 ->waitForText('View class')
                 ->press('@view-class')
                 ->assertPathIs("/student/classes/{$this->course->id}/exercises")
-                ->assertSee($this->quiz->name);
+                ->assertSee($this->quiz->name)
+                ->click('@dropdown')
+                ->click('@logout-button')
+                ->assertSee('Master the Knowledge');
+        });
+    }
+
+    /** @test */
+    public function studentCanStartAquiz()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit($this->baseUrl . '/login')
+                ->type('email', $this->student->user->email)
+                ->type('password', 'password')  // Assicurati che questo sia la password corretta
+                ->click('button[type="submit"]')
+                ->waitForLocation('/dashboard')
+                ->visit($this->baseUrl . "/student/classes/{$this->course->id}/exercises")
+                ->waitFor('@start-quiz', 10)
+                ->click('@start-quiz')
+                ->assertPathIs("/student/classes/{$this->course->id}/exercises/{$this->quiz->id}/start")
+                ->click('@dropdown')
+                ->click('@logout-button')
+                ->assertSee('Master the Knowledge');
         });
     }
 
     /** @test */
 
-    // IL TEST FUNZIONA MA IL BELLISSIMO DUSK CONTINUA A CAMBIARE SEMPRE L'ID AD TEST
-    public function studentCanStartAquiz()
+    public function studentCanSubmitQuiz()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit($this->baseUrl . "/student/classes/{$this->course->id}/exercises")
+            $browser->visit($this->baseUrl . '/login')
+                ->type('email', $this->student->user->email)
+                ->type('password', 'password')  // Assicurati che questo sia la password corretta
+                ->click('button[type="submit"]')
+                ->waitForLocation('/dashboard')
+                ->visit($this->baseUrl . "/student/classes/{$this->course->id}/exercises")
                 ->waitFor('@start-quiz', 10)
                 ->click('@start-quiz')
                 ->assertPathIs("/student/classes/{$this->course->id}/exercises/{$this->quiz->id}/start")
-                ->assertSee('Exam -' . $this->course->course_name . ' - ' . $this->quiz->name);
+                ->press('@submit-exam')
+                ->assertPathIs("/student/classes/{$this->course->id}/exercises")
+                ->assertSee('Success!')
+                ->click('@dropdown')
+                ->click('@logout-button')
+                ->assertSee('Master the Knowledge');
+        });
+    }
+
+    /** @test */
+    public function studentCannotSubmitQuizAlreadyTaken()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit($this->baseUrl . '/login')
+                ->type('email', $this->student->user->email)
+                ->type('password', 'password')  // Assicurati che questo sia la password corretta
+                ->click('button[type="submit"]')
+                ->waitForLocation('/dashboard')
+                ->visit($this->baseUrl . "/student/classes/{$this->course->id}/exercises")
+                ->waitFor('@start-quiz', 10)
+                ->click('@start-quiz')
+                ->assertPathIs("/student/classes/{$this->course->id}/exercises/{$this->quiz->id}/start")
+                ->press('@submit-exam')
+                ->assertPathIs("/student/classes/{$this->course->id}/exercises")
+                ->assertSee('Success!')
+                ->assertAttribute('@disabled-link', 'aria-disabled', 'true')
+                ->assertPathIs("/student/classes/{$this->course->id}/exercises")
+                ->click('@dropdown')
+                ->click('@logout-button')
+                ->assertSee('Master the Knowledge');
         });
     }
 }

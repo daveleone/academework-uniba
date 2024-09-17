@@ -45,7 +45,7 @@
             <div class="hidden sm:flex sm:items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="text-gray-700 inline-flex items-center">
+                        <button dusk="dropdown" class="text-gray-700 inline-flex items-center">
                             {{ Auth::user()->name }}
                             <div class="ml-1">
                                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100">
+                            <x-dropdown-link dusk="logout-button" :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100">
                                 <x-heroicon-o-arrow-right-start-on-rectangle class="w-6 h-6 mr-2" />
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
