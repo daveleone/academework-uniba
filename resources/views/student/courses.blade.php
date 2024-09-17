@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="px-6 py-4 bg-gray-50 flex justify-end">
-                                    <span class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                    <span dusk="view-class" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500">
                                         @lang('trad.View class')
                                         <x-heroicon-s-chevron-right class="ml-1 w-5 h-5" />
                                     </span>
