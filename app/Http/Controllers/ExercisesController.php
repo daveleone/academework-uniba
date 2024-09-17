@@ -268,7 +268,7 @@ class ExercisesController extends Controller
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function showExercise($id): RedirectResponse
+    public function showExercise($id): RedirectResponse | View
     {
         $exercise = Exercise::with(['topic.subject'])
             ->where('id', $id)
