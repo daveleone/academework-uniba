@@ -184,6 +184,7 @@ return [
    'You\'re logged in!' => 'You\'re logged in!',
    'Create a class' => 'Create a class',
    'My subjects' => 'My subjects',
+   'My exercises' => 'My exercises',
    'My classes' => 'My classes',
    'My quizzes' => 'My quizzes',
    'Profile' => 'Profile',
