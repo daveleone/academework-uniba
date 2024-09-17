@@ -29,7 +29,7 @@ class ExercisesController extends Controller
             session()->flash('error', 'Topic not found');
             return to_route('subject.show');
         }
-        $exercises = Exercise::where('topic_id', $topic->id)->get();
+        $exercises = Exercise::where('topic_id', $topic->id)->paginate(8);
         return view(
             'exercises.exercises',
             ['topic' => $topic, 'exercises' => $exercises]
