@@ -3,7 +3,7 @@
         <div class="mx-auto max-w-7xl">
             <div class="mb-8 flex items-center justify-between">
                 <div class="mb-8 inline-flex items-center">
-                    <a href="{{ route("dashboard") }}">
+                    <a href="{{ url()->previous() }}">
                         <x-heroicon-o-chevron-left class="ml-1 mr-2 h-6 w-6" />
                     </a>
                     <h2 class="text-3xl font-bold leading-tight text-gray-900">

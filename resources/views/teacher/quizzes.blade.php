@@ -2,7 +2,7 @@
     <div>
         <div class="max-w-7xl mx-auto">
             <div class="mb-8 inline-flex items-center">
-                <a href="{{ route('courses.edit', $course->id) }}">
+                <a href="{{ url()->previous() }}">
                     <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
                 </a>
                 <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Course Quizzes')</h1>
@@ -81,7 +81,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @include('partials.confirm_quiz_class_remove')
                             @empty
                                 <tr>
                                     <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">@lang('trad.No quizzes found for this course.')</td>
@@ -90,6 +89,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        @include('partials.confirm_quiz_class_remove')
                     </div>
                 </div>
             </div>

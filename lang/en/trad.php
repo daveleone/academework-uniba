@@ -195,6 +195,7 @@ return [
    'Repeatable' => 'Repeatable',
    'Time limit (minutes):' => 'Time limit (minutes):',
    'Create New Quiz' => 'Create New Quiz',
+   'Create Quiz' => 'Create Quiz',
    'Are you sure you want to delete' => 'Are you sure you want to delete',
    'Yes, I\'m sure' => 'Yes, I\'m sure',
    'Search course' => 'Search class',

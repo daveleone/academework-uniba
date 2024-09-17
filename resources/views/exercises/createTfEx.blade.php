@@ -27,7 +27,7 @@
                         required
                         class="mb-2 flex text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        Question 1:
+                        @lang('trad.Question') 1:
                     </label>
                     <div class="flex flex-row items-center justify-start">
                         <input
@@ -53,7 +53,7 @@
                                 id="isTrueLab0"
                                 class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
-                                True?
+                                @lang('trad.True?')
                             </label>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
             <button
                 type="submit"
                 form="tf-Form"
-                class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="mb-2 me-2 rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
                 @lang('trad.Submit')
             </button>
@@ -111,7 +111,7 @@
 
             newQuestion.id = 'questDiv' + n;
             newQuestion.querySelector('#questLab0').innerText =
-                'Question ' + (n + 1) + ':';
+                '@lang('trad.Question') ' + (n + 1) + ':';
             newQuestion.querySelector('#questLab0').for = 'question' + n;
             newQuestion.querySelector('#questLab0').id = 'questLab' + n;
             newQuestion.querySelector('#question0').name = 'question' + n;

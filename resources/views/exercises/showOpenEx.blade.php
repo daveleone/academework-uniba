@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <div class="mb-8 inline-flex items-center">
-                    <a href="{{ route('topic.exercises', ['id' => $exercise->topic->id]) }}">
+                    <a href="{{ url()->previous() }}">
                         <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
                     </a>
                     <h1 class="text-3xl font-bold text-gray-900">
@@ -22,7 +22,7 @@
                 <div class="absolute right-0">
                     <div class="flex flex-col grow-0">
 
-                        <button type="button" onclick="enableEdit()" class="flex m-1 mr-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="button" onclick="enableEdit()" class="flex m-1 mr-0 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <x-heroicon-o-pencil-square class="w-4 h-4"/>
                             <span class="sr-only">@lang('trad.Edit')</span>
                         </button>
@@ -75,7 +75,7 @@
                         id="exName"
                         name="exName"
                         placeholder="{{ $exercise->name }}"
-                        class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                        class="focus:ring-indigo-500 focus:border-indigo-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 bg-white dark:text-white dark:placeholder-gray-400"
                     />
                 </div>
                 <div class="mb-[1rem]">
@@ -89,7 +89,7 @@
                         id="exDescription"
                         name="exDescription"
                         placeholder="{{ $exercise->description }}"
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     ></textarea>
                 </div>
                 <div class="mb-[1rem]">
@@ -105,7 +105,7 @@
                         name="exPoints"
                         min="1"
                         placeholder="{{ $exercise->points }}"
-                        class="focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                        class="focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                     />
                 </div>
                 @foreach ($exercise->elements as $element)
@@ -120,28 +120,27 @@
                             name="exAnswer"
                             id="exAnswer"
                             placeholder="{{ $element->answer }}"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         ></textarea>
                     </div>
                 @endforeach
             </form>
-            <div class="mt-[2rem] flex flex-row">
-                <button
-                    type="submit"
-                    form="open-Form"
-                    class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                    Edit
-                </button>
-                <button
-                    type="button"
-                    onclick="disableEdit()"
-                    class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-                >
-                    @lang('trad.Abort')
-                </button>
+            <div class="mt-[2rem]">
+                <div class="flex items-center justify-between space-x-4">
+                    <button type="submit" form="open-Form" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <x-heroicon-s-plus-circle class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" />
+                        </span>
+                        @lang('trad.Edit')
+                    </button>
+                    <button type="submit" onclick="disableEdit()" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-gray-400 text-sm font-medium rounded-md text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <x-heroicon-s-x-circle class="h-5 w-5 text-gray-400 group-hover:text-gray-400" />
+                        </span>
+                        @lang('trad.Abort')
+                    </button>
+                </div>
             </div>
-        </div>
     </div>
     <script>
         initialForm = document.getElementById('editDiv').innerHTML;
