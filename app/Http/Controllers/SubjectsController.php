@@ -11,7 +11,7 @@ class SubjectsController extends Controller
 {
     public function show(): View
     {
-        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->paginate(8);
         return view('subjects', ['subjects' => $subjects]);
     }
 

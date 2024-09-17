@@ -21,7 +21,7 @@ class TopicsController extends Controller
             return to_route('subject.show');
         }
 
-        $topics = $subject->topics;
+        $topics = $subject->topics()->paginate(8);
         return view('topics', ['subject' => $subject, 'topics' => $topics]);
     }
 

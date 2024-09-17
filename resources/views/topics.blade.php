@@ -38,6 +38,7 @@
                         @include("forms.topic.delete", ["topic" => $topic, "subject" => $subject])
                     @endforeach
                 </div>
+            {{$topics->links()}}
         </div>
     </div>
 </x-app-layout>

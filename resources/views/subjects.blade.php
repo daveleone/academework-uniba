@@ -54,6 +54,7 @@
                 </div>
             @endif
             </div>
+            {{$subjects->links()}}
         </div>
     @include("forms.subject.create")
 </x-app-layout>
