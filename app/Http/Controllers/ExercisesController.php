@@ -268,7 +268,7 @@ class ExercisesController extends Controller
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function showExercise($id): View
+    public function showExercise($id): RedirectResponse
     {
         $exercise = Exercise::with(['topic.subject'])
             ->where('id', $id)
@@ -276,7 +276,7 @@ class ExercisesController extends Controller
                 $query->where('teacher_id', Auth::user()->id);
             })
             ->first();
-        
+
         if (!$exercise) {
             session()->flash('error', 'Exercise not found');
             return to_route('subject.show');
@@ -284,7 +284,7 @@ class ExercisesController extends Controller
 
         // $quizzes = Quiz::where('creator_id', Auth::user()->id)->get();
 
-        
+
         $quizzes = Quiz::whereNotIn('id', function($query) use ($id){
             $query->select('quiz_id')
                   ->from('exercise_quiz')
@@ -292,7 +292,7 @@ class ExercisesController extends Controller
         })
             ->where('creator_id', Auth::user()->id)
             ->get();
-        
+
         switch ($exercise->type) {
             case 'true/false':
                 return view('exercises.showTfEx', ['exercise' => $exercise, 'quizzes' => $quizzes]);
