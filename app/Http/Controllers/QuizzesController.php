@@ -13,6 +13,10 @@ use App\Models\course_quiz;
 use App\Models\Exercise;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ClassEmail;
+use App\Models\student;
+use App\Models\CourseStudent;
 use App\Models\Teacher;
 
 class QuizzesController extends Controller
@@ -184,6 +188,8 @@ class QuizzesController extends Controller
             if(strpos($key, "checkbox-course-") === 0 and is_numeric($val))
                 array_push($coursesId, $val);
         }
+
+        $quizId = $data['quizId'];
         
         $quizId = array_key_exists("quizId", $data) ? $data["quizId"] : null;
 
@@ -201,6 +207,8 @@ class QuizzesController extends Controller
         $repeatable = array_key_exists("repeatable", $data) ? true : false;
         $datetimeString = null;
         $datetime = null;
+        
+        if($time and $date and $offset)
 
         if($time and $date and $offset) //TODO controllare offset
         {
@@ -221,6 +229,31 @@ class QuizzesController extends Controller
                 $teacher_id = Teacher::where('user_id', $user_id)->first()->id;
                 $userCourses = Course::where('teacher_id', $teacher_id)->pluck('id')->toArray();
                 foreach($coursesId as $courseId){
+                    course_quiz::create([
+                        'quiz_id' => $quizId,
+                        'course_id' => $courseId,     
+                        'repeatable' => $repeatable,
+                        'duration_minutes' => $data['time_limit'],
+                        'start_time' => $datetime
+                    ]);
+
+                    // Recupera gli studenti iscritti al corso
+                    $students = CourseStudent::where('course_id', $courseId)
+                        ->join('students', 'course_student.student_id', '=', 'students.id')
+                        ->join('users', 'students.user_id', '=', 'users.id')
+                        ->select('users.email')
+                        ->get();
+
+                    $toEmail = $students->pluck('email')->toArray();
+                    $quiz = Quiz::find($quizId);
+                    $course = Course::find($courseId);
+
+                    // Invia email a ciascuno studente
+                    $messageContent = [
+                        'quizName' => $quiz->name,
+                        'courseName' => $course->course_name,
+                    ];
+                    Mail::to($toEmail)->send(new ClassEmail($messageContent));
                     if(in_array($courseId, $userCourses)){
                         course_quiz::create([
                             'quiz_id' => $quizId,
