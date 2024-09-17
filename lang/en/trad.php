@@ -16,6 +16,8 @@ return [
     "Get started by creating a new class" => "Get started by creating a new class",
     "New Class" => "New Class",
 
+    'Quizzes - ' => 'Quizzes - ',
+
 
     'Edit Course' => 'Edit class',
     'Update Course' => 'Update class',
@@ -120,8 +122,8 @@ return [
 
     'No exercises' => 'No exercises',
     'Get started by creating a new exercise' => 'Get started by creating a new exercise',
-    
-    
+
+
     'Status' => 'Status',
     'Scheduled for' => 'Scheduled for',
     'Are you sure you want to remove this quiz from the class?' => 'Are you sure you want to remove this quiz from the class?',

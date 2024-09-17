@@ -18,7 +18,6 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'teacher_id' => Teacher::factory(),
             'course_name' => $this->faker->numberBetween(1, 10),
             'course_description' => $this->faker->paragraph('4'),
         ];

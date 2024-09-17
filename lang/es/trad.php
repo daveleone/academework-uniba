@@ -12,6 +12,8 @@ return [
     "Get started by creating a new class" => "Comienza creando una nueva clase",
     "New Class" => "Nueva Clase",
 
+    'Quizzes - ' => 'Cuestionarios - ',
+
 
     'Edit Course' => 'Editar clase',
     'Course Name' => 'Nombre del clase',
@@ -148,7 +150,7 @@ return [
     'No quizzes' => 'No hay cuestionarios',
     'Get started by creating a new quiz' => 'Empiece creando un nuevo cuestionario',
     'No exercises' => 'Sin ejercicios',
-    'Get started by creating a new exercise' => 'Comienza creando un nuevo ejercicio',    
+    'Get started by creating a new exercise' => 'Comienza creando un nuevo ejercicio',
 
     'Status' => 'Estado',
     'Scheduled for' => 'Programado para',

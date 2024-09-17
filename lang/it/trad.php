@@ -67,7 +67,7 @@ return [
 
     'No exercises' => 'Nessun esercizio',
     'Get started by creating a new exercise' => 'Inizia creando un nuovo esercizio',
-    
+
 
     'Status' => 'Stato',
     'Scheduled for' => 'Programmato per',
@@ -102,6 +102,7 @@ return [
     'Complete some quizzes to see your grades here' => 'Completa alcuni quiz per vedere i tuoi voti qui',
     'Keep up the good work!' => 'Continua così!',
 
+    'Quizzes - ' => 'Quiz - ',
 
     'Question' => 'Domanda',
     'Answer' => 'Risposta',

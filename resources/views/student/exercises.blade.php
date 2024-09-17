@@ -6,7 +6,7 @@
                     <a href="{{ url()->previous() }}">
                         <x-heroicon-o-chevron-left class="ml-1 mr-2 w-6 h-6" />
                     </a>
-                    <h1 class="text-3xl font-bold text-gray-900">{{ $course->course_name }}</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Quizzes - '){{ $course->course_name }}</h1>
                 </div>
                 <a href="{{ route('student.class_details', ['course' => $course->id]) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150">
                     <x-heroicon-s-check-badge class="w-5 h-5 mr-2" />
@@ -70,10 +70,10 @@
                                     </div>
                                 @else
                                     <div class="mt-4">
-                                        <p class="inline-flex items-center px-4 py-2 bg-indigo-300 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest">
+                                        <button dusk="disabled-link" aria-disabled="true" class="inline-flex items-center px-4 py-2 bg-indigo-300 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest">
                                             <x-heroicon-s-check-circle class="w-5 h-5 mr-2" />
                                             @lang('trad.Quiz already taken')
-                                        </p>
+                                        </button>
                                     </div>
                                 @endif
                             </div>
