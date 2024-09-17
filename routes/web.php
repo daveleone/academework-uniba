@@ -10,7 +10,8 @@ use App\Http\Controllers\StudentCoursesController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TopicsController;
 use App\Http\Controllers\LocaleController;
-
+use App\Http\Controllers\EmailController;
+use App\Mail\ClassEmail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -113,6 +114,7 @@ Route::middleware('auth', 'role:teacher')->group(function () {  // TODO: impleme
     });
 
     Route::get('locale/{lang}',[LocaleController::class,'setLocale']);
+    // non serve perchè ho integrato in quizzesconteoller Route::get('send-mail',[EmailController::class, 'ClassEmail']);
 });
 
 require __DIR__ . '/auth.php';

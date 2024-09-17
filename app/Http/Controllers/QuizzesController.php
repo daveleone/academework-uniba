@@ -12,6 +12,10 @@ use App\Models\Course;
 use App\Models\course_quiz;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ClassEmail;
+use App\Models\student;
+use App\Models\CourseStudent;
 
 class QuizzesController extends Controller
 {
@@ -145,7 +149,7 @@ class QuizzesController extends Controller
             if(strpos($key, "checkbox-course-") === 0 and is_numeric($val))
                 array_push($coursesId, $val);
         }
-       
+
         $quizId = $data['quizId'];
 
         if(!$quizId or !is_numeric($quizId))
@@ -158,7 +162,7 @@ class QuizzesController extends Controller
         $datetimeString = null;
         $datetime = null;
         
-        if($time and $date and $offset) //TODO controllare offset
+        if($time and $date and $offset)
         {
             // Creazione della stringa di data e ora
             $datetimeString = $date . ' ' . $time;
@@ -182,6 +186,24 @@ class QuizzesController extends Controller
                         'duration_minutes' => $data['time_limit'],
                         'start_time' => $datetime
                     ]);
+
+                    // Recupera gli studenti iscritti al corso
+                    $students = CourseStudent::where('course_id', $courseId)
+                        ->join('students', 'course_student.student_id', '=', 'students.id')
+                        ->join('users', 'students.user_id', '=', 'users.id')
+                        ->select('users.email')
+                        ->get();
+
+                    $toEmail = $students->pluck('email')->toArray();
+                    $quiz = Quiz::find($quizId);
+                    $course = Course::find($courseId);
+
+                    // Invia email a ciascuno studente
+                    $messageContent = [
+                        'quizName' => $quiz->name,
+                        'courseName' => $course->course_name,
+                    ];
+                    Mail::to($toEmail)->send(new ClassEmail($messageContent));
                 }
                 session()->flash('success', 'Exercise added to quiz');
             } catch(\Exception $e){
@@ -190,8 +212,10 @@ class QuizzesController extends Controller
         } else {
             session()->flash('error', 'Addition to quiz failed');
         }
+
         return to_route('quiz.show', ['id' => $quizId]);
     }
+
 
 
     public function downloadPdf($id)
