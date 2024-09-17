@@ -118,6 +118,10 @@ return [
     'No quizzes' => 'No quizzes',
     'Get started by creating a new quiz' => 'Get started by creating a new quiz',
 
+    'No exercises' => 'No exercises',
+    'Get started by creating a new exercise' => 'Get started by creating a new exercise',
+    
+    
     'Status' => 'Status',
     'Scheduled for' => 'Scheduled for',
     'Are you sure you want to remove this quiz from the class?' => 'Are you sure you want to remove this quiz from the class?',

@@ -89,7 +89,9 @@
                             @endforelse
                             </tbody>
                         </table>
-                        @include('partials.confirm_quiz_class_remove')
+                        @if($quizzes->count() > 0)
+                            @include('partials.confirm_quiz_class_remove')
+                        @endif
                     </div>
                 </div>
             </div>

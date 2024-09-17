@@ -47,7 +47,7 @@
             />
         </div>
     </div>
-    <form action="{{ route("quiz.addExercise") }}" method="POST">
+    <form id="quizForm" action="{{ route("quiz.addExercise") }}" method="POST">
         @csrf
         @method("POST")
         <ul
@@ -79,6 +79,9 @@
             @endforeach
         </ul>
         <button
+            @if($quizzes->count() == 0)
+                disabled
+            @endif
             type="submit"
             class="flex w-[100%] items-center rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 text-sm font-medium text-red-600 hover:bg-gray-100 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-blue-500 dark:hover:bg-gray-600"
         >
@@ -102,16 +105,12 @@
 </div>
 
 <script>
-    // get input
     let input = document.getElementById('input-group-search');
-    //get list of value
     let list = document.querySelectorAll('#quiz-list li');
 
-    //function search on the list.
     function search() {
         for (let i = 0; i < list.length; i += 1) {
             let label = list[i].querySelector('label');
-            //check if the element contains the value of the input
             if (
                 label.innerText
                     .toLowerCase()
@@ -124,6 +123,15 @@
         }
     }
 
-    //to the change run search.
     input.addEventListener('input', search);
+
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        const checkboxes = document.querySelectorAll('#quiz-list input[type="checkbox"]');
+    
+        const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    
+        if (!isChecked) {
+            event.preventDefault();
+        }
+    });
 </script>
