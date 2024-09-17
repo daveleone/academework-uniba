@@ -49,13 +49,18 @@ class ExercisesController extends Controller
 
         $exercises = Exercise::join('topics', 'topics.id', '=', 'exercises.topic_id')
              ->select('exercises.*', 'topics.name as topic_name')
-             ->get();
+             ->paginate(8);
 
         return view(
             'exercises.index',
             ['topics' => $topics, 'exercises' => $exercises]
         );
         
+    }
+
+    public function creatorRedirect(): RedirectResponse
+    {
+        return redirect()->back();
     }
 
     private function createExInit($topic): Exercise | RedirectResponse
@@ -83,8 +88,8 @@ class ExercisesController extends Controller
         $id = Request()->input('TopicId');
 
         if(!$id){
-            session()->flash('error', 'Topicdd not found');
-            return to_route('subject.show');
+            session()->flash('error', 'Topic not found');
+            return redirect()->back();
         }
                 
         $topic = Topic::
@@ -94,7 +99,7 @@ class ExercisesController extends Controller
       
         if (!$topic) {
             session()->flash('error', 'Topic not found' . $id);
-            return to_route('subject.show');
+            return redirect()->back();
         }
 
         $data = request()->validate([
@@ -140,10 +145,7 @@ class ExercisesController extends Controller
                 break;
             default:
                 session()->flash('error', 'Invalid type');
-                return to_route(
-                    'topic.exercises',
-                    ['id' => $topic->id]
-                );
+            return redirect()->back()->back();
                 break;
         }
     }
