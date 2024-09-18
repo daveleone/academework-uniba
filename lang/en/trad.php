@@ -44,6 +44,11 @@ return [
     'Once this exercise is deleted all of its resources and data will be permanently deleted' => 'Once this exercise is deleted all data will be permanently deleted',
     'Delete exercise' => 'Delete exercise',
 
+    'True False' => 'True False',
+    'Open' => 'Open',
+    'Closed' => 'Closed',
+    'Fill In' => 'Fill In',
+
 
     'Edit Course' => 'Edit class',
     'Update Course' => 'Update class',
