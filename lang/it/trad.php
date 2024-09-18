@@ -212,6 +212,16 @@ return [
     'Are you sure you want to delete this subject?' => 'Sei sicuro di voler eliminare questa materia?',
     'Once this subject is deleted all of its data will be permanently deleted' => 'Una volta che questa materia verrà eliminata, tutti i suoi dati verrano persi.',
 
+    'Are you sure you want to delete this topic?' => 'Sei sicuro di voler cancellare questo argomento?',
+    'Once this topic is deleted all of its data will be permanently deleted' => 'Una volta cancellato questo argomento tutti i suoi dati verranno eliminati permanentemente',
+    'Delete topic' => 'Elimina argomento',
+
+    'Write exercise description here' => 'Scrivi descrizione dell\'esercizio qui (Per la domanda aperta è la domanda stessa!)',
+    'Type exercise name' => 'Scrivi nome esercizio',
+    'Search topics' => 'Cerca argomento',
+    'Type quiz name' => 'Scrivi nome quiz',
+    'Write quiz description here' => 'Scrivi descrizione quiz',
+
     'Edit subject' => 'Modifica materia',
     'Add exercise' => 'Aggiungi esercizio',
     'Create New Exercise' => 'Crea un nuovo esercizio',
@@ -229,6 +239,17 @@ return [
     'No available students' => 'Nessun studente disponibile',
     'All students are already enrolled in this course' => 'Tutti gli studenti sono già iscritti alla classe',
     'Search for students' => 'Cerca studenti',
+
+    'Are you sure you want to delete this quiz?' => 'Sei sicuro di volere eliminare questo quiz?',
+    'Once this quiz is deleted all of its data will be permanently deleted' => 'Una volta che questo quiz viene eliminato tutti i suoi dati verrano eliminati permanentemente',
+    'Delete quiz' => 'Elimina quiz',
+
+    'Quiz\'s name' => 'Nome quiz',
+    'Quiz\'s Description' => 'Descrizione quiz',
+
+    'Are you sure you want to delete this exercise?' => 'Sei sicuro di voler eliminare questo esercizio?',
+    'Once this exercise is deleted all of its resources and data will be permanently deleted' => 'Una volta eliminato questo esercizio tutti i suoi dati verrano eliminati permanentemente',
+    'Delete exercise' => 'Elimina esercizio',
 
     'Description' => 'Descrizione',
     'Next' => 'Prossimo',
@@ -255,14 +276,16 @@ return [
     "results" => "risultati",
     "Go to page :page" => "Vai alla pagina :page",
 
+    'Type topic\'s name' => 'Scrivi nome argomento',
+    'Write topic\'s description here' => 'Scrivi descrizione argomento',
+
 
     'Exercises' => 'Esercizi',
-    'Add topic' => 'Aggiungi topic',
-    'Create New Topic' => 'Crea nuovo topic',
-    'Add new topic' => 'Aggiungi nuovo topic',
-    'Edit topic' => 'Modifica topic',
-    'Topic\'s name' => 'Nome del topic',
-    'Topic\'s Description' => 'Descrizione del topic',
+    'Create New Topic' => 'Crea nuovo argomento',
+    'Add topic' => 'Aggiungi argomento',
+    'Edit topic' => 'Modifica argomento',
+    'Topic\'s name' => 'Nome dell\'argomento',
+    'Topic\'s Description' => 'Descrizione dell\'argomento',
     'Update' => 'Aggiorna',
     'Add Students' => 'Aggiungi studenti',
     'Delete Course' => 'Elimina classe',

@@ -19,6 +19,31 @@ return [
     'Quizzes - ' => 'Quizzes - ',
     'Exams' => 'Exams',
 
+    'Type topic\'s name' => 'Type topic\'s name',
+    'Write topic\'s description here' => 'Write topic\'s description here',
+
+    'Are you sure you want to delete this topic?' => 'Are you sure you want to delete this topic?',
+    'Once this topic is deleted all of its data will be permanently deleted' => 'Once this topic is deleted all data will be permanently deleted',
+    'Delete topic' => 'Delete topic',
+
+    'Write exercise description here' => 'Write exercise description here, (For the open question it\'s the question itself!)',
+    'Type exercise name' => 'Type exercise name',
+
+    'Search topics' => 'Search topics',
+    'Type quiz name' => 'Type quiz name',
+    'Write quiz description here' => 'Write quiz description here',
+
+    'Are you sure you want to delete this quiz?' => 'Are you sure you want to delete this quiz?',
+    'Once this quiz is deleted all of its data will be permanently deleted' => 'Once this quiz is deleted all data will be permanently deleted',
+    'Delete quiz' => 'Delete quiz',
+
+    'Quiz\'s name' => 'Quiz\'s name',
+    'Quiz\'s Description' => 'Quiz\'s Description',
+
+    'Are you sure you want to delete this exercise?' => 'Are you sure you want to delete this exercise?',
+    'Once this exercise is deleted all of its resources and data will be permanently deleted' => 'Once this exercise is deleted all data will be permanently deleted',
+    'Delete exercise' => 'Delete exercise',
+
 
     'Edit Course' => 'Edit class',
     'Update Course' => 'Update class',

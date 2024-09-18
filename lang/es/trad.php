@@ -16,6 +16,30 @@ return [
     'Exams' => 'Exámenes',
 
 
+    'Type topic\'s name' => 'Escribe el nombre del tema',
+    'Write topic\'s description here' => 'Escriba aquí la descripción del tema',
+
+    'Are you sure you want to delete this topic?' => '¿Estás seguro de que quieres borrar este tema?',
+    'Once this topic is deleted all of its data will be permanently deleted' => 'Una vez eliminado este tema todos sus datos serán borrados permanentemente',
+    'Delete topic' => 'Eliminar tema',
+    'Write exercise description here' => 'Escriba aquí la descripción del ejercicio (Para la pregunta abierta es la propia pregunta!)',
+    'Type exercise name' => 'Escriba el nombre del ejercicio',
+
+    'Search topics' => 'Buscar temas',
+    'Type quiz name' => 'Escriba el nombre del cuestionario',
+    'Write quiz description here' => 'Escriba aquí la descripción del cuestionario',
+
+    'Are you sure you want to delete this quiz?' => '¿Seguro que quieres borrar este cuestionario?',
+    'Once this quiz is deleted all of its data will be permanently deleted' => 'Una vez eliminado este cuestionario, todos sus datos serán borrados permanentemente',
+    'Delete quiz' => 'Borrar cuestionario',
+
+    'Quiz\'s name' => 'Nombre del cuestionario',
+    'Quiz\'s Description' => 'Descripción del cuestionario',
+
+    'Are you sure you want to delete this exercise?' => '¿Está seguro de que desea eliminar este ejercicio?',
+    'Once this exercise is deleted all of its resources and data will be permanently deleted' => 'Una vez borrado este ejercicio todos sus recursos y datos serán eliminados permanentemente',
+    'Delete exercise' => 'Borrar ejercicio',
+
     'Edit Course' => 'Editar clase',
     'Course Name' => 'Nombre del clase',
     'Course Description' => 'Descripción del clase',
