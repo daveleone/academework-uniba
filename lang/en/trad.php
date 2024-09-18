@@ -17,6 +17,7 @@ return [
     "New Class" => "New Class",
 
     'Quizzes - ' => 'Quizzes - ',
+    'Exams' => 'Exams',
 
 
     'Edit Course' => 'Edit class',

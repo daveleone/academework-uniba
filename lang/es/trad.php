@@ -13,6 +13,7 @@ return [
     "New Class" => "Nueva Clase",
 
     'Quizzes - ' => 'Cuestionarios - ',
+    'Exams' => 'Exámenes',
 
 
     'Edit Course' => 'Editar clase',

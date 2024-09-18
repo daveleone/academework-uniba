@@ -137,6 +137,12 @@ return [
     '© 2024 Academe Work. All rights reserved.' => '© 2024 Academe Work. Tutti i diritti riservati.',
     'Start Your Journey' => 'Inizia il tuo Viaggio',
     'Dashboard' => 'Dashboard',
+    'Start quiz' => 'Inizia Quiz',
+    'Time remaining' => 'Tempo rimanente',
+    'Quiz already taken' => 'Quiz già svolto',
+    'Exams' => 'Esami',
+
+    'Profile' => 'Profilo',
 
 
     'Add Selected Students' => 'Aggiungi studente/i selezionato',
