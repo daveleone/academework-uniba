@@ -33,9 +33,9 @@
                                         <x-heroicon-o-academic-cap class="w-7 h-7 text-indigo-600" />
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
                                             <x-heroicon-s-users class="w-4 h-4 mr-1" />
-                                            @if($course->students_count < 2)
+                                            @if($course->students_count == 1)
                                                 {{ $course->students_count }} @lang('trad.student')
-                                            @elseif($course->students_count >= 2)
+                                            @else
                                                 {{ $course->students_count }} @lang('trad.students')
                                             @endif
 

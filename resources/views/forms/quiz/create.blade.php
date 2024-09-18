@@ -25,8 +25,8 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-heroicon-o-clipboard class="w-5 h-5 text-gray-400" />
                             </div>
-                            <input type="text" name="QuizName" id="QuizName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Type quiz name" required>
-                        </div>                    
+                            <input type="text" name="QuizName" id="QuizName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Type quiz name')" required>
+                        </div>
                     </div>
                     <div class="col-span-2">
                         <label for="QuizDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('trad.Quiz Description')</label>
@@ -34,7 +34,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex pointer-events-none pt-2">
                                 <x-heroicon-o-clipboard class="w-5 h-5 text-gray-400" />
                             </div>
-                            <textarea id="QuizDescription" name="QuizDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Write quiz description here" required></textarea>
+                            <textarea id="QuizDescription" name="QuizDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Write quiz description here')" required></textarea>
                         </div>
                     </div>
                 </div>

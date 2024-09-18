@@ -11,7 +11,7 @@
             <input type="hidden" name="topId" value="{{ $topic->id }}">
             <div>
                 <label for="{{ 'topName'.$topic->id }}" class="block text-sm font-medium text-gray-700">
-                    @lang('trad.topic\'s name')
+                    @lang('trad.Topic\'s name')
                 </label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label for="{{ 'topDesc'.$topic->id }}" class="block text-sm font-medium text-gray-700">
-                    @lang('trad.topic\'s Description')
+                    @lang('trad.Topic\'s Description')
                 </label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 pt-2">
