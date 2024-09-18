@@ -133,6 +133,7 @@ return [
 
     '- topics' => '- Tema',
     'View Exercises' => 'Ver ejercicios',
+    'View Exercise' => 'Ver ejercicio',
 
     'Upcoming Quizzes' => 'Próximos Cuestionarios',
     'Great job!' => '¡Buen trabajo!',
@@ -152,6 +153,11 @@ return [
     'Created At' => 'Creado el',
     'No quizzes found for this course.' => 'No se encontraron cuestionarios para este curso.',
     'View Quizzes' => 'Ver Cuestionarios',
+
+    'True False' => 'Verdadero Falso',
+    'Open' => 'Abierta',
+    'Closed' => 'Cerrada',
+    'Fill In' => 'Rellenar',
 
     'Show Quizzes' => 'Mostrar Cuestionarios',
 

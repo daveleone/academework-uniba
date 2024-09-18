@@ -251,6 +251,11 @@ return [
     'Once this exercise is deleted all of its resources and data will be permanently deleted' => 'Una volta eliminato questo esercizio tutti i suoi dati verrano eliminati permanentemente',
     'Delete exercise' => 'Elimina esercizio',
 
+    'True False' => 'Vero Falso',
+    'Open' => 'Aperta',
+    'Closed' => 'Chiusa',
+    'Fill In' => 'Riempimento',
+
     'Description' => 'Descrizione',
     'Next' => 'Prossimo',
     'Create' => 'Crea',
