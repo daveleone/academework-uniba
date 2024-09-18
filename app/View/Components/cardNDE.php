@@ -25,6 +25,7 @@ class cardNDE extends Component
         public string $displayExFoot = 'hidden',
         public string $type = '',
         public string $points = '',
+        public string $sub_top = ''
     ) {
         $this->name = $name;
         $this->hrefName = $hrefName != "" ? "trad." . $hrefName : "";
@@ -41,6 +42,7 @@ class cardNDE extends Component
         $this->displayExFoot = (($type != '') or ($points != '')) ? 'inline-flex' : 'hidden';
         $this->type = $type;
         $this->points = $points;
+        $this->sub_top = $sub_top;
     }
 
     /**

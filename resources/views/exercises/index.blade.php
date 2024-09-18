@@ -32,8 +32,9 @@
                             <x-slot name="description">
                                 {{ $exercise->description }}
                             </x-slot>
-                            <x-slot name="icon">
-                                <x-heroicon-o-document-text class="h-5 w-5" />
+                            <x-slot name="sub_top">
+                                @php $topic = $exercise->topic; $subject = $topic->subject; @endphp
+                                {{$subject->name . ' - ' . $topic->name }}
                             </x-slot>
                         </x-card-NDE>
                     @endforeach
