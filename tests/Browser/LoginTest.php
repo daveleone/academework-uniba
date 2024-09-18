@@ -30,7 +30,7 @@ class LoginTest extends DuskTestCase
             'password' => bcrypt('password'),
         ]);
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser){
             $browser->visit('http://127.0.0.1:8000/login')
                 ->waitForLocation('/login')
                 ->type('email', 'test@example.com')

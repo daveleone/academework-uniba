@@ -6,7 +6,16 @@
         <h3 class="mb-2 text-xl font-semibold text-gray-800 dark:text-white">
             {{ $name }}
         </h3>
-        {{ $icon }}
+
+        @if($sub_top != '')
+            <div>
+                <span class="ml-2 inline-flex items-center px-1.5 py-1 rounded-lg text-xs font-small bg-indigo-100 text-indigo-800">
+                {{ $sub_top }}
+                </span>
+            </div>
+        @else
+            {{ $icon }}
+        @endif
     </div>
     <p class="mb-4 text-gray-600 dark:text-gray-300">{{ $description }}</p>
     <div class="flex items-center justify-between">

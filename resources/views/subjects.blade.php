@@ -15,6 +15,7 @@
                         x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'create-subject')"
                         class="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white ring-indigo-300 transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-indigo-700 focus:border-indigo-900 focus:outline-none focus:ring active:bg-indigo-900 disabled:opacity-25"
+                        dusk="add-subject-link"
                     >
                         <x-heroicon-s-plus class="mr-2 h-5 w-5" />
                         @lang("trad.Add subject")
