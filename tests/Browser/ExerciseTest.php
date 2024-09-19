@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\Exercise;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\Teacher;
@@ -147,6 +148,58 @@ class ExerciseTest extends DuskTestCase
                 ->waitFor('@success-alert')
                 ->assertVisible('@success-alert')
                 ->click('@success-alert');
+        });
+    }
+    
+    public function testTeacherCanCreateQuiz(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit($this->baseUrl . "/quizzes")
+                ->assertPathIs('/quizzes')
+                ->press('@create-quiz-button')
+                ->waitForText('Create New Quiz')
+                ->type('@create-quiz-name', "My Quiz")
+                ->type('@create-quiz-description', "My Quiz description")
+                ->press('@create-quiz-submit')
+                ->waitFor('@success-alert')
+                ->assertVisible('@success-alert')
+                ->click('@success-alert');
+        });
+    }
+
+    public function testTeacherCanAddExToQuiz(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $topics = Topic::with('subject')
+               ->whereHas('subject', function ($query) {
+                   $query->where('teacher_id', $this->teacher->user_id);
+               })
+               ->get();
+
+            $exercises = Exercise::join('topics', 'topics.id', '=', 'exercises.topic_id')
+                 ->whereIn('topics.id', $topics->pluck('id')->toArray()) // Filtra per gli ID dei topic
+                 ->select('exercises.*', 'topics.name as topic_name')
+                 ->get();
+            foreach($exercises as $exercise){
+                $browser->visit($this->baseUrl . "/exercise/" . $exercise->id)
+                    ->assertPathIs("/exercise/" . $exercise->id)
+                    ->press('@add-to-quiz-button')
+                    ->check('checkbox-quiz-0')
+                    ->press('@add-to-quiz-submit')
+                    ->waitFor('@success-alert')
+                    ->assertVisible('@success-alert')
+                    ->click('@success-alert');
+            }
+        });
+    }
+
+    public function testTeacherCanViewQuiz(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit($this->baseUrl . "/quizzes")
+                ->assertPathIs('/quizzes')
+                ->click('@nde-link')
+                ->assertPathBeginsWith('/quiz/');
         });
     }
 }
