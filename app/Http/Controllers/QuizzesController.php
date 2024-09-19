@@ -210,17 +210,13 @@ class QuizzesController extends Controller
         
         if($time and $date and $offset)
 
-        if($time and $date and $offset) //TODO controllare offset
+        if($time and $date and $offset)
         {
-            // Creazione della stringa di data e ora
             $datetimeString = $date . ' ' . $time;
 
-            // Calcolo dell'offset
             $hours = intdiv($offset, 60);
             $minutes = abs($offset % 60);
             $offsetString = sprintf('%+03d:%02d', $hours, $minutes);
-
-            // Creazione dell'oggetto Carbon
             $datetime = Carbon::createFromFormat('m/d/Y H:i P', $datetimeString . ' ' . $offsetString);
         }
 
@@ -237,36 +233,43 @@ class QuizzesController extends Controller
                         'start_time' => $datetime
                     ]);
 
-                    // Recupera gli studenti iscritti al corso
-                    $students = CourseStudent::where('course_id', $courseId)
-                        ->join('students', 'course_student.student_id', '=', 'students.id')
-                        ->join('users', 'students.user_id', '=', 'users.id')
-                        ->select('users.email')
-                        ->get();
-
-                    $toEmail = $students->pluck('email')->toArray();
-                    $quiz = Quiz::find($quizId);
-                    $course = Course::find($courseId);
-
-                    // Invia email a ciascuno studente
-                    $messageContent = [
-                        'quizName' => $quiz->name,
-                        'courseName' => $course->course_name,
-                    ];
-                    Mail::to($toEmail)->send(new ClassEmail($messageContent));
-                    if(in_array($courseId, $userCourses)){
-                        course_quiz::create([
-                            'quiz_id' => $quizId,
-                            'course_id' => $courseId,
-                            'repeatable' => $repeatable,
-                            'duration_minutes' => $data['time_limit'],
-                            'start_time' => $datetime
-                        ]);
-                    }
                 }
                 session()->flash('success', 'Exercise added to quiz');
+
+                
             } catch(\Exception $e){
                 session()->flash('error', $e->getMessage());
+            }
+
+            try{
+                 // Recupera gli studenti iscritti al corso
+                $students = CourseStudent::where('course_id', $courseId)
+                    ->join('students', 'course_student.student_id', '=', 'students.id')
+                    ->join('users', 'students.user_id', '=', 'users.id')
+                    ->select('users.email')
+                    ->get();
+
+                $toEmail = $students->pluck('email')->toArray();
+                $quiz = Quiz::find($quizId);
+                $course = Course::find($courseId);
+
+                // Invia email a ciascuno studente
+                $messageContent = [
+                    'quizName' => $quiz->name,
+                    'courseName' => $course->course_name,
+                ];
+                Mail::to($toEmail)->send(new ClassEmail($messageContent));
+                if(in_array($courseId, $userCourses)){
+                    course_quiz::create([
+                        'quiz_id' => $quizId,
+                        'course_id' => $courseId,
+                        'repeatable' => $repeatable,
+                        'duration_minutes' => $data['time_limit'],
+                        'start_time' => $datetime
+                    ]);
+                }
+              session()->flash('success', 'Emails sent to students');
+            }catch(\Exception $e){
             }
         } else {
             session()->flash('error', 'Addition to quiz failed');
