@@ -1,8 +1,7 @@
 <!-- Modal toggle -->
-<button data-modal-target="CreateTop-modal" data-modal-toggle="CreateTop-modal" class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1">
+<button data-modal-target="CreateTop-modal" data-modal-toggle="CreateTop-modal" class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1" dusk="add-topic-button">
     <x-heroicon-s-plus class="w-5 h-5 mr-2" />
     @lang('trad.Add topic')
-
 </button>
 
 <!-- Main modal -->
@@ -26,7 +25,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-heroicon-o-book-open class="w-5 h-5 text-gray-400" />
                             </div>
-                            <input type="text" name="TopicName" id="TopicName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Type topic's name" required>
+                            <input type="text" name="TopicName" id="TopicName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Type topic's name" required dusk="create-topic-name">
                         </div>
                     </div>
                     <div class="col-span-2">
@@ -35,12 +34,12 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex pointer-events-none pt-2">
                                 <x-heroicon-o-document-text class="w-5 h-5 text-gray-400" />
                             </div>
-                            <textarea id="TopicDescription" name="TopicDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Write topic's description here" required></textarea>
+                            <textarea id="TopicDescription" name="TopicDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Write topic's description here" required dusk="create-topic-description"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="flex items-center justify-between space-x-4">
-                    <button type="submit" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <button type="submit" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1" dusk="submit-create-topic">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                             <x-heroicon-s-plus-circle class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" />
                         </span>

@@ -3,7 +3,8 @@
     data-modal-target="CreateEx-modal"
     data-modal-toggle="CreateEx-modal"
     class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1"
-    type="button">
+    type="button"
+    dusk="create-exercise-button">
     <x-heroicon-s-plus class="w-5 h-5 mr-2" />
     @lang('trad.Add exercise')
 </button>
@@ -44,7 +45,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-heroicon-o-book-open class="w-5 h-5 text-gray-400" />
                             </div>
-                            <input type="text" name="ExName" id="ExName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="{{__('Type exercise name')}}" required value="{{ old('ExName' )}}">
+                            <input type="text" name="ExName" id="ExName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="{{__('Type exercise name')}}" required value="{{ old('ExName' )}}" dusk="create-exercise-name">
                         </div>
                         @error('ExName')
                             <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
@@ -60,7 +61,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex pointer-events-none pt-2">
                                 <x-heroicon-o-document-text class="w-5 h-5 text-gray-400" />
                             </div>
-                            <textarea id="ExDescription" name="ExDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="{{__('Write exercise description here')}}" required>{{ old('ExDescription')}}</textarea>
+                            <textarea id="ExDescription" name="ExDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="{{__('Write exercise description here')}}" required dusk="create-exercise-description">{{ old('ExDescription')}}</textarea>
                         </div>
                         @error('ExDescription')
                             <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
@@ -81,7 +82,8 @@
                             class="block w-full rounded-lg border border-gray-300 p-2.5 text-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             placeholder="{{__('')}}"
                             required
-                            value="{{ old('ExPoints' )}}"/>
+                            value="{{ old('ExPoints' )}}"
+                            dusk="create-exercise-points"/>
                         @error('ExPoints')
                             <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
                         @enderror
@@ -97,7 +99,8 @@
                             required
                             id="ExType"
                             name="ExType"
-                            class="block w-full rounded-lg border border-gray-300 p-2.5 text-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                            class="block w-full rounded-lg border border-gray-300 p-2.5 text-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            dusk="create-exercise-type">
                             <option value="true/false">@lang('trad.True or false')</option>
                             <option value="open">@lang('trad.Open question')</option>
                             <option value="close">@lang('trad.Closed question')</option>
@@ -109,7 +112,7 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-between space-x-4">
-                    <button type="submit" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <button type="submit" class="group w-1/2 inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1" dusk="create-exercise-submit">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                             <x-heroicon-s-plus-circle class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" />
                         </span>
