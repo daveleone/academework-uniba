@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Topic>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\closedExElement>
  */
-class TopicFactory extends Factory
+class closedExElementFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class TopicFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->lastName(),
-            'description' => $this->faker->paragraph('2')
+            'content' => $this->faker->sentence,
+            'truth' => $this->faker->boolean        
         ];
     }
 }
