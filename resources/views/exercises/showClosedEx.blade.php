@@ -119,7 +119,7 @@
                             id="{{ "ansLab" . $element->position }}"
                             class="mb-2 flex text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            N {{ $element->position + 1 }}:
+                            Answer {{ $element->position + 1 }}:
                         </label>
                         <div
                             class="ml-[1rem] flex flex-row items-center justify-start"
