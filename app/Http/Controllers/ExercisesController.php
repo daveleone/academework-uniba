@@ -56,7 +56,7 @@ class ExercisesController extends Controller
             'exercises.index',
             ['topics' => $topics, 'exercises' => $exercises]
         );
-        
+
     }
 
     public function creatorRedirect(): RedirectResponse
@@ -64,7 +64,7 @@ class ExercisesController extends Controller
         return redirect()->back();
     }
 
-    private function createExInit($topic): Exercise | RedirectResponse
+    private function createExInit($topic)
     {
         try {
             $exercise = json_decode(Session::get('exerciseInit'));
@@ -74,13 +74,14 @@ class ExercisesController extends Controller
                 'description' => $exercise->description,
                 'type' => $exercise->type,
                 'points' => $exercise->points,
-                'topic_id' => $topic->id
+                'topic_id' => $exercise->topic_id,
             ]);
             return $exercise;
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
-            return to_route('topic.exercises', ['id' => $topic->id]);
         }
+
+        return null;
     }
 
     public function create(): View | RedirectResponse
@@ -92,12 +93,12 @@ class ExercisesController extends Controller
             session()->flash('error', 'Topic not found');
             return redirect()->back();
         }
-                
+
         $topic = Topic::
             where('topics.id', intval($id))
             ->first();
 
-      
+
         if (!$topic) {
             session()->flash('error', 'Topic not found' . $id);
             return redirect()->back();
@@ -154,6 +155,7 @@ class ExercisesController extends Controller
     public function createTf($id): RedirectResponse
     {
         $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->select('topics.*') // Select only the columns from the topics table
             ->where('topics.id', $id)
             ->where('subjects.teacher_id', Auth::user()->id)
             ->first();
@@ -192,6 +194,7 @@ class ExercisesController extends Controller
     public function createClosed($id): RedirectResponse
     {
         $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->select('topics.*') // Select only the columns from the topics table
             ->where('topics.id', $id)
             ->where('subjects.teacher_id', Auth::user()->id)
             ->first();
@@ -228,9 +231,10 @@ class ExercisesController extends Controller
         return to_route('topic.exercises', ['id' => $id]);
     }
 
-    public function createOpen($id): RedirectResponse
+    public function createOpen(Request $request, $id): RedirectResponse
     {
         $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->select('topics.*') // Select only the columns from the topics table
             ->where('topics.id', $id)
             ->where('subjects.teacher_id', Auth::user()->id)
             ->first();
@@ -243,14 +247,14 @@ class ExercisesController extends Controller
         $exercise = $this->createExInit($topic);
 
         if (!$exercise) {
-            session()->flash('error', 'Exercise initialization failed');
+//            session()->flash('error', 'Exercise initialization failed');
             return to_route('topic.exercises', ['id' => $id]);
         }
 
         try {
             openExElement::create([
                 'exercise_id' => $exercise->id,
-                'answer' => Request()->input('exAnswer'),
+                'answer' => $request->input('exAnswer'),
             ]);
             session()->flash('success', $exercise->name . ' created');
         } catch (\Exception $e) {
@@ -264,6 +268,7 @@ class ExercisesController extends Controller
     public function createFill($id): RedirectResponse
     {
         $topic = Topic::join('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->select('topics.*') // Select only the columns from the topics table
             ->where('topics.id', $id)
             ->where('subjects.teacher_id', Auth::user()->id)
             ->first();

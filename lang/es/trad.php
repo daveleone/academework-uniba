@@ -62,6 +62,7 @@ return [
     "No exercises found" => "No hay estudiantes encontrados",
     "There are no exercises for this quiz" => "No hay estudiantes encontrados para este quiz",
 
+    'Time remaining' => 'Tiempo restante',
 
     "Email" => "Correo Electrónico",
     "N/A" => "N/D",

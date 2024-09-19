@@ -284,6 +284,7 @@ return [
     'Type topic\'s name' => 'Scrivi nome argomento',
     'Write topic\'s description here' => 'Scrivi descrizione argomento',
 
+    'Submit Exam' => 'Invia esame',
 
     'Exercises' => 'Esercizi',
     'Create New Topic' => 'Crea nuovo argomento',
