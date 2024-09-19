@@ -22,6 +22,7 @@
         <a
             href="{{ $href }}"
             class="font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300"
+            dusk="nde-link"
         >
             @lang($hrefName)
         </a>
@@ -31,6 +32,7 @@
                     x-data="" x-on:click.prevent="$dispatch('open-modal', '{{$editModal}}')"
                 @endif
                 class="{{ $displayEdit }} text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300"
+                dusk="nde-edit-button"
             >
                 <x-heroicon-o-pencil class="h-5 w-5" />
             </button>
@@ -39,6 +41,7 @@
                     x-data="" x-on:click.prevent="$dispatch('open-modal', '{{$deleteModal}}')"
                 @endif
                 class="{{ $displayDelete }} text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
+                dusk="nde-delete-button"
             >
                 <x-heroicon-o-trash class="h-5 w-5" />
             </button>

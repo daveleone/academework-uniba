@@ -18,7 +18,7 @@
                         @lang('trad.Cancel')
                     </x-secondary-button>
                     <input type="hidden" name="topId" value="{{ $topic->id }}">
-                    <x-danger-button class="px-3 py-2 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-lg hover:-translate-y-1">
+                    <x-danger-button class="px-3 py-2 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-lg hover:-translate-y-1" dusk="submit-delete-topic">
                         <x-heroicon-o-user-minus class="w-4 h-4 mr-2" />
                         @lang('trad.Delete topic')
                     </x-danger-button>

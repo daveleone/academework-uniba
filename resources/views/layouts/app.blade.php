@@ -62,7 +62,7 @@
                             </svg>
                             <span class="sr-only">@lang('trad.Info')</span>
                             <div>
-                                <span class="font-medium">@lang('trad.Success')!</span>
+                                <span class="font-medium" dusk="success-alert">@lang('trad.Success')!</span>
                                 {{ session("success") }}
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             </svg>
                             <span class="sr-only">@lang('trad.Info')</span>
                             <div>
-                                <span class="font-medium">@lang('trad.Error')!</span>
+                                <span class="font-medium" dusk="error-alert">@lang('trad.Error')!</span>
                                 {{ session("error") }}
                             </div>
                         </div>
