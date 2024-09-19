@@ -48,6 +48,7 @@ class ExercisesController extends Controller
            ->get();
 
         $exercises = Exercise::join('topics', 'topics.id', '=', 'exercises.topic_id')
+             ->whereIn('topics.id', $topics->pluck('id')->toArray()) // Filtra per gli ID dei topic
              ->select('exercises.*', 'topics.name as topic_name')
              ->paginate(8);
 
