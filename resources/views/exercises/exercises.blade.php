@@ -21,13 +21,13 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($exercises as $exercise)
-                <x-card-NDE type="{{$exercise->type}}" points="{{$exercise->points}}" href="{{ route('exercise.show', ['id' => $exercise->id]) }}" hrefName="View Exercise">
+                <x-card-n-d-e type="{{$exercise->type}}" points="{{$exercise->points}}" href="{{ route('exercise.show', ['id' => $exercise->id]) }}" hrefName="View Exercise">
                     <x-slot name="name">{{ $exercise->name }}</x-slot>
                     <x-slot name="description">{{ $exercise->description }}</x-slot>
                     <x-slot name="icon">
                         <x-heroicon-o-document-text class="h-5 w-5" />
                     </x-slot>
-                </x-card-NDE>
+                </x-card-n-d-e>
                 @endforeach
             </div>
         </div>

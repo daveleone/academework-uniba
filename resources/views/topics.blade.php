@@ -18,7 +18,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($topics as $topic)
-                        <x-cardNDE
+                        <x-card-n-d-e
                             id="{{ $topic->id }}"
                             icon="pencil"
                             editModal="edit-topic-{{ $topic->id }}"
@@ -33,7 +33,7 @@
                             <x-slot name="icon">
                                 <x-heroicon-o-book-open class="w-7 h-7 mr-1" />
                             </x-slot>
-                        </x-cardNDE>
+                        </x-card-n-d-e>
                         @include("forms.topic.edit", ["topic" => $topic, "subject" => $subject])
                         @include("forms.topic.delete", ["topic" => $topic, "subject" => $subject])
                     @endforeach

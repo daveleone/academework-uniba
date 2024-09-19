@@ -19,7 +19,7 @@
                     class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
                 >
                     @foreach ($quizzes as $quiz)
-                        <x-cardNDE
+                        <x-card-n-d-e
                             id="{{ $quiz->id }}"
                             editModal="edit-quiz-{{ $quiz->id }}"
                             deleteModal="delete-quiz-{{ $quiz->id }}"
@@ -33,7 +33,7 @@
                             <x-slot name="icon">
                                 <x-heroicon-o-clipboard class="mr-1 h-7 w-7" />
                             </x-slot>
-                        </x-cardNDE>
+                        </x-card-n-d-e>
                         @include("forms.quiz.edit")
                         @include("forms.quiz.delete")
                     @endforeach

@@ -25,7 +25,7 @@
                     class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                 >
                     @foreach ($exercises as $exercise)
-                        <x-card-NDE
+                        <x-card-n-d-e
                             type="{{$exercise->type}}"
                             points="{{$exercise->points}}"
                             href="{{ route('exercise.show', ['id' => $exercise->id]) }}"
@@ -41,7 +41,7 @@
                                 @php $topic = $exercise->topic; $subject = $topic->subject; @endphp
                                 {{$subject->name . ' - ' . $topic->name }}
                             </x-slot>
-                        </x-card-NDE>
+                        </x-card-n-d-e>
                     @endforeach
                 </div>
             @else
