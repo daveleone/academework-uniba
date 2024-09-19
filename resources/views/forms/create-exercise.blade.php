@@ -46,9 +46,7 @@
                                 <x-heroicon-o-book-open class="w-5 h-5 text-gray-400" />
                             </div>
 
-                            <input type="text" name="ExName" id="ExName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="{{__('Type exercise name')}}" required value="{{ old('ExName' )}}" dusk="create-exercise-name">
-
-                            <input type="text" name="ExName" id="ExName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Type exercise name')" required value="{{ old('ExName' )}}">
+                            <input type="text" name="ExName" id="ExName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Type exercise name')" required value="{{ old('ExName' )}}" dusk="create-exercise-name">
                         </div>
                         @error('ExName')
                             <div class="text-red-600 dark:text-red-400">{{ $message }}</div>
