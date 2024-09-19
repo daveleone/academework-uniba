@@ -25,7 +25,7 @@
             @if($subjects->count() > 0)
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach ($subjects as $subject)
-                        <x-cardNDE
+                        <x-card-n-d-e
                             editModal="edit-subject-{{ $subject->id }}"
                             deleteModal="delete-subject-{{ $subject->id }}"
                             href="{{ route('subject.topics', ['id' => $subject->id]) }}"
@@ -40,7 +40,7 @@
                             <x-slot name="icon">
                                 <x-heroicon-o-bookmark class="mr-1 h-7 w-7" />
                             </x-slot>
-                        </x-cardNDE>
+                        </x-card-n-d-e>
                         @include("forms.subject.edit", ["subject" => $subject])
                         @include("forms.subject.delete", ["subject" => $subject])
                     @endforeach
