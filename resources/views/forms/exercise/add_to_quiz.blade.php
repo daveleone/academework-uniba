@@ -4,6 +4,7 @@
     data-dropdown-placement="bottom"
     class="cursor-pointer inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 hover:-translate-y-1"
     type="button"
+    dusk="add-to-quiz-button"
 >
     <x-heroicon-s-plus class="w-5 h-5 mr-2" />
     @lang('trad.Add to quiz')
@@ -67,6 +68,7 @@
                             type="checkbox"
                             value="{{ $quiz->id }}"
                             class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-700"
+                            dusk="check-quiz{{$i}}"
                         />
                         <label
                             for="checkbox-quiz-{{ $i }}"
@@ -84,6 +86,7 @@
             @endif
             type="submit"
             class="flex w-[100%] items-center rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 text-sm font-medium text-red-600 hover:bg-gray-100 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-blue-500 dark:hover:bg-gray-600"
+            dusk="add-to-quiz-submit"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
