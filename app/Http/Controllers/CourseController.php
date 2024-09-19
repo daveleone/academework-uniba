@@ -66,7 +66,7 @@ class CourseController extends Controller
         $course->course_description = $request->get('course_description');
         $course->save();
 
-        return redirect()->route('courses.update', $course->id)->with('success', "Course updated successfuly!");
+        return redirect()->route('courses.update', $course->id)->with('success', __('messages.course_updated'));
     }
 
     public function showQuizzes(Course $course)
@@ -79,6 +79,6 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         $course->delete();
-        return redirect()->route('courses.show')->with('success', 'Course deleted successfully!');
+        return redirect()->route('courses.show')->with('success', __('messages.course_deleted'));
     }
 }

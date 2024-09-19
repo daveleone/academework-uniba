@@ -41,7 +41,7 @@ class StudentController extends Controller
             }
         }
 
-        return redirect()->route('courses.edit', $course->id)->with('success', __('trad.Students added successfully'));
+        return redirect()->route('courses.edit', $course->id)->with('success', __('messages.student_added'));
     }
 
     public function show(Course $course)
@@ -150,13 +150,13 @@ class StudentController extends Controller
         $mark->mark = $validatedData['mark'];
         $mark->save();
 
-        return redirect()->back()->with('success', 'Voto aggiornato con successo.');
+        return redirect()->back()->with('success', __('messages.vote_updated'));
     }
 
 
     public function delete(Course $course, Student $student)
     {
         $course->students()->detach($student->id);
-        return redirect()->back()->with('success', 'Student removed from course successfully.');
+        return redirect()->back()->with('success', __('messages.student_deleted'));
     }
 }

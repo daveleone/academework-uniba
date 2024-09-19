@@ -45,9 +45,8 @@
                         <!-- Success alert -->
                         <div
                             id="success-alert"
-                            class="my-5 flex items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800 dark:border-green-800 dark:bg-gray-800 dark:text-green-400"
+                            class="alert my-5 flex items-center fixed top-16 left-1/2 transform -translate-x-1/2 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800 dark:border-green-800 dark:bg-gray-800 dark:text-green-400 opacity-0 w-auto max-w-md cursor-pointer"
                             role="alert"
-                            onclick="hideAlert(this)"
                         >
                             <svg
                                 class="me-3 inline h-4 w-4 flex-shrink-0"
@@ -71,9 +70,9 @@
                     @if (session("error"))
                         <!-- Error alert -->
                         <div
-                            class="my-5 flex items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400"
+                            id="error-alert"
+                            class="alert my-5 flex items-center fixed top-16 left-1/2 transform -translate-x-1/2 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400 opacity-0 w-auto max-w-md cursor-pointer"
                             role="alert"
-                            onclick="hideAlert(this)"
                         >
                             <svg
                                 class="me-3 inline h-4 w-4 flex-shrink-0"
@@ -99,23 +98,49 @@
             </main>
         </div>
         <script>
-            function hideAlert(alertDiv) {
+            function showAlert(alertDiv) {
+                alertDiv.style.display = 'flex';
                 alertDiv.animate(
                     [
-                        { transform: 'translateY(0px)', opacity: 1 },
-                        { transform: 'translateY(-0px)', opacity: 0 },
+                        { transform: 'translate(-50%, -20px)', opacity: 0 },
+                        { transform: 'translate(-50%, 0)', opacity: 1 }
                     ],
                     {
                         duration: 500,
                         easing: 'ease-out',
-                        fill: 'forwards',
-                    },
+                        fill: 'forwards'
+                    }
                 );
 
-                setTimeout(() => {
-                    alertDiv.classList.add('hidden');
-                }, 500);
+                setTimeout(() => hideAlert(alertDiv), 5000);
             }
+
+            function hideAlert(alertDiv) {
+                const animation = alertDiv.animate(
+                    [
+                        { transform: 'translate(-50%, 0)', opacity: 1 },
+                        { transform: 'translate(-50%, -20px)', opacity: 0 }
+                    ],
+                    {
+                        duration: 500,
+                        easing: 'ease-in',
+                        fill: 'forwards'
+                    }
+                );
+
+                animation.onfinish = () => alertDiv.style.display = 'none';
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    showAlert(alert);
+
+                    alert.addEventListener('click', () => {
+                        hideAlert(alert);
+                    });
+                });
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     </body>
