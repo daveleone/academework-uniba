@@ -43,7 +43,7 @@
                 type="text"
                 id="input-group-search"
                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                placeholder="Search quiz"
+                placeholder="@lang('trad.Search quiz')"
             />
         </div>
     </div>
@@ -127,9 +127,9 @@
 
     document.getElementById('quizForm').addEventListener('submit', function(event) {
         const checkboxes = document.querySelectorAll('#quiz-list input[type="checkbox"]');
-    
+
         const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-    
+
         if (!isChecked) {
             event.preventDefault();
         }

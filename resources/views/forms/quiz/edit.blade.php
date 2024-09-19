@@ -11,7 +11,7 @@
             <input type="hidden" name="quizId" value="{{ $quiz->id }}">
             <div>
                 <label for="{{ 'quizName'.$quiz->id }}" class="block text-sm font-medium text-gray-700">
-                    @lang('trad.quiz\'s name')
+                    @lang('trad.Quiz\'s name')
                 </label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label for="{{ 'quizDesc'.$quiz->id }}" class="block text-sm font-medium text-gray-700">
-                    @lang('trad.quiz\'s Description')
+                    @lang('trad.Quiz\'s Description')
                 </label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 pt-2">

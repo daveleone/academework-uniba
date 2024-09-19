@@ -50,7 +50,20 @@
             <p
                 class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white"
             >
-                {{ $type }}
+                @switch($type)
+                    @case('true/false')
+                        @lang('trad.True False')
+                        @break
+                    @case('open')
+                        @lang('trad.Open')
+                        @break
+                    @case('close')
+                        @lang('trad.Closed')
+                        @break
+                    @case('fill-in')
+                        @lang('trad.Fill In')
+                        @break
+                @endswitch
                 <br />
                 {{ $points }}
                 @lang("trad.Points")

@@ -20,21 +20,24 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="TopicName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topic's name</label>
+                        <label for="TopicName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('trad.Topic\'s name')</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-heroicon-o-book-open class="w-5 h-5 text-gray-400" />
                             </div>
-                            <input type="text" name="TopicName" id="TopicName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Type topic's name" required dusk="create-topic-name">
+
+                            <input type="text" name="TopicName" id="TopicName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Type topic\'s name')" required dusk="create-topic-name">
+
                         </div>
                     </div>
                     <div class="col-span-2">
-                        <label for="TopicDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topic's Description</label>
+                        <label for="TopicDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('trad.Topic\'s Description')</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
                             <div class="absolute inset-y-0 left-0 pl-3 flex pointer-events-none pt-2">
                                 <x-heroicon-o-document-text class="w-5 h-5 text-gray-400" />
                             </div>
-                            <textarea id="TopicDescription" name="TopicDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Write topic's description here" required dusk="create-topic-description"></textarea>
+
+                            <textarea id="TopicDescription" name="TopicDescription" rows="4" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="@lang('trad.Write topic\'s description here')" required dusk="create-topic-description"></textarea>
                         </div>
                     </div>
                 </div>
