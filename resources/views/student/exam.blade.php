@@ -5,41 +5,40 @@
                 <h1 class="text-3xl font-bold text-gray-900">@lang('trad.Exam') - {{ $course->course_name ?? '' }} - {{ $quiz->name ?? '' }}</h1>
             </div>
 
+            @if(isset($remainingTime))
+                <div id="timer" class="text-xl font-bold mb-4 text-indigo-600">@lang('trad.Time remaining'): <span id="time-left"></span></div>
+            @endif
 
-                    @if(isset($remainingTime))
-                        <div id="timer" class="text-xl font-bold mb-4 text-indigo-600">@lang('trad.Time remaining'): <span id="time-left"></span></div>
-                    @endif
-
-                    <form id="exam-form" action="{{ route('student.submitExam', ['courses' => $course, 'quiz' => $quiz]) }}" method="POST">
-                        @csrf
-                        @foreach($exercises->shuffle()->all() as $exercise)
-                            <div class="mb-6 bg-gray-50 p-4 rounded-lg">
-                                <h3 class="text-lg font-semibold mb-2 text-gray-800">{{ $exercise->question }}</h3>
-                                @switch($exercise->type)
-                                    @case('true/false')
-                                        @include('student.exercises.tf_question')
-                                        @break
-                                    @case('open')
-                                        @include('student.exercises.open_question')
-                                        @break
-                                    @case('close')
-                                        @include('student.exercises.closed_question')
-                                        @break
-                                    @case('fill-in')
-                                        @include('student.exercises.fill_question')
-                                        @break
-                                @endswitch
-                            </div>
-                        @endforeach
-                        <div class="mt-6">
-                            <button dusk="submit-exam" type="submit" id="submit-btn" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150">
-                                <x-heroicon-s-check class="w-5 h-5 mr-2" />
-                                @lang('trad.Submit Exam')
-                            </button>
-                        </div>
-                    </form>
+            <form id="exam-form" action="{{ route('student.submitExam', ['courses' => $course, 'quiz' => $quiz]) }}" method="POST">
+                @csrf
+                @foreach($exercises->shuffle()->all() as $exercise)
+                    <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">{{ $exercise->question }}</h3>
+                        @switch($exercise->type)
+                            @case('true/false')
+                                @include('student.exercises.tf_question')
+                                @break
+                            @case('open')
+                                @include('student.exercises.open_question')
+                                @break
+                            @case('close')
+                                @include('student.exercises.closed_question')
+                                @break
+                            @case('fill-in')
+                                @include('student.exercises.fill_question')
+                                @break
+                        @endswitch
+                    </div>
+                @endforeach
+                <div class="mt-6">
+                    <button dusk="submit-exam" type="submit" id="submit-btn" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150">
+                        <x-heroicon-s-check class="w-5 h-5 mr-2" />
+                        @lang('trad.Submit Exam')
+                    </button>
                 </div>
-            </div>
+            </form>
+        </div>
+    </div>
 
     @if(isset($remainingTime))
         <script>
