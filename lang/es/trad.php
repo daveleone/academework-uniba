@@ -330,7 +330,8 @@ return [
     'Grade' => 'Nota',
     'Date' => 'Fecha',
     "Show Grades" => "Mostrar calificaciones",
-    "No quizzes have been assigned to this course yet." => "Aún no se han asignado cuestionarios a este curso."
+    "No quizzes have been assigned to this course yet." => "Aún no se han asignado cuestionarios a este curso.",
+    "Error" => "Error",
 
 ];
 

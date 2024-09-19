@@ -345,6 +345,7 @@ return [
    'Are you sure you want to remove this student? This action cannot be undone.' => 'Are you sure you want to remove this student? This action cannot be undone.',
    'Log Out' => 'Log Out',
    'Language' => 'Language',
+    'Error' => 'Error',
 ];
 
 ?>

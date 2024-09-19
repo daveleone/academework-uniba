@@ -69,7 +69,7 @@ class StudentCoursesController extends Controller
         }
 
         if (!$isEnrolled) {
-            return redirect()->route('student.show')->with('error', 'You are not enrolled in this course.');
+            return redirect()->route('student.show')->with('error', __('messages.not_enrolled'));
         }
 
 
@@ -114,13 +114,13 @@ class StudentCoursesController extends Controller
             ->exists();
 
         if (!$isEnrolled) {
-            return redirect()->route('student.show')->with('error', 'You are not enrolled in this course.');
+            return redirect()->route('student.show')->with('error', __('messages.not_enrolled'));
         }
 
         $courseQuiz = $course->quizzes()->where('quiz_id', $quiz->id)->first();
 
         if (!$courseQuiz) {
-            return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', 'This quiz is not associated with the course.');
+            return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', __('messages.class_not_associated'));
         }
 
         $start_time = null;
@@ -133,7 +133,7 @@ class StudentCoursesController extends Controller
 
         if($now->lte($start_time) && $start_time != null)
         {
-            return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', 'This quiz has not started yet.');
+            return redirect()->route('student.exercises', ['courses' => $course->id])->with('error', __('messages.quiz_not_started'));
         }
 
         // Check if the student has already started the quiz
@@ -244,10 +244,10 @@ class StudentCoursesController extends Controller
 
         if ($timeUp) {
             return redirect()->route('student.exercises', ['courses' => $course_id])
-                ->with('warning', "Time's up. The exam has been submitted!");
+                ->with('warning', __('messages.time_up'));
         } else {
             return redirect()->route('student.exercises', ['courses' => $course_id])
-                ->with('success', 'Exam submitted successfully!');
+                ->with('success', __('exam_submitted'));
         }
     }
 

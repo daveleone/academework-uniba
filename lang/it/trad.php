@@ -342,7 +342,8 @@ return [
     'Date' => 'Data',
     "Show Grades" => "Mostra voti",
     "No quizzes have been assigned to this course yet." => "Nessun quiz è assegnato a questa classe.",
-    "Success" => "Successo"
+    "Success" => "Successo",
+    "Error" => "Errore",
 ];
 
 ?>
