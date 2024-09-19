@@ -207,6 +207,7 @@ return [
     'Complete some quizzes to see your grades here' => 'Complete some quizzes to see your grades here',
     'Keep up the good work!' => 'Keep up the good work!',
 
+    'Time remaining' => 'Time remaining',
 
     "Pagination Navigation" => "Pagination Navigation",
     "Previous" => "Previous",

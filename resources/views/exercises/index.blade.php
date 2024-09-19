@@ -1,3 +1,8 @@
+@php
+
+
+@endphp
+
 <x-app-layout>
     <div>
         <div class="mx-auto max-w-7xl">
