@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->longText('description');
             $table->unsignedBigInteger('creator_id');
+            $table->unique(['creator_id', 'name']);
             $table->foreign('creator_id')->references('id')->on('users');
             $table->timestamps();
         });
